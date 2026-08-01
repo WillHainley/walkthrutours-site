@@ -1,0 +1,12 @@
+;; WalkThru Tours - DNS records for GitHub Pages
+;; Cloudflare dashboard > walkthrutours.com > DNS > Records > Import and Export > Import
+;;
+;; IMPORTANT: importing ADDS records, it never removes them. Delete the existing
+;; A / AAAA / CNAME records for @ and www BEFORE importing, or the old Coming Soon
+;; page keeps answering and the import will collide with them.
+;;
+;; When the importer asks about proxy status, choose DNS only (grey cloud).
+;; Orange cloud stops GitHub from issuing its certificate.
+
+walkthrutours.com.	1	IN	CNAME	willhainley.github.io.
+www.walkthrutours.com.	1	IN	CNAME	willhainley.github.io.
