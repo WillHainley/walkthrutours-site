@@ -7,7 +7,7 @@
 <meta name="description" content="Cinematic walkthrough tours for vacation rentals, built from the listing photos you already have. Pay once, no subscription.">
 <meta property="og:title" content="WalkThru Tours">
 <meta property="og:description" content="Let guests experience your home before they book. Cinematic walkthroughs built from the listing photos you already have.">
-<meta property="og:image" content="./media/scene-01-poster.png">
+<meta property="og:image" content="./media/hero-loop-poster.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,6 +101,8 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
 .feature .card-title{font-family:var(--font-display);font-weight:500;font-size:clamp(1.3rem,1.1rem + 1vw,1.9rem);color:var(--color-paper);}
 .feature .card-loc{font-size:0.76rem;letter-spacing:0.14em;text-transform:uppercase;color:oklch(82% 0.07 185);}
 .shelf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2.4vw,1.8rem);margin-top:clamp(1.2rem,2.6vw,1.8rem);}
+/* an odd final card spans the row instead of leaving a hole */
+.shelf > .reel:last-child:nth-child(odd){grid-column:1 / -1;}
 /* depth from background + layered shadow instead of borders (Refactoring UI) */
 .reel{margin:0;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1rem;align-items:center;
   border:0;border-left:2px solid transparent;border-radius:0;padding:0.9rem;background:oklch(25% 0.012 95);
@@ -216,13 +218,13 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
 </nav>
 
 <header class="hero">
-  <video id="hv-a" class="on" src="./media/scene-01.mp4" poster="./media/scene-01-poster.png" autoplay muted playsinline preload="auto" aria-label="Rotating scenes from cinematic property walkthroughs"></video>
+  <video id="hv-a" class="on" src="./media/hero-loop.mp4" poster="./media/hero-loop-poster.jpg" autoplay muted playsinline preload="auto" aria-label="Rotating scenes from cinematic property walkthroughs"></video>
   <video id="hv-b" muted playsinline preload="auto" aria-hidden="true"></video>
   <script>
   (function(){
-    // Production footage that ships with this repo. To use the fuller reel from
-    // the other machine, drop its clips into media/ and list them here (MEDIA.md).
-    var scenes=["./media/scene-01.mp4","./media/scene-02.mp4","./media/scene-03.mp4"];
+    // Purpose-built hero loop first, then production glide segments. All local
+    // and web-encoded — see MEDIA.md before swapping anything in.
+    var scenes=["./media/hero-loop.mp4","./media/scene-01.mp4","./media/scene-02.mp4","./media/scene-03.mp4"];
     var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var a=document.getElementById("hv-a"),b=document.getElementById("hv-b");
     if(reduce){a.removeAttribute("autoplay");a.pause();return;}
@@ -281,12 +283,12 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
       <p class="samples-note">Every walkthrough below was built from real listing photos and delivered to a real owner.</p>
     </div>
     <figure class="feature">
-      <div class="feature-frame"><video src="https://d2ol7oe51mr4n9.cloudfront.net/user_3GC9brUnJ8xAbUdmHRNKiz46FmU/482e5d0a-cf39-4200-bb6c-0817aa8b3f72.mp4" poster="./media/scene-01-poster.png" controls muted playsinline preload="metadata"></video></div>
+      <div class="feature-frame"><video src="./media/showreel.mp4" poster="./media/showreel-poster.jpg" controls muted playsinline preload="metadata"></video></div>
       <figcaption><span class="card-title">A full walkthrough, start to finish</span><span class="card-loc">Five bedroom pool home &middot; Gulf coast</span></figcaption>
     </figure>
     <div class="shelf">
       <figure class="reel">
-        <video src="https://d2ol7oe51mr4n9.cloudfront.net/user_3GC9brUnJ8xAbUdmHRNKiz46FmU/f07c09ef-ea37-4707-ae14-62ce581d794c.mp4" poster="./media/scene-02-poster.png" controls muted playsinline preload="metadata"></video>
+        <video src="./media/photo-comes-alive.mp4" poster="./media/photo-comes-alive-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
         <figcaption>
           <span class="card-title">A photo becomes the tour</span>
           <span class="card-loc">Before and after</span>
@@ -294,11 +296,19 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
         </figcaption>
       </figure>
       <figure class="reel">
-        <video src="./media/scene-03.mp4" poster="./media/scene-03-poster.png" autoplay muted loop playsinline preload="metadata"></video>
+        <video src="./media/venue-tour.mp4" poster="./media/venue-tour-poster.jpg" controls muted playsinline preload="metadata"></video>
         <figcaption>
-          <span class="card-title">One unbroken glide</span>
-          <span class="card-loc">No cuts, no shake</span>
-          <span class="reel-note">The camera moves through the room the way a guest walks it.</span>
+          <span class="card-title">A venue, room by room</span>
+          <span class="card-loc">Historic event hall</span>
+          <span class="reel-note">Couples see the whole property before they book a walkthrough.</span>
+        </figcaption>
+      </figure>
+      <figure class="reel">
+        <video src="./media/sizzle-30s.mp4" poster="./media/sizzle-30s-poster.jpg" controls muted playsinline preload="metadata"></video>
+        <figcaption>
+          <span class="card-title">The thirty second cut</span>
+          <span class="card-loc">Built for socials</span>
+          <span class="reel-note">Same build, trimmed for reels and stories. Every tour ships in both.</span>
         </figcaption>
       </figure>
     </div>
