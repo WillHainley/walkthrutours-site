@@ -1,11 +1,15 @@
 # walkthrutours.com
 
-Hand-coded static site: HTML + CSS + vendored GSAP/ScrollTrigger/Lenis. No build step —
-edit, push, GitHub Pages redeploys. Both machines: clone, edit, push.
+Single-file static site — all markup, CSS and JS live in `index.html`. No build step, no
+framework, no dependencies. Edit, push, GitHub Pages redeploys. Both machines: clone, edit, push.
 
-- `index.html` / `styles.css` / `main.js` — the whole site
-- `media/` — Villa Manatee production film segments + posters (the hero footage)
-- `vendor/` — pinned animation libraries (no CDN dependency)
+Design is the v2 redesign ported from the other laptop (Newsreader + Instrument Sans,
+cream/ink/teal, rotating film hero, dark screening-room samples band), integrated here with
+the delivered-tours ledger, deposit-first pricing, favicon, OG tags and domain config.
+
+- `index.html` — the whole site
+- `media/` — Villa Manatee production film segments + posters (see MEDIA.md)
+- `MEDIA.md` — how to swap in the fuller hero reel from the other machine
 - `PAYMENTS-SETUP.md` — how to wire the Stripe deposit links
 - `CNAME` — custom domain for GitHub Pages
 

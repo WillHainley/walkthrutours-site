@@ -3,92 +3,300 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WalkThru Tours · Cinematic walkthrough films from your listing photos</title>
-<meta name="description" content="We turn the listing photos you already have into a cinematic walkthrough film guests can feel. Real rooms only. Pay once, keep it forever. Bradenton, Florida.">
+<title>WalkThru Tours — Let guests experience your home before they book</title>
+<meta name="description" content="Cinematic walkthrough tours for vacation rentals, built from the listing photos you already have. Pay once, no subscription.">
 <meta property="og:title" content="WalkThru Tours">
-<meta property="og:description" content="Your photos already hold the tour. Cinematic walkthrough films for vacation rentals, built from the photos you already have.">
-<meta property="og:image" content="media/scene-01-poster.png">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:description" content="Let guests experience your home before they book. Cinematic walkthroughs built from the listing photos you already have.">
+<meta property="og:image" content="./media/scene-01-poster.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,560;1,9..144,340&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · macrostructure: Marquee Hero · tone: luxury-editorial · anchor hue: sea-teal 185°
+ * theme: brand-locked (WalkThru cream/ink/teal · Newsreader + Instrument Sans)
+ * nav: minimal 2-destination · footer: statement band
+ * Hallmark · pre-emit critique: P4 H5 E4 S4 R5 V4 */
+:root{
+  --color-paper:   oklch(95.1% 0.026 92);
+  --color-paper-2: oklch(91.8% 0.036 90);
+  --color-ink:     oklch(21.3% 0.012 95);
+  --color-ink-2:   oklch(40%   0.02  95);
+  --color-muted:   oklch(52%   0.03  92);
+  --color-rule:    oklch(84%   0.03  92);
+  --color-accent:  oklch(55% 0.085 185);
+  --color-accent-deep: oklch(45% 0.08 185);
+  --color-focus:   oklch(55% 0.085 185);
+  --color-paper-dark: oklch(23% 0.012 95);
+
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "Instrument Sans", system-ui, sans-serif;
+
+  --text-display: clamp(2.9rem, 2rem + 4.4vw, 6rem);
+  --text-h2: clamp(1.9rem, 1.4rem + 2vw, 2.9rem);
+  --text-h3: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  --text-body: clamp(1rem, 0.97rem + 0.2vw, 1.1rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-short: 220ms;
+  --rule-hair: 1px solid var(--color-rule);
+  --radius-card: 0;
+  --gutter: clamp(1.15rem, 4.5vw, 3rem);
+  --maxw: 1180px;
+}
+html,body{margin:0;padding:0;overflow-x:clip;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--color-paper); color:var(--color-ink);
+  font-family:var(--font-body); font-size:var(--text-body); line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+*,*::before,*::after{box-sizing:border-box;min-width:0;}
+img,video{max-width:100%;display:block;}
+a{color:inherit;}
+h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-height:1.04;letter-spacing:-0.015em;margin:0;overflow-wrap:anywhere;}
+:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px;}
+
+/* nav */
+.nav{position:absolute;inset:0 0 auto 0;z-index:30;}
+.nav-in{max-width:var(--maxw);margin-inline:auto;padding:1.2rem var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.wordmark{font-family:var(--font-display);font-weight:500;font-size:1.5rem;letter-spacing:-0.01em;color:var(--color-paper);text-decoration:none;text-shadow:0 1px 14px rgba(20,18,14,0.45);}
+.nav-links{display:flex;gap:1.6rem;align-items:center;}
+.nav-a{font-weight:500;font-size:0.95rem;color:var(--color-paper);text-decoration:none;text-shadow:0 1px 12px rgba(20,18,14,0.5);position:relative;}
+.nav-a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--color-accent);transition:right var(--dur-short) var(--ease-out);}
+.nav-a:hover::after,.nav-a:focus-visible::after{right:0;}
+
+/* hero — the product is the hero */
+.hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;color:var(--color-paper);isolation:isolate;}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0;transition:opacity 1.4s var(--ease-out);}
+.hero video.on{opacity:1;}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(to top, rgba(20,18,14,0.82) 0%, rgba(20,18,14,0.35) 42%, rgba(20,18,14,0.18) 70%, rgba(20,18,14,0.34) 100%);}
+.hero-in{max-width:var(--maxw);margin-inline:auto;width:100%;padding:0 var(--gutter) clamp(2.4rem,6vw,4.5rem);}
+.kicker{font-weight:600;font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;color:oklch(82% 0.07 185);margin:0 0 1.2rem;}
+.hero h1{font-size:var(--text-display);max-width:14ch;}
+.hero-sub{max-width:38ch;font-size:clamp(1.02rem,1rem + 0.3vw,1.2rem);line-height:1.5;color:oklch(93% 0.02 92);margin:1.4rem 0 2rem;}
+.hero-proof{display:flex;align-items:center;gap:0.7rem;font-size:0.92rem;font-weight:500;color:oklch(88% 0.03 92);margin:0 0 1.8rem;max-width:46ch;}
+.hero-proof::before{content:"";width:26px;height:2px;background:oklch(70% 0.08 185);flex:none;}
+.hero-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.1rem 2rem;}
+
+/* primary CTA */
+.cta{display:inline-block;font-weight:600;font-size:1rem;text-decoration:none;
+  background:var(--color-accent);color:oklch(97% 0.01 185);padding:0.95rem 1.9rem;border-radius:0;
+  transition:transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);}
+.cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(20,18,14,0.7);}
+.cta:active{transform:translateY(0);}
+
+/* samples — the screening room: dark band, one feature, a shelf of reels */
+.samples{background:var(--color-ink);color:var(--color-paper);padding:clamp(4rem,9vw,7rem) 0;}
+.samples-in{max-width:var(--maxw);margin-inline:auto;padding:0 var(--gutter);}
+.samples-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:1rem clamp(2rem,5vw,4rem);align-items:end;margin-bottom:clamp(2rem,4.5vw,3.2rem);}
+.samples h2{font-size:var(--text-h2);color:var(--color-paper);}
+.samples-note{color:oklch(70% 0.02 92);font-size:0.98rem;max-width:44ch;justify-self:end;text-align:right;}
+.feature{margin:0;position:relative;}
+.feature-frame{position:relative;overflow:hidden;border-radius:0;background:#000;box-shadow:0 30px 70px -40px rgba(0,0,0,0.9);}
+.feature video{width:100%;aspect-ratio:21/9;object-fit:cover;}
+.feature figcaption{position:absolute;left:clamp(1rem,3vw,2rem);bottom:clamp(0.9rem,2.5vw,1.6rem);display:flex;flex-direction:column;gap:0.15rem;text-shadow:0 1px 12px rgba(0,0,0,0.6);}
+.feature .card-title{font-family:var(--font-display);font-weight:500;font-size:clamp(1.3rem,1.1rem + 1vw,1.9rem);color:var(--color-paper);}
+.feature .card-loc{font-size:0.76rem;letter-spacing:0.14em;text-transform:uppercase;color:oklch(82% 0.07 185);}
+.shelf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2.4vw,1.8rem);margin-top:clamp(1.2rem,2.6vw,1.8rem);}
+.reel{margin:0;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1rem;align-items:center;
+  border:1px solid oklch(34% 0.015 95);border-radius:0;padding:0.8rem;background:oklch(25% 0.012 95);
+  transition:border-color var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);}
+.reel:hover{border-color:oklch(55% 0.085 185);transform:translateY(-2px);}
+.reel video{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:0;}
+.reel figcaption{display:flex;flex-direction:column;gap:0.4rem;padding-right:0.4rem;}
+.reel .card-title{font-family:var(--font-display);font-weight:500;font-size:1.15rem;color:var(--color-paper);line-height:1.15;}
+.reel .card-loc{font-size:0.74rem;letter-spacing:0.13em;text-transform:uppercase;color:oklch(82% 0.07 185);}
+.reel-note{font-size:0.88rem;line-height:1.45;color:oklch(70% 0.02 92);}
+.samples-line{margin:clamp(2.2rem,5vw,3.4rem) 0 0;font-family:var(--font-display);font-weight:300;font-size:clamp(1.3rem,1.1rem + 1.2vw,2rem);line-height:1.25;color:oklch(85% 0.02 92);max-width:26ch;}
+.samples-line strong{font-weight:500;color:var(--color-paper);border-bottom:2px solid oklch(55% 0.085 185);}
+
+/* steps — hairline ledger */
+.steps{background:var(--color-paper-2);padding:clamp(3.5rem,8vw,6.5rem) 0;}
+.steps-in{max-width:var(--maxw);margin-inline:auto;padding:0 var(--gutter);}
+.steps h2{font-size:var(--text-h2);max-width:16ch;}
+.ledger{margin-top:clamp(2rem,4.5vw,3.2rem);border-top:var(--rule-hair);}
+.step{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.4fr);gap:1rem clamp(1.5rem,4vw,4rem);padding:clamp(1.4rem,3vw,2rem) 0;border-bottom:var(--rule-hair);}
+.step h3{font-size:var(--text-h3);font-weight:500;}
+.step p{margin:0;color:var(--color-ink-2);font-size:0.98rem;line-height:1.55;max-width:52ch;}
+
+/* pricing — tier row, dark venue slab */
+.pricing{padding:clamp(3.5rem,8vw,6.5rem) 0;}
+.pricing-in{max-width:var(--maxw);margin-inline:auto;padding:0 var(--gutter);}
+.pricing h2{font-size:var(--text-h2);}
+.pricing-sub{color:var(--color-ink-2);max-width:52ch;margin:0.8rem 0 0;}
+.tiers{margin-top:clamp(1.8rem,4vw,2.6rem);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(0.9rem,2vw,1.3rem);}
+.tier{border:var(--rule-hair);border-radius:var(--radius-card);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:0.55rem;background:var(--color-paper);
+  transition:transform var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);}
+.tier:hover{transform:translateY(-3px);border-color:var(--color-accent-deep);}
+.tier-price{font-family:var(--font-display);font-weight:400;font-size:clamp(2.1rem,3.4vw,2.9rem);line-height:0.9;}
+.tier-size{font-weight:600;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-muted);}
+.tier--venue{background:var(--color-ink);color:var(--color-paper);border-color:var(--color-ink);}
+.tier--venue .tier-size{color:oklch(78% 0.07 185);}
+.pricing-note{margin:1.6rem 0 0;color:var(--color-muted);font-size:0.92rem;max-width:70ch;}
+.tier-cta{margin-top:auto;padding-top:0.9rem;font-weight:600;font-size:0.88rem;text-decoration:none;
+  color:var(--color-accent-deep);display:inline-flex;align-items:center;gap:0.4rem;transition:gap var(--dur-short) var(--ease-out);}
+.tier-cta::after{content:"\2192";transition:transform var(--dur-short) var(--ease-out);}
+.tier:hover .tier-cta::after{transform:translateX(3px);}
+.tier--venue .tier-cta{color:oklch(82% 0.07 185);}
+
+/* delivered ledger — the proof shelf */
+.delivered{margin-top:clamp(2.4rem,5vw,3.6rem);border-top:1px solid oklch(34% 0.015 95);}
+.delivered-title{font-size:0.74rem;letter-spacing:0.18em;text-transform:uppercase;color:oklch(82% 0.07 185);font-weight:600;margin:1rem 0 0.2rem;}
+.delivered ul{list-style:none;margin:0;padding:0;}
+.delivered li{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr) auto;gap:0.4rem 1.4rem;align-items:baseline;
+  padding:0.95rem 0;border-bottom:1px solid oklch(30% 0.012 95);transition:padding-left var(--dur-short) var(--ease-out);}
+.delivered li:hover{padding-left:0.5rem;}
+.delivered li span{font-family:var(--font-display);font-size:1.2rem;font-weight:500;color:var(--color-paper);}
+.delivered li em{font-style:normal;color:oklch(70% 0.02 92);font-size:0.92rem;}
+.delivered li b{font-weight:500;color:oklch(82% 0.07 185);font-variant-numeric:tabular-nums;}
+@media (max-width:620px){
+  .delivered li{grid-template-columns:1fr auto;}
+  .delivered li em{grid-column:1 / -1;}
+}
+
+/* contact — statement band */
+.contact{background:var(--color-ink);color:var(--color-paper);padding:clamp(4rem,9vw,7rem) 0;}
+.contact-in{max-width:var(--maxw);margin-inline:auto;padding:0 var(--gutter);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:center;}
+.contact h2{font-size:var(--text-h2);max-width:14ch;}
+.contact p{color:oklch(78% 0.02 92);margin:0.9rem 0 0;max-width:40ch;}
+.contact-card{display:flex;flex-direction:column;gap:1rem;justify-self:end;width:100%;max-width:360px;}
+.contact-mail{font-family:var(--font-display);font-size:clamp(1.15rem,1rem + 0.9vw,1.5rem);color:var(--color-paper);text-decoration:none;border-bottom:2px solid var(--color-accent);padding-bottom:0.3rem;width:fit-content;max-width:100%;transition:color var(--dur-short) var(--ease-out);}
+.contact-mail:hover{color:var(--color-accent);}
+.contact-tel{color:oklch(78% 0.02 92);text-decoration:none;font-size:1.02rem;width:fit-content;}
+.contact-tel:hover{color:var(--color-paper);}
+
+/* footer */
+.footer{background:var(--color-ink);color:oklch(62% 0.02 92);border-top:1px solid oklch(32% 0.012 95);}
+.footer-in{max-width:var(--maxw);margin-inline:auto;padding:1.5rem var(--gutter);display:flex;flex-wrap:wrap;justify-content:space-between;gap:0.5rem 2rem;font-size:0.9rem;}
+
+/* responsive */
+@media (max-width:900px){
+  .shelf{grid-template-columns:1fr;}
+  .samples-head{grid-template-columns:1fr;}
+  .samples-note{justify-self:start;text-align:left;}
+  .tiers{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .contact-in{grid-template-columns:1fr;}
+  .contact-card{justify-self:start;}
+}
+@media (max-width:620px){
+  .hero{min-height:86svh;}
+  .feature video{aspect-ratio:16/10;}
+  .reel{grid-template-columns:1fr;}
+  .step{grid-template-columns:1fr;gap:0.5rem;}
+  .tiers{grid-template-columns:1fr;}
+  .nav-links .nav-a{display:none;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:0.01ms !important;animation:none !important;}
+  html{scroll-behavior:auto;}
+}
+</style>
 </head>
 <body>
 
-<div class="progress" aria-hidden="true"></div>
+<nav class="nav" aria-label="Main">
+  <div class="nav-in">
+    <a class="wordmark" href="#">WalkThru Tours</a>
+    <div class="nav-links">
+      <a class="nav-a" href="#samples">Samples</a>
+      <a class="nav-a" href="#pricing">Pricing</a>
+    </div>
+  </div>
+</nav>
 
-<header class="nav" id="nav">
-  <a class="brand" href="#top">WalkThru<span>&nbsp;Tours</span></a>
-  <nav class="navlinks">
-    <a href="#shelf">Samples</a>
-    <a href="#how">How it works</a>
-    <a href="#pricing" class="navcta">Get your tour</a>
-  </nav>
+<header class="hero">
+  <video id="hv-a" class="on" src="./media/scene-01.mp4" poster="./media/scene-01-poster.png" autoplay muted playsinline preload="auto" aria-label="Rotating scenes from cinematic property walkthroughs"></video>
+  <video id="hv-b" muted playsinline preload="auto" aria-hidden="true"></video>
+  <script>
+  (function(){
+    // Production footage that ships with this repo. To use the fuller reel from
+    // the other machine, drop its clips into media/ and list them here (MEDIA.md).
+    var scenes=["./media/scene-01.mp4","./media/scene-02.mp4","./media/scene-03.mp4"];
+    var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var a=document.getElementById("hv-a"),b=document.getElementById("hv-b");
+    if(reduce){a.removeAttribute("autoplay");a.pause();return;}
+    var i=0,front=a,back=b,fading=false,FADE=1.2;
+    back.src=scenes[1]; back.load();
+    function arm(v){
+      v.ontimeupdate=function(){
+        if(fading||!v.duration)return;
+        if(v.currentTime>=v.duration-FADE){fading=true;swap();}
+      };
+      v.onended=function(){ if(!fading){fading=true;swap();} };
+    }
+    function swap(){
+      var p=back.play(); if(p&&p.catch)p.catch(function(){});
+      back.classList.add("on"); front.classList.remove("on");
+      var old=front; front=back; back=old;
+      arm(front);
+      setTimeout(function(){
+        i=(i+1)%scenes.length;
+        var nxt=scenes[(i+1)%scenes.length];
+        back.classList.remove("on"); back.pause();
+        back.src=nxt; back.load();
+        fading=false;
+      }, FADE*1000+100);
+    }
+    arm(front);
+    // watchdog: browsers pause offscreen/background video and the event chain
+    // stalls at a clip end. Whenever visible, revive: replay or hand off.
+    setInterval(function(){
+      if(document.hidden)return;
+      if(front.paused){
+        if(front.ended&&!fading){fading=true;swap();}
+        else{var p=front.play(); if(p&&p.catch)p.catch(function(){});}
+      }
+    },1500);
+    document.addEventListener("visibilitychange",function(){
+      if(!document.hidden){var p=front.play(); if(p&&p.catch)p.catch(function(){});}
+    });
+  })();
+  </script>
+  <div class="hero-in">
+    <p class="kicker">Interactive walkthroughs for vacation rentals</p>
+    <h1>Let guests experience your home before they book.</h1>
+    <p class="hero-sub">Guests don't just see photos, they walk naturally from room to room and understand how your property flows.</p>
+    <p class="hero-proof">Every scene playing behind these words was built from still photos. No camera ever visited.</p>
+    <div class="hero-row">
+      <a class="cta" href="#contact">Get my walkthrough</a>
+    </div>
+  </div>
 </header>
 
-<main id="top">
-
-  <!-- ARRIVE -->
-  <section class="hero" id="arrive">
-    <video class="hero-film" autoplay muted loop playsinline
-           poster="media/scene-01-poster.png">
-      <source src="media/scene-01.mp4" type="video/mp4">
-    </video>
-    <div class="hero-scrim" aria-hidden="true"></div>
-    <div class="hero-copy">
-      <p class="kicker reveal">WalkThru Tours &middot; Bradenton, Florida</p>
-      <h1 class="display">
-        <span class="line"><span>Your photos already</span></span>
-        <span class="line"><span>hold the tour.</span></span>
-      </h1>
-      <p class="hero-sub reveal">We turn the listing photos you have into a walkthrough
-      guests can feel. No re-shoot. Nobody visits the property.</p>
-      <a class="hero-cue" href="#walk" aria-label="Scroll to continue">
-        <span>Walk in</span><i></i>
-      </a>
+<section class="samples" id="samples">
+  <div class="samples-in">
+    <div class="samples-head">
+      <h2>See what guests experience</h2>
+      <p class="samples-note">Every walkthrough below was built from real listing photos and delivered to a real owner.</p>
     </div>
-  </section>
-
-  <!-- WALK -->
-  <section class="chapter" id="walk">
-    <div class="chapter-media">
-      <video muted loop playsinline preload="metadata" poster="media/scene-02-poster.png" data-autoplay>
-        <source src="media/scene-02.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="chapter-copy">
-      <p class="kicker reveal">The walkthrough</p>
-      <h2 class="display-2 reveal">Guests walk the room<br>before they book it.</h2>
-      <p class="reveal">A steady cinematic glide through every space. Built from stills,
-      moving like film. The footage above is the actual product, produced for a paying
-      client, not a concept reel.</p>
-      <p class="tagline reveal">Real rooms only</p>
-    </div>
-  </section>
-
-  <!-- SHELF -->
-  <section class="shelf" id="shelf">
-    <div class="shelf-head">
-      <h2 class="display-2 reveal">Watch a real one.</h2>
-      <p class="reveal">Every film on this shelf was delivered to a paying client.</p>
-    </div>
-    <div class="shelf-grid">
-      <figure class="film film-wide reveal">
-        <video controls muted playsinline preload="metadata"
-               src="https://d2ol7oe51mr4n9.cloudfront.net/user_3GC9brUnJ8xAbUdmHRNKiz46FmU/482e5d0a-cf39-4200-bb6c-0817aa8b3f72.mp4"></video>
-        <figcaption><strong>Villa Manatee, showreel</strong>
-        <span>Twenty-nine seconds through a five bedroom Siesta Key pool home.</span></figcaption>
+    <figure class="feature">
+      <div class="feature-frame"><video src="https://d2ol7oe51mr4n9.cloudfront.net/user_3GC9brUnJ8xAbUdmHRNKiz46FmU/482e5d0a-cf39-4200-bb6c-0817aa8b3f72.mp4" poster="./media/scene-01-poster.png" controls muted playsinline preload="metadata"></video></div>
+      <figcaption><span class="card-title">Villa Manatee, the full walkthrough</span><span class="card-loc">Siesta Key, FL</span></figcaption>
+    </figure>
+    <div class="shelf">
+      <figure class="reel">
+        <video src="https://d2ol7oe51mr4n9.cloudfront.net/user_3GC9brUnJ8xAbUdmHRNKiz46FmU/f07c09ef-ea37-4707-ae14-62ce581d794c.mp4" poster="./media/scene-02-poster.png" controls muted playsinline preload="metadata"></video>
+        <figcaption>
+          <span class="card-title">A photo becomes the tour</span>
+          <span class="card-loc">Siesta Key, FL</span>
+          <span class="reel-note">The exact still an owner sent us, waking up into a moving room.</span>
+        </figcaption>
       </figure>
-      <figure class="film reveal">
-        <video controls muted playsinline preload="metadata"
-               src="https://d2ol7oe51mr4n9.cloudfront.net/user_3GC9brUnJ8xAbUdmHRNKiz46FmU/f07c09ef-ea37-4707-ae14-62ce581d794c.mp4"></video>
-        <figcaption><strong>A photo becomes the tour</strong>
-        <span>The exact still an owner sent us, waking up.</span></figcaption>
+      <figure class="reel">
+        <video src="./media/scene-03.mp4" poster="./media/scene-03-poster.png" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption>
+          <span class="card-title">One unbroken glide</span>
+          <span class="card-loc">Siesta Key, FL</span>
+          <span class="reel-note">No cuts, no shake. The camera moves the way a guest walks.</span>
+        </figcaption>
       </figure>
     </div>
-    <div class="ledger reveal">
-      <p class="ledger-title">The delivered shelf</p>
+
+    <div class="delivered">
+      <p class="delivered-title">Delivered so far</p>
       <ul>
         <li><span>Villa Manatee</span><em>five bedroom pool home, Siesta Key</em><b>1:51</b></li>
         <li><span>Villa Sea Turtle</span><em>three bedroom beachfront, Siesta Key</em><b>1:47</b></li>
@@ -96,108 +304,93 @@
         <li><span>The Livery</span><em>historic wedding and event venue</em><b>reel</b></li>
       </ul>
     </div>
-  </section>
 
-  <!-- HOW -->
-  <section class="how" id="how">
-    <p class="kicker reveal">How it works</p>
-    <h2 class="display-2 reveal">Three steps. About a day.</h2>
-    <div class="steps">
-      <article class="step reveal">
-        <span class="stepnum">01</span>
-        <h3>Send the photos you already have</h3>
-        <p>The same set that is on your listing today. Nothing to re-shoot,
-        nobody visits the property.</p>
-      </article>
-      <article class="step reveal">
-        <span class="stepnum">02</span>
-        <h3>We build the walkthrough</h3>
-        <p>Every room becomes a steady cinematic camera move. If it is not in
-        your photos, it is not in your tour.</p>
-      </article>
-      <article class="step reveal">
-        <span class="stepnum">03</span>
-        <h3>Delivered in about a day</h3>
-        <p>A finished film sized for your listing page, your socials and your
-        inbox. Yours forever.</p>
-      </article>
-    </div>
-  </section>
+    <p class="samples-line">Every room in the film is a room in the photos. <strong>Nothing staged, nothing invented.</strong></p>
+  </div>
+</section>
 
-  <!-- PROMISE -->
-  <section class="promise" id="promise">
-    <div class="promise-inner">
-      <div class="promise-left">
-        <p class="kicker reveal">The promise</p>
-        <h2 class="display-2 reveal">Real rooms only.</h2>
+<section class="steps">
+  <div class="steps-in">
+    <h2>It is completely hands off.</h2>
+    <div class="ledger">
+      <div class="step">
+        <h3>Send me your listing</h3>
+        <p>Just send the listing link, or a folder of photos. I build everything from there. No appointments, no visits, nothing to schedule.</p>
       </div>
-      <div class="promise-right">
-        <p class="reveal">The rooms in the tour are the rooms in your photos. No invented
-        furniture, no imaginary views, no warped walls. If a shot cannot be made faithfully,
-        it does not go in the film.</p>
-        <p class="reveal">That is the whole point. Guests trust what they can walk through,
-        and they should be able to trust it on arrival too.</p>
+      <div class="step">
+        <h3>I create the walkthrough</h3>
+        <p>I arrange every room in the order a guest would naturally experience the home. You review it before anything goes live.</p>
+      </div>
+      <div class="step">
+        <h3>Share it everywhere</h3>
+        <p>Add it to Airbnb, VRBO, your website, or send it directly to potential guests. One link works anywhere.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- BOOK / PRICING -->
-  <section class="pricing" id="pricing">
-    <div class="pricing-media" aria-hidden="true">
-      <video muted loop playsinline preload="metadata" poster="media/scene-03-poster.png" data-autoplay>
-        <source src="media/scene-03.mp4" type="video/mp4">
-      </video>
+<section class="pricing">
+  <div class="pricing-in">
+    <h2>Pay once. Own it forever.</h2>
+    <p class="pricing-sub">Priced by the size of the property. No monthly fees, no contracts. One payment for a walkthrough you can use anywhere your property is listed.</p>
+    <div class="tiers">
+      <div class="tier"><span class="tier-price">$99</span><span class="tier-size">1&ndash;2 bedrooms</span>
+        <a class="tier-cta" data-tier="1-2 bedrooms" href="#contact">Reserve &middot; $50 deposit</a></div>
+      <div class="tier"><span class="tier-price">$149</span><span class="tier-size">3&ndash;4 bedrooms</span>
+        <a class="tier-cta" data-tier="3-4 bedrooms" href="#contact">Reserve &middot; $50 deposit</a></div>
+      <div class="tier"><span class="tier-price">$199</span><span class="tier-size">5+ bedrooms</span>
+        <a class="tier-cta" data-tier="5+ bedrooms" href="#contact">Reserve &middot; $50 deposit</a></div>
+      <div class="tier tier--venue"><span class="tier-price">$299+</span><span class="tier-size">Venues &amp; estates</span>
+        <a class="tier-cta" data-tier="venue or estate" href="#contact">Start a conversation</a></div>
     </div>
-    <div class="pricing-panel">
-      <p class="kicker reveal">Pay once</p>
-      <h2 class="display-2 reveal">One photo set.<br>One living tour.</h2>
-      <p class="reveal">Priced by the size of the property. No subscription, no contracts.
-      Reserve with a fifty dollar deposit, pay the balance when you approve the film.</p>
-      <div class="tiers">
-        <div class="tier reveal">
-          <span class="tier-size">1 to 2 bedrooms</span>
-          <span class="tier-price">$99</span>
-          <a class="tier-cta" data-tier="1-2 bedrooms" href="#">Reserve &middot; $50 deposit</a>
-        </div>
-        <div class="tier reveal">
-          <span class="tier-size">3 to 4 bedrooms</span>
-          <span class="tier-price">$149</span>
-          <a class="tier-cta" data-tier="3-4 bedrooms" href="#">Reserve &middot; $50 deposit</a>
-        </div>
-        <div class="tier reveal">
-          <span class="tier-size">5+ bedrooms</span>
-          <span class="tier-price">$199</span>
-          <a class="tier-cta" data-tier="5+ bedrooms" href="#">Reserve &middot; $50 deposit</a>
-        </div>
-        <div class="tier reveal">
-          <span class="tier-size">Venues &amp; estates</span>
-          <span class="tier-price">from $299</span>
-          <a class="tier-cta" data-tier="venue or estate" href="#">Start a conversation</a>
-        </div>
-      </div>
-      <p class="fineprint reveal">The deposit comes off the price. Delivery in about a day
-      from receiving your photos. The files are yours, hosted wherever you like.</p>
+    <p class="pricing-note">Reserve with a fifty dollar deposit that comes off the price, then pay the balance when you approve the film. Every tier includes the full walkthrough, sized for your listing page, socials and email. Managing several properties? Multi-property deals can be negotiated.</p>
+    <script>
+    /* Stripe Payment Links go here — see PAYMENTS-SETUP.md. Until one is pasted,
+       each button falls back to a pre-filled email so no lead is ever dropped. */
+    (function(){
+      var LINKS = {
+        "1-2 bedrooms": "",
+        "3-4 bedrooms": "",
+        "5+ bedrooms": "",
+        "venue or estate": ""
+      };
+      document.querySelectorAll(".tier-cta").forEach(function(a){
+        var link = LINKS[a.dataset.tier];
+        if (link) { a.href = link; return; }
+        a.href = "mailto:willhainley@walkthrutours.com?subject=" +
+          encodeURIComponent("tour for my " + a.dataset.tier + " property") +
+          "&body=" + encodeURIComponent("Here is a link to my listing: ");
+      });
+    })();
+    </script>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-in">
+    <div>
+      <h2>Tell me about your place</h2>
+      <p>Email or call with the listing link and I will take it from there. Quotes come back the same day.</p>
     </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <h2 class="display-2 reveal">Ready when your photos are.</h2>
-    <a class="mail reveal" href="mailto:willhainley@walkthrutours.com">willhainley@walkthrutours.com</a>
-    <p class="reveal contact-line">(956) 589-0497 &middot; Bradenton, Florida</p>
-  </section>
-
-</main>
+    <div class="contact-card">
+      <a class="contact-mail" href="mailto:willhainley@walkthrutours.com?subject=My%20rental">willhainley@walkthrutours.com</a>
+      <a class="contact-tel" href="#" id="tel-reveal" data-a="956" data-b="589" data-c="0497">Prefer to call? Tap to show the number</a>
+      <script>
+      (function(){var el=document.getElementById('tel-reveal');var done=false;
+      el.addEventListener('click',function(e){if(done)return;e.preventDefault();
+      var n='('+el.dataset.a+') '+el.dataset.b+'-'+el.dataset.c;
+      el.textContent=n;el.href='tel:+1'+el.dataset.a+el.dataset.b+el.dataset.c;done=true;});})();
+      </script>
+    </div>
+  </div>
+</section>
 
 <footer class="footer">
-  <span>WalkThru Tours</span>
-  <span>Cinematic walkthrough films built from your photos.</span>
-  <span>Bradenton, Florida</span>
+  <div class="footer-in">
+    <span>WalkThru Tours</span>
+    <span>Bradenton, Florida</span>
+  </div>
 </footer>
 
-<script src="vendor/gsap.min.js"></script>
-<script src="vendor/ScrollTrigger.min.js"></script>
-<script src="vendor/lenis.min.js"></script>
-<script src="main.js"></script>
 </body>
 </html>
