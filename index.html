@@ -87,6 +87,13 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
   transition:transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);}
 .cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(20,18,14,0.7);}
 .cta:active{transform:translateY(0);}
+/* secondary path for people who want proof before a price */
+.hero-cue{display:inline-flex;align-items:center;gap:0.6rem;color:oklch(93% 0.02 92);text-decoration:none;
+  font-size:0.95rem;font-weight:500;text-shadow:0 1px 12px rgba(20,18,14,0.5);}
+.hero-cue i{width:1.5px;height:1.6rem;background:currentColor;display:block;transform-origin:top;
+  animation:cue 2.4s var(--ease-out) infinite;}
+@keyframes cue{0%,100%{transform:scaleY(0.45);opacity:0.5;}50%{transform:scaleY(1);opacity:1;}}
+@media (prefers-reduced-motion:reduce){.hero-cue i{animation:none;}}
 
 /* samples — the screening room: dark band, one feature, a shelf of reels */
 .samples{background:var(--color-ink);color:var(--color-paper);padding:clamp(4rem,9vw,7rem) 0;}
@@ -146,22 +153,29 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
 .tier--venue{background:var(--color-ink);color:var(--color-paper);border-color:var(--color-ink);}
 .tier--venue .tier-size{color:oklch(78% 0.07 185);}
 .pricing-note{margin:1.6rem 0 0;color:var(--color-muted);font-size:0.92rem;max-width:70ch;}
-.tier-cta{margin-top:auto;padding-top:0.9rem;font-weight:600;font-size:0.88rem;text-decoration:none;
+/* the tier most people pick, called out so the row has a centre of gravity */
+.tier--common{position:relative;border-top-color:var(--color-accent);box-shadow:0 2px 3px rgba(20,18,14,0.05), 0 18px 40px -24px rgba(20,18,14,0.65);}
+.tier-flag{position:absolute;top:-0.72rem;left:1.3rem;background:var(--color-accent);color:oklch(97% 0.01 185);
+  font-size:0.66rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:0.22rem 0.6rem;}
+/* 44px minimum touch target */
+.tier-cta{margin-top:auto;padding:0.9rem 0 0.35rem;min-height:2.75rem;font-weight:600;font-size:0.88rem;text-decoration:none;
   color:var(--color-accent-deep);display:inline-flex;align-items:center;gap:0.4rem;transition:gap var(--dur-short) var(--ease-out);}
 .tier-cta::after{content:"\2192";transition:transform var(--dur-short) var(--ease-out);}
 .tier:hover .tier-cta::after{transform:translateX(3px);}
 .tier--venue .tier-cta{color:oklch(82% 0.07 185);}
 
-/* delivered ledger — the proof shelf */
-.delivered{margin-top:clamp(2.4rem,5vw,3.6rem);border-top:1px solid oklch(34% 0.015 95);}
-.delivered-title{font-size:0.74rem;letter-spacing:0.18em;text-transform:uppercase;color:oklch(82% 0.07 185);font-weight:600;margin:1rem 0 0.2rem;}
-.delivered ul{list-style:none;margin:0;padding:0;}
-.delivered li{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr) auto;gap:0.4rem 1.4rem;align-items:baseline;
-  padding:0.95rem 0;border-bottom:1px solid oklch(30% 0.012 95);transition:padding-left var(--dur-short) var(--ease-out);}
+/* delivered ledger — its own light band, so the proof gets a moment of its own
+   and the dark screening room does not run on for half the page */
+.delivered-band{background:var(--color-paper);padding:clamp(3rem,6vw,4.5rem) 0;}
+.delivered-in{max-width:var(--maxw);margin-inline:auto;padding:0 var(--gutter);}
+.delivered-band .kicker{color:var(--color-accent-deep);margin-bottom:0.6rem;}
+.delivered{list-style:none;margin:0;padding:0;border-top:1px solid var(--color-rule);}
+.delivered li{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:0.4rem 1.4rem;align-items:baseline;
+  padding:1rem 0;border-bottom:1px solid var(--color-rule);transition:padding-left var(--dur-short) var(--ease-out);}
 .delivered li:hover{padding-left:0.5rem;}
-.delivered li span{font-family:var(--font-display);font-size:1.2rem;font-weight:500;color:var(--color-paper);}
-.delivered li em{font-style:normal;color:oklch(70% 0.02 92);font-size:0.92rem;}
-.delivered li b{font-weight:500;color:oklch(82% 0.07 185);font-variant-numeric:tabular-nums;}
+.delivered li span{font-family:var(--font-display);font-size:1.25rem;font-weight:500;color:var(--color-ink);}
+.delivered li em{font-style:normal;color:var(--color-muted);font-size:0.92rem;}
+.delivered li b{font-weight:600;color:var(--color-accent-deep);font-variant-numeric:tabular-nums;}
 @media (max-width:620px){
   .delivered li{grid-template-columns:1fr auto;}
   .delivered li em{grid-column:1 / -1;}
@@ -197,7 +211,10 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
   .reel{grid-template-columns:1fr;}
   .step{grid-template-columns:1fr;gap:0.5rem;}
   .tiers{grid-template-columns:1fr;}
-  .nav-links .nav-a{display:none;}
+  /* keep one way to reach pricing on a 5000px phone page */
+  .nav-links .nav-a:not(.nav-pill){display:none;}
+  .nav-pill{border:1px solid oklch(88% 0.02 92 / 0.7);border-radius:99px;padding:0.45rem 1rem;font-size:0.85rem;}
+  .nav-pill::after{display:none;}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:0.01ms !important;animation:none !important;}
@@ -212,7 +229,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
     <a class="wordmark" href="#">WalkThru Tours</a>
     <div class="nav-links">
       <a class="nav-a" href="#samples">Samples</a>
-      <a class="nav-a" href="#pricing">Pricing</a>
+      <a class="nav-a nav-pill" href="#pricing">Pricing</a>
     </div>
   </div>
 </nav>
@@ -274,6 +291,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
     <p class="hero-proof">Every scene behind these words started as a still photo. No camera ever visited the property.</p>
     <div class="hero-row">
       <a class="cta" href="#contact">Get my walkthrough</a>
+      <a class="hero-cue" href="#samples">Watch one first<i></i></a>
     </div>
   </div>
 </header>
@@ -315,17 +333,19 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
       </figure>
     </div>
 
-    <div class="delivered">
-      <p class="delivered-title">Delivered so far</p>
-      <ul>
-        <li><span>Five bedroom pool home</span><em>heated pool, canal dock, gulf coast</em><b>1:51</b></li>
-        <li><span>Three bedroom beachfront</span><em>steps from the sand, gulf coast</em><b>1:47</b></li>
-        <li><span>Two bedroom ocean villa</span><em>island rental, gulf coast</em><b>1:34</b></li>
-        <li><span>Wedding and event venue</span><em>historic hall, full property reel</em><b>reel</b></li>
-      </ul>
-    </div>
-
     <p class="samples-line">Every room in the film is a room in the photos. <strong>Nothing in it was staged or invented.</strong></p>
+  </div>
+</section>
+
+<section class="delivered-band">
+  <div class="delivered-in">
+    <p class="kicker">Delivered so far</p>
+    <ul class="delivered">
+      <li><span>Five bedroom pool home</span><em>heated pool, canal dock, gulf coast</em><b>1:51</b></li>
+      <li><span>Three bedroom beachfront</span><em>steps from the sand, gulf coast</em><b>1:47</b></li>
+      <li><span>Two bedroom ocean villa</span><em>island rental, gulf coast</em><b>1:34</b></li>
+      <li><span>Wedding and event venue</span><em>historic hall, full property reel</em><b>reel</b></li>
+    </ul>
   </div>
 </section>
 
@@ -361,7 +381,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
     <div class="tiers">
       <div class="tier"><span class="tier-price">$99</span><span class="tier-size">1&ndash;2 bedrooms</span>
         <a class="tier-cta" data-tier="1-2 bedrooms" href="#contact">Reserve &middot; $50 deposit</a></div>
-      <div class="tier"><span class="tier-price">$149</span><span class="tier-size">3&ndash;4 bedrooms</span>
+      <div class="tier tier--common"><span class="tier-flag">Most booked</span><span class="tier-price">$149</span><span class="tier-size">3&ndash;4 bedrooms</span>
         <a class="tier-cta" data-tier="3-4 bedrooms" href="#contact">Reserve &middot; $50 deposit</a></div>
       <div class="tier"><span class="tier-price">$199</span><span class="tier-size">5+ bedrooms</span>
         <a class="tier-cta" data-tier="5+ bedrooms" href="#contact">Reserve &middot; $50 deposit</a></div>
