@@ -343,22 +343,27 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
       <div class="tier tier--venue"><span class="tier-price">$299+</span><span class="tier-size">Venues &amp; estates</span>
         <a class="tier-cta" data-tier="venue or estate" href="#contact">Start a conversation</a></div>
     </div>
-    <p class="pricing-note">Reserve with a fifty dollar deposit that comes off the price, then pay the balance when you approve the film. Every tier includes the full walkthrough, sized for your listing page, socials and email. Managing several properties? Multi-property deals can be negotiated.</p>
+    <p class="pricing-note">Reserve with a fifty dollar deposit on Venmo that comes off the price, then pay the balance when you approve the film. Every tier includes the full walkthrough, sized for your listing page, socials and email. Managing several properties? Multi-property deals can be negotiated.</p>
     <script>
-    /* Stripe Payment Links go here — see PAYMENTS-SETUP.md. Until one is pasted,
-       each button falls back to a pre-filled email so no lead is ever dropped. */
+    /* Venmo deposit flow. Set VENMO_HANDLE once (no @) and every button opens a
+       pre-filled $50 payment; the Venmo app catches it on phones, the web page on
+       desktop. Leave it empty and the buttons fall back to a pre-filled email, so
+       a lead is never dropped either way. */
     (function(){
-      var LINKS = {
-        "1-2 bedrooms": "",
-        "3-4 bedrooms": "",
-        "5+ bedrooms": "",
-        "venue or estate": ""
-      };
+      var VENMO_HANDLE = "";        // e.g. "Will-Hainley"
+      var DEPOSIT = "50";
       document.querySelectorAll(".tier-cta").forEach(function(a){
-        var link = LINKS[a.dataset.tier];
-        if (link) { a.href = link; return; }
+        var tier = a.dataset.tier;
+        if (VENMO_HANDLE && tier !== "venue or estate") {
+          a.href = "https://venmo.com/" + encodeURIComponent(VENMO_HANDLE) +
+            "?txn=pay&amount=" + DEPOSIT +
+            "&note=" + encodeURIComponent("WalkThru Tours deposit, " + tier);
+          a.target = "_blank";
+          a.rel = "noopener";
+          return;
+        }
         a.href = "mailto:willhainley@walkthrutours.com?subject=" +
-          encodeURIComponent("tour for my " + a.dataset.tier + " property") +
+          encodeURIComponent("tour for my " + tier + " property") +
           "&body=" + encodeURIComponent("Here is a link to my listing: ");
       });
     })();
