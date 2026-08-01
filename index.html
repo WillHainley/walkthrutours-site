@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WalkThru Tours — Let guests experience your home before they book</title>
+<title>WalkThru Tours · Let guests walk your place before they book it</title>
 <meta name="description" content="Cinematic walkthrough tours for vacation rentals, built from the listing photos you already have. Pay once, no subscription.">
 <meta property="og:title" content="WalkThru Tours">
-<meta property="og:description" content="Let guests experience your home before they book. Cinematic walkthroughs built from the listing photos you already have.">
+<meta property="og:description" content="Send the photos you already have. Get back a film of your property, usually the next day. Pay once, no subscription.">
 <meta property="og:image" content="./media/hero-loop-poster.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
@@ -222,9 +222,11 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
   <video id="hv-b" muted playsinline preload="auto" aria-hidden="true"></video>
   <script>
   (function(){
-    // Purpose-built hero loop first, then production glide segments. All local
-    // and web-encoded — see MEDIA.md before swapping anything in.
-    var scenes=["./media/hero-loop.mp4","./media/scene-01.mp4","./media/scene-02.mp4","./media/scene-03.mp4"];
+    // Best scenes across every delivered tour. All local and web-encoded.
+    // Read MEDIA.md before swapping anything in.
+    var scenes=["./media/hero-loop.mp4","./media/hero-01.mp4","./media/hero-02.mp4",
+                "./media/hero-03.mp4","./media/hero-04.mp4","./media/hero-05.mp4",
+                "./media/hero-06.mp4"];
     var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var a=document.getElementById("hv-a"),b=document.getElementById("hv-b");
     if(reduce){a.removeAttribute("autoplay");a.pause();return;}
@@ -266,10 +268,10 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
   })();
   </script>
   <div class="hero-in">
-    <p class="kicker">Interactive walkthroughs for vacation rentals</p>
-    <h1>Let guests experience your home before they book.</h1>
-    <p class="hero-sub">Guests don't just see photos, they walk naturally from room to room and understand how your property flows.</p>
-    <p class="hero-proof">Every scene playing behind these words was built from still photos. No camera ever visited.</p>
+    <p class="kicker">Walkthrough tours for vacation rentals</p>
+    <h1>Let guests walk your place before they book it.</h1>
+    <p class="hero-sub">Send me the photos you already have. I send back a film of your property, usually the next day.</p>
+    <p class="hero-proof">Every scene behind these words started as a still photo. No camera ever visited.</p>
     <div class="hero-row">
       <a class="cta" href="#contact">Get my walkthrough</a>
     </div>
@@ -279,8 +281,8 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
 <section class="samples" id="samples">
   <div class="samples-in">
     <div class="samples-head">
-      <h2>See what guests experience</h2>
-      <p class="samples-note">Every walkthrough below was built from real listing photos and delivered to a real owner.</p>
+      <h2>See what guests see</h2>
+      <p class="samples-note">All of these came from listing photos an owner already had. Each one went to a paying client.</p>
     </div>
     <figure class="feature">
       <div class="feature-frame"><video src="./media/showreel.mp4" poster="./media/showreel-poster.jpg" controls muted playsinline preload="metadata"></video></div>
@@ -329,19 +331,19 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
 
 <section class="steps">
   <div class="steps-in">
-    <h2>It is completely hands off.</h2>
+    <h2>Three steps, and two of them are mine.</h2>
     <div class="ledger">
       <div class="step">
-        <h3>Send me your listing</h3>
-        <p>Just send the listing link, or a folder of photos. I build everything from there. No appointments, no visits, nothing to schedule.</p>
+        <h3>Send the link</h3>
+        <p>Your listing link, or a folder of photos. That is the whole ask. Nobody schedules anything and nobody visits the property.</p>
       </div>
       <div class="step">
-        <h3>I create the walkthrough</h3>
-        <p>I arrange every room in the order a guest would naturally experience the home. You review it before anything goes live.</p>
+        <h3>I build it</h3>
+        <p>I put the rooms in the order a guest would walk them, then send it to you first. Changes are free until you like it.</p>
       </div>
       <div class="step">
-        <h3>Share it everywhere</h3>
-        <p>Add it to Airbnb, VRBO, your website, or send it directly to potential guests. One link works anywhere.</p>
+        <h3>Post it anywhere</h3>
+        <p>Airbnb, VRBO, your own site, or straight to someone asking questions in your inbox. One file, and it works everywhere.</p>
       </div>
     </div>
   </div>
@@ -350,7 +352,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
 <section class="pricing">
   <div class="pricing-in">
     <h2>Pay once. Own it forever.</h2>
-    <p class="pricing-sub">Priced by the size of the property. No monthly fees, no contracts. One payment for a walkthrough you can use anywhere your property is listed.</p>
+    <p class="pricing-sub">Priced by the size of the property. There is no monthly fee and no contract. You pay once, and the file is yours to use wherever the property is listed.</p>
     <ul class="assurances">
       <li>You see it before you pay the balance</li>
       <li>Delivered in about a day</li>
@@ -398,7 +400,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
   <div class="contact-in">
     <div>
       <h2>Tell me about your place</h2>
-      <p>Email or call with the listing link and I will take it from there. Quotes come back the same day.</p>
+      <p>Send the listing link and I will take it from there. Quotes come back the same day.</p>
     </div>
     <div class="contact-card">
       <a class="contact-mail" href="mailto:willhainley@walkthrutours.com?subject=My%20rental">willhainley@walkthrutours.com</a>
