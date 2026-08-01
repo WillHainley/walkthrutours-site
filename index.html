@@ -101,10 +101,12 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
 .feature .card-title{font-family:var(--font-display);font-weight:500;font-size:clamp(1.3rem,1.1rem + 1vw,1.9rem);color:var(--color-paper);}
 .feature .card-loc{font-size:0.76rem;letter-spacing:0.14em;text-transform:uppercase;color:oklch(82% 0.07 185);}
 .shelf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2.4vw,1.8rem);margin-top:clamp(1.2rem,2.6vw,1.8rem);}
+/* depth from background + layered shadow instead of borders (Refactoring UI) */
 .reel{margin:0;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1rem;align-items:center;
-  border:1px solid oklch(34% 0.015 95);border-radius:0;padding:0.8rem;background:oklch(25% 0.012 95);
+  border:0;border-left:2px solid transparent;border-radius:0;padding:0.9rem;background:oklch(25% 0.012 95);
+  box-shadow:0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -18px rgba(0,0,0,0.8);
   transition:border-color var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);}
-.reel:hover{border-color:oklch(55% 0.085 185);transform:translateY(-2px);}
+.reel:hover{border-left-color:var(--color-accent);transform:translateY(-2px);}
 .reel video{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:0;}
 .reel figcaption{display:flex;flex-direction:column;gap:0.4rem;padding-right:0.4rem;}
 .reel .card-title{font-family:var(--font-display);font-weight:500;font-size:1.15rem;color:var(--color-paper);line-height:1.15;}
@@ -128,9 +130,15 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
 .pricing h2{font-size:var(--text-h2);}
 .pricing-sub{color:var(--color-ink-2);max-width:52ch;margin:0.8rem 0 0;}
 .tiers{margin-top:clamp(1.8rem,4vw,2.6rem);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(0.9rem,2vw,1.3rem);}
-.tier{border:var(--rule-hair);border-radius:var(--radius-card);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:0.55rem;background:var(--color-paper);
+.tier{border:0;border-top:2px solid var(--color-rule);border-radius:var(--radius-card);padding:1.4rem 1.3rem 1.5rem;display:flex;flex-direction:column;gap:0.55rem;background:var(--color-paper);
+  box-shadow:0 1px 1px rgba(20,18,14,0.04), 0 10px 24px -20px rgba(20,18,14,0.5);
   transition:transform var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);}
-.tier:hover{transform:translateY(-3px);border-color:var(--color-accent-deep);}
+.tier:hover{transform:translateY(-3px);border-top-color:var(--color-accent);}
+
+/* assurances — trust signals sit AT the conversion point, not only in the samples band */
+.assurances{list-style:none;margin:1.4rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:0.5rem 1.9rem;}
+.assurances li{display:flex;align-items:center;gap:0.55rem;font-size:0.93rem;font-weight:500;color:var(--color-ink-2);}
+.assurances li::before{content:"";width:7px;height:7px;flex:none;background:var(--color-accent);border-radius:50%;}
 .tier-price{font-family:var(--font-display);font-weight:400;font-size:clamp(2.1rem,3.4vw,2.9rem);line-height:0.9;}
 .tier-size{font-weight:600;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-muted);}
 .tier--venue{background:var(--color-ink);color:var(--color-paper);border-color:var(--color-ink);}
@@ -274,23 +282,23 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
     </div>
     <figure class="feature">
       <div class="feature-frame"><video src="https://d2ol7oe51mr4n9.cloudfront.net/user_3GC9brUnJ8xAbUdmHRNKiz46FmU/482e5d0a-cf39-4200-bb6c-0817aa8b3f72.mp4" poster="./media/scene-01-poster.png" controls muted playsinline preload="metadata"></video></div>
-      <figcaption><span class="card-title">Villa Manatee, the full walkthrough</span><span class="card-loc">Siesta Key, FL</span></figcaption>
+      <figcaption><span class="card-title">A full walkthrough, start to finish</span><span class="card-loc">Five bedroom pool home &middot; Gulf coast</span></figcaption>
     </figure>
     <div class="shelf">
       <figure class="reel">
         <video src="https://d2ol7oe51mr4n9.cloudfront.net/user_3GC9brUnJ8xAbUdmHRNKiz46FmU/f07c09ef-ea37-4707-ae14-62ce581d794c.mp4" poster="./media/scene-02-poster.png" controls muted playsinline preload="metadata"></video>
         <figcaption>
           <span class="card-title">A photo becomes the tour</span>
-          <span class="card-loc">Siesta Key, FL</span>
-          <span class="reel-note">The exact still an owner sent us, waking up into a moving room.</span>
+          <span class="card-loc">Before and after</span>
+          <span class="reel-note">The exact still an owner sent in, waking up into a moving room.</span>
         </figcaption>
       </figure>
       <figure class="reel">
         <video src="./media/scene-03.mp4" poster="./media/scene-03-poster.png" autoplay muted loop playsinline preload="metadata"></video>
         <figcaption>
           <span class="card-title">One unbroken glide</span>
-          <span class="card-loc">Siesta Key, FL</span>
-          <span class="reel-note">No cuts, no shake. The camera moves the way a guest walks.</span>
+          <span class="card-loc">No cuts, no shake</span>
+          <span class="reel-note">The camera moves through the room the way a guest walks it.</span>
         </figcaption>
       </figure>
     </div>
@@ -298,10 +306,10 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
     <div class="delivered">
       <p class="delivered-title">Delivered so far</p>
       <ul>
-        <li><span>Villa Manatee</span><em>five bedroom pool home, Siesta Key</em><b>1:51</b></li>
-        <li><span>Villa Sea Turtle</span><em>three bedroom beachfront, Siesta Key</em><b>1:47</b></li>
-        <li><span>Villa Seahorse</span><em>two bedroom ocean villa, Siesta Key</em><b>1:34</b></li>
-        <li><span>The Livery</span><em>historic wedding and event venue</em><b>reel</b></li>
+        <li><span>Five bedroom pool home</span><em>heated pool, canal dock, gulf coast</em><b>1:51</b></li>
+        <li><span>Three bedroom beachfront</span><em>steps from the sand, gulf coast</em><b>1:47</b></li>
+        <li><span>Two bedroom ocean villa</span><em>island rental, gulf coast</em><b>1:34</b></li>
+        <li><span>Wedding and event venue</span><em>historic hall, full property reel</em><b>reel</b></li>
       </ul>
     </div>
 
@@ -333,6 +341,11 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
   <div class="pricing-in">
     <h2>Pay once. Own it forever.</h2>
     <p class="pricing-sub">Priced by the size of the property. No monthly fees, no contracts. One payment for a walkthrough you can use anywhere your property is listed.</p>
+    <ul class="assurances">
+      <li>You see it before you pay the balance</li>
+      <li>Delivered in about a day</li>
+      <li>The files are yours, hosted anywhere</li>
+    </ul>
     <div class="tiers">
       <div class="tier"><span class="tier-price">$99</span><span class="tier-size">1&ndash;2 bedrooms</span>
         <a class="tier-cta" data-tier="1-2 bedrooms" href="#contact">Reserve &middot; $50 deposit</a></div>
