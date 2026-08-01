@@ -1,25 +1,27 @@
-# Payments — Venmo (30 seconds)
+# Payments — Venmo
 
-The pricing buttons open a pre-filled $50 Venmo deposit. One value turns them on.
+Live. Handle is `WalkThruTours`, set as `var VENMO_HANDLE` in the pricing script in
+`index.html`. Each tier button opens Venmo with $50 and a note already filled in
+(the app on phones, the web page on desktop). The venues tier goes to email instead,
+since those are quoted individually. Empty the handle and every button falls back to
+a pre-filled email, so a lead is never dropped either way.
 
-1. In `index.html`, find `var VENMO_HANDLE = "";` in the pricing script.
-2. Put your Venmo username between the quotes, **without the @** — for example
-   `var VENMO_HANDLE = "Will-Hainley";` (it is the handle in your Venmo profile URL).
-3. Commit and push. Pages redeploys in about a minute.
+**Test it once before sending anyone there.** Open the site on your phone, tap a
+Reserve button, and check that Venmo opens on the right account with $50 filled in.
+Venmo's link format has changed before.
 
-That is it. Each button then opens Venmo with the amount ($50) and the note
-("WalkThru Tours deposit, 3-4 bedrooms") already filled in — the app on phones,
-the web page on desktop. The venues tier always goes to email instead, since
-those are quoted individually.
-
-While the handle is empty every button falls back to a pre-filled email, so a lead
-is never dropped.
+## Two things to know
+- **A personal Venmo account is not meant for business payments.** Venmo's user
+  agreement puts business activity on a business profile, and personal accounts
+  taking regular payments can get frozen while they review it, with the money held.
+  Creating a business profile under the same login takes a few minutes. Do it before
+  volume picks up, not after a payment is stuck.
+- **Some owners will not use Venmo at all**, particularly older ones and anyone
+  expensing it. Stripe Payment Links are the drop-in second option: create a $50
+  one-time link at dashboard.stripe.com and swap the URL in the same script. Worth
+  doing the first time someone asks to pay by card.
 
 ## The business rule
 Deposit before credits. Do not start generating until the $50 lands. The deposit
 comes off the price; collect the balance on approval, same handle.
 
-## Later, if card payments matter
-Some owners will not use Venmo. Stripe Payment Links are the drop-in upgrade: create
-a $50 one-time link at dashboard.stripe.com and use it in place of the Venmo URL in
-the same script. Worth doing only once someone actually asks to pay by card.

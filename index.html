@@ -392,14 +392,15 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
        desktop. Leave it empty and the buttons fall back to a pre-filled email, so
        a lead is never dropped either way. */
     (function(){
-      var VENMO_HANDLE = "";        // e.g. "Will-Hainley"
+      var VENMO_HANDLE = "WalkThruTours";
       var DEPOSIT = "50";
       document.querySelectorAll(".tier-cta").forEach(function(a){
         var tier = a.dataset.tier;
         if (VENMO_HANDLE && tier !== "venue or estate") {
-          a.href = "https://venmo.com/" + encodeURIComponent(VENMO_HANDLE) +
-            "?txn=pay&amount=" + DEPOSIT +
-            "&note=" + encodeURIComponent("WalkThru Tours deposit, " + tier);
+          a.href = "https://venmo.com/?txn=pay&audience=private" +
+            "&recipients=" + encodeURIComponent(VENMO_HANDLE) +
+            "&amount=" + DEPOSIT +
+            "&note=" + encodeURIComponent("WalkThru Tours deposit for a " + tier + " property");
           a.target = "_blank";
           a.rel = "noopener";
           return;
