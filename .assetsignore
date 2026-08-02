@@ -1,0 +1,6 @@
+# Files in this repo that are notes for us, not part of the website.
+*.md
+wrangler.jsonc
+.assetsignore
+.gitignore
+dist/

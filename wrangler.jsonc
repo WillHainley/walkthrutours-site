@@ -1,0 +1,10 @@
+{
+  // Connects this repo to the Cloudflare Worker that serves walkthrutours.com.
+  // Cloudflare > Workers & Pages > lucky-union-daa5 > Settings > Build > connect
+  // this repo. After that every push to main redeploys the site automatically.
+  "name": "lucky-union-daa5",
+  "compatibility_date": "2026-08-02",
+  "assets": {
+    "directory": "."
+  }
+}

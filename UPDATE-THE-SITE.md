@@ -1,28 +1,38 @@
 # Updating walkthrutours.com
 
-walkthrutours.com is served by a Cloudflare Worker called `lucky-union-daa5`.
-DNS is fine and does not need to change. Email (Google Workspace MX, SPF, DKIM,
-DMARC) is untouched by any of this.
+The site is served by a Cloudflare Worker called `lucky-union-daa5`, using static
+assets. DNS never needs to change and email is never touched.
 
-## One time: point the Worker at this repo
+## One time: connect this repo to the Worker
 
-Cloudflare > Workers & Pages > `lucky-union-daa5` > Edit code. Replace everything
-with `cloudflare-worker.js` from this repo, then Deploy.
+Cloudflare > Workers & Pages > `lucky-union-daa5` > **Settings** > **Build** >
+connect `WillHainley/walkthrutours-site`, branch `main`.
 
-That is the only Cloudflare step there will ever be.
+- Build command: leave empty
+- `wrangler.jsonc` in this repo tells Cloudflare what to serve
+- `.assetsignore` keeps these notes out of the deployed site
 
 ## Every time after that
 
-Edit `index.html`, commit, push. GitHub Pages rebuilds in about a minute and
-walkthrutours.com serves it. Both machines update the same way.
+Edit `index.html`, commit, push. Cloudflare rebuilds and walkthrutours.com updates.
+Either machine, no dashboard, no uploads.
 
-## Leftovers you can clean up whenever
+## Until that is connected
 
-- `www` still points at Squarespace (`ext-sq.squarespace.com`) and shows a Coming
-  Soon page. Change that CNAME to `willhainley.github.io`, DNS only, grey cloud.
+Uploading by hand still works: rebuild the clean folder and drag it into
+Workers & Pages > lucky-union-daa5 > upload static files.
+
+```
+rm -rf dist && mkdir dist && cp index.html favicon.svg dist/ && cp -r media dist/media
+```
+
+## Leftovers
+
+- `www` still points at Squarespace and shows Coming Soon. Change that CNAME to
+  match the apex when you feel like it.
 - `_domainconnect` is a Squarespace leftover and can be deleted.
 
-## Never delete these
+## Never delete these DNS records
 Google Workspace email for willhainley@walkthrutours.com depends on them:
 `MX smtp.google.com`, the SPF TXT, `google._domainkey` DKIM, `_dmarc`, and the
 google-site-verification TXT. Losing any of them breaks cold outreach.
