@@ -506,50 +506,12 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
     }
   }, 500);
 
-  // The one showy effect, and it is on message: the still photo that becomes a tour is
-  // scrubbed by the visitor's own scroll, so they drive the transformation themselves.
-  // Desktop only, since programmatic seeking is unreliable on mobile Safari; there the
-  // clip keeps its ordinary autoplay loop.
-  var alive = document.querySelector('.shelf .reel video[src*="photo-comes-alive"]');
-  if (alive && matchMedia('(min-width: 900px)').matches) {
-    var wanted = 0, ticking = false, armed = false;
-
-    function arm() {
-      if (armed || !isFinite(alive.duration) || !alive.duration) return;
-      armed = true;
-      alive.loop = false;
-      alive.pause();
-      onScroll();
-    }
-    function onScroll() {
-      if (!armed) return;
-      var r = alive.getBoundingClientRect();
-      // 0 when the clip's top reaches the bottom of the viewport, 1 when its bottom
-      // reaches the top: the whole pass through the screen drives the whole clip.
-      var p = (innerHeight - r.top) / (innerHeight + r.height);
-      p = p < 0 ? 0 : p > 1 ? 1 : p;
-      wanted = p * (alive.duration - 0.05);
-      if (!ticking) { ticking = true; requestAnimationFrame(step); }
-    }
-    function step() {
-      ticking = false;
-      if (alive.readyState >= 2) {
-        // ease toward the target so a fast flick does not look like a jump cut
-        var cur = alive.currentTime;
-        var next = cur + (wanted - cur) * 0.35;
-        if (Math.abs(wanted - cur) < 0.02) next = wanted;
-        try { alive.currentTime = next; } catch (e) {}
-        if (Math.abs(wanted - next) > 0.02) { ticking = true; requestAnimationFrame(step); }
-      }
-    }
-
-    alive.removeAttribute('autoplay');
-    alive.preload = 'auto';
-    if (alive.readyState >= 1) arm();
-    else alive.addEventListener('loadedmetadata', arm, { once: true });
-    addEventListener('scroll', onScroll, { passive: true });
-    addEventListener('resize', onScroll, { passive: true });
-  }
+  // NOTE: a scroll-scrubbed version of the "photo becomes the tour" clip was tried here
+  // and removed. Setting video.currentTime seeks to the nearest keyframe, and this clip
+  // is encoded with a normal GOP, so scrubbing snapped between keyframes and read as
+  // glitching rather than as smooth motion. Doing it properly needs an all-intra
+  // re-encode (ffmpeg -g 1), which multiplies the file size. Not worth it for one
+  // effect on a page whose job is to load fast. The clip keeps its autoplay loop.
 })();
 </script>
 
