@@ -412,5 +412,146 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-
   </div>
 </footer>
 
+<!-- Motion layer.
+     Native APIs on purpose. GSAP + ScrollTrigger + Lenis were wired up first and did
+     load fine; they were dropped because they were not earning their ~130KB. Reveals
+     and a scroll-scrubbed video are a few lines of IntersectionObserver and rAF, so
+     the dependency bought nothing here and cost a CDN round trip on every visit.
+
+     Everything below is progressive enhancement. If it throws, if the browser is old,
+     or if the visitor prefers reduced motion, the page renders exactly as before with
+     all content visible. Nothing here is required to read or use the site.
+
+     The reveal deliberately has THREE independent triggers (observer, scroll, timer).
+     Hiding a single-page sales site and depending on one event to bring it back is the
+     only change here that could actually cost money, so it does not rely on any one
+     API working. Worst case, everything is visible within 12 seconds regardless. -->
+<script>
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  var groups = [
+    ['.samples-head > *', 60],
+    ['.feature', 0],
+    ['.shelf .reel', 80],
+    ['.steps .step', 80],
+    ['.pricing-in > h2, .pricing-in > .pricing-sub, .assure li, .tier', 50],
+    ['.contact-in > *', 60]
+  ];
+
+  var all = [];
+  groups.forEach(function (g) {
+    var els = [].slice.call(document.querySelectorAll(g[0]));
+    els.forEach(function (el, i) {
+      el.style.willChange = 'opacity, transform';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      el.style.transition = 'opacity .55s cubic-bezier(.22,.61,.36,1) ' + (i * g[1]) +
+                            'ms, transform .55s cubic-bezier(.22,.61,.36,1) ' + (i * g[1]) + 'ms';
+      all.push(el);
+    });
+  });
+  if (!all.length) return;
+
+  function show(el) {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+    setTimeout(function () { el.style.willChange = ''; }, 900);
+  }
+
+  // THREE independent ways for an element to become visible. This is deliberate
+  // redundancy, not belt-and-braces paranoia: hiding a one-page sales site and
+  // relying on a single event to bring it back is the one failure that would cost
+  // real money, and it must not depend on any single API behaving.
+  var pending = all.slice();
+
+  function sweep() {
+    if (!pending.length) return;
+    for (var i = pending.length - 1; i >= 0; i--) {
+      var r = pending[i].getBoundingClientRect();
+      if (r.top < innerHeight * 0.92 && r.bottom > 0) { show(pending[i]); pending.splice(i, 1); }
+    }
+  }
+
+  // 1. IntersectionObserver, the efficient path.
+  try {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          show(e.target);
+          io.unobserve(e.target);
+          var k = pending.indexOf(e.target);
+          if (k > -1) pending.splice(k, 1);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.01 });
+    all.forEach(function (el) { io.observe(el); });
+  } catch (e) {}
+
+  // 2. Plain scroll/resize, in case the observer never fires.
+  addEventListener('scroll', sweep, { passive: true });
+  addEventListener('resize', sweep, { passive: true });
+  sweep();
+
+  // 3. A polling backstop for the first 12 seconds, then reveal everything left,
+  //    whatever happened. After this point nothing can still be hidden.
+  var ticks = 0;
+  var poll = setInterval(function () {
+    sweep();
+    if (++ticks >= 24 || !pending.length) {
+      clearInterval(poll);
+      pending.forEach(show);
+      pending.length = 0;
+    }
+  }, 500);
+
+  // The one showy effect, and it is on message: the still photo that becomes a tour is
+  // scrubbed by the visitor's own scroll, so they drive the transformation themselves.
+  // Desktop only, since programmatic seeking is unreliable on mobile Safari; there the
+  // clip keeps its ordinary autoplay loop.
+  var alive = document.querySelector('.shelf .reel video[src*="photo-comes-alive"]');
+  if (alive && matchMedia('(min-width: 900px)').matches) {
+    var wanted = 0, ticking = false, armed = false;
+
+    function arm() {
+      if (armed || !isFinite(alive.duration) || !alive.duration) return;
+      armed = true;
+      alive.loop = false;
+      alive.pause();
+      onScroll();
+    }
+    function onScroll() {
+      if (!armed) return;
+      var r = alive.getBoundingClientRect();
+      // 0 when the clip's top reaches the bottom of the viewport, 1 when its bottom
+      // reaches the top: the whole pass through the screen drives the whole clip.
+      var p = (innerHeight - r.top) / (innerHeight + r.height);
+      p = p < 0 ? 0 : p > 1 ? 1 : p;
+      wanted = p * (alive.duration - 0.05);
+      if (!ticking) { ticking = true; requestAnimationFrame(step); }
+    }
+    function step() {
+      ticking = false;
+      if (alive.readyState >= 2) {
+        // ease toward the target so a fast flick does not look like a jump cut
+        var cur = alive.currentTime;
+        var next = cur + (wanted - cur) * 0.35;
+        if (Math.abs(wanted - cur) < 0.02) next = wanted;
+        try { alive.currentTime = next; } catch (e) {}
+        if (Math.abs(wanted - next) > 0.02) { ticking = true; requestAnimationFrame(step); }
+      }
+    }
+
+    alive.removeAttribute('autoplay');
+    alive.preload = 'auto';
+    if (alive.readyState >= 1) arm();
+    else alive.addEventListener('loadedmetadata', arm, { once: true });
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+  }
+})();
+</script>
+
 </body>
 </html>
