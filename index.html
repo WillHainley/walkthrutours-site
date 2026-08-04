@@ -1,519 +1,369 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>WalkThru Tours · Show people around before they book</title>
 <meta name="description" content="Walkthrough tours for vacation rentals, wedding venues and golf clubs, built from the photos you already have. Pay once, no subscription.">
 <meta property="og:title" content="WalkThru Tours">
-<meta property="og:description" content="You send the photos from your listing. I turn them into a walkthrough film, usually back the next day. Pay once, no subscription.">
+<meta property="og:description" content="You send the photos you already have. I turn them into a walkthrough film, usually back the next day. Pay once, no subscription.">
 <meta property="og:image" content="./media/hero-loop-poster.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400&display=swap" rel="stylesheet">
 <style>
-/* Hallmark · macrostructure: Marquee Hero · tone: luxury-editorial · anchor hue: sea-teal 185°
- * theme: brand-locked (WalkThru cream/ink/teal · Newsreader + Instrument Sans)
- * nav: minimal 2-destination · footer: statement band
- * Hallmark · pre-emit critique: P4 H5 E4 S4 R5 V4 */
+/* ============================================================================
+   WalkThru Tours — cinema cut. Shipped 2026-08-03, replacing the cream editorial
+   layout that preceded it (see git history if it needs to come back).
+
+   The previous design was a warm editorial magazine: cream paper, serif display,
+   everything inside a 1180px column. Tasteful, but it argued with the product.
+   Film is shown dark, full bleed and big, because darkness makes the footage the
+   only light on the screen. Three decisions carry the whole page:
+     1. warm near-black ground, so video is the brightest object on screen
+     2. nothing caged in a column, footage runs edge to edge
+     3. type at theatrical scale, overlapping the frame
+
+   Rounded corners, pill buttons in brass, and real depth (shadow, gradient, glow)
+   come from the reference designs Will picked: all four used them, and the old
+   flat square-cornered layout was the outlier.
+   ========================================================================== */
 :root{
-  --color-paper:   oklch(95.1% 0.026 92);
-  --color-paper-2: oklch(91.8% 0.036 90);
-  --color-ink:     oklch(21.3% 0.012 95);
-  --color-ink-2:   oklch(40%   0.02  95);
-  --color-muted:   oklch(52%   0.03  92);
-  --color-rule:    oklch(84%   0.03  92);
-  --color-accent:  oklch(55% 0.085 185);
-  --color-accent-deep: oklch(45% 0.08 185);
-  --color-focus:   oklch(55% 0.085 185);
-  --color-paper-dark: oklch(23% 0.012 95);
-
-  --font-display: "Newsreader", Georgia, serif;
-  --font-body: "Instrument Sans", system-ui, sans-serif;
-
-  --text-display: clamp(2.9rem, 2rem + 4.4vw, 6rem);
-  --text-h2: clamp(1.9rem, 1.4rem + 2vw, 2.9rem);
-  --text-h3: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
-  --text-body: clamp(1rem, 0.97rem + 0.2vw, 1.1rem);
-
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-short: 220ms;
-  --rule-hair: 1px solid var(--color-rule);
-  --radius-card: 0;
-  --gutter: clamp(1.15rem, 4.5vw, 3rem);
-  --maxw: 1180px;
+  /* Warm near-black, not the cool blue-black I reached for first. Every reference
+     Will picked is moody but WARM (deep green, deep brown, cream+brown). A cold
+     ground would fight the brass and the property footage. */
+  --ink:#0d0b09;
+  --ink-2:#151210;
+  --ink-3:#1d1815;
+  --paper:#f4f1ea;
+  --dim:#9a938a;
+  --accent:#d8b06a;         /* brass: the pill-button colour in 3 of the 4 refs */
+  --accent-soft:#e6c78d;
+  --font-d:"Newsreader",Georgia,serif;
+  --font-b:"Instrument Sans",system-ui,sans-serif;
+  --gutter:clamp(1.1rem,4vw,3.2rem);
+  --ease:cubic-bezier(.16,1,.3,1);
+  /* Rounded + shadowed. All four references do this; the live site is square and
+     flat, which is the single most consistent difference between them and it. */
+  --r-card:18px;
+  --r-media:22px;
+  --shadow:0 24px 60px -18px rgba(0,0,0,.75);
 }
-html,body{margin:0;padding:0;overflow-x:clip;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--color-paper); color:var(--color-ink);
-  font-family:var(--font-body); font-size:var(--text-body); line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-*,*::before,*::after{box-sizing:border-box;min-width:0;}
-img,video{max-width:100%;display:block;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);
+  font-family:var(--font-b);-webkit-font-smoothing:antialiased;overflow-x:clip;}
+img,video{display:block;max-width:100%;}
 a{color:inherit;}
-h1,h2,h3{font-family:var(--font-display);font-weight:400;font-style:normal;line-height:1.04;letter-spacing:-0.015em;margin:0;overflow-wrap:anywhere;}
-:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px;}
+::selection{background:var(--accent);color:var(--ink);}
 
-/* nav */
-.nav{position:absolute;inset:0 0 auto 0;z-index:30;}
-.nav-in{max-width:var(--maxw);margin-inline:auto;padding:1.2rem var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:1rem;}
-.wordmark{font-family:var(--font-display);font-weight:500;font-size:1.5rem;letter-spacing:-0.01em;color:var(--color-paper);text-decoration:none;text-shadow:0 1px 14px rgba(20,18,14,0.45);}
-.nav-links{display:flex;gap:1.6rem;align-items:center;}
-.nav-a{font-weight:500;font-size:0.95rem;color:var(--color-paper);text-decoration:none;text-shadow:0 1px 12px rgba(20,18,14,0.5);position:relative;}
-.nav-a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--color-accent);transition:right var(--dur-short) var(--ease-out);}
-.nav-a:hover::after,.nav-a:focus-visible::after{right:0;}
+/* film grain over the whole page: the single cheapest trick that makes a site
+   read as "shot" rather than "designed". Very low opacity on purpose. */
+body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:none;
+  opacity:.035;background-image:url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter>\
+<rect width='140' height='140' filter='url(%23n)'/></svg>");
+  animation:grain 700ms steps(2) infinite;}
+@keyframes grain{0%{transform:translate(0,0)}50%{transform:translate(-3%,2%)}100%{transform:translate(2%,-2%)}}
 
-/* hero — the product is the hero */
-.hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;color:var(--color-paper);isolation:isolate;}
-.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0;transition:opacity 1.4s var(--ease-out);}
+/* ---------- HERO: full bleed, full height, type over footage ---------- */
+.hero{position:relative;height:100svh;min-height:560px;display:grid;
+  grid-template-rows:1fr auto;isolation:isolate;overflow:hidden;}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+  opacity:0;transition:opacity 1.6s var(--ease);}
 .hero video.on{opacity:1;}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(to top, rgba(20,18,14,0.82) 0%, rgba(20,18,14,0.35) 42%, rgba(20,18,14,0.18) 70%, rgba(20,18,14,0.34) 100%);}
-.hero-in{max-width:var(--maxw);margin-inline:auto;width:100%;padding:0 var(--gutter) clamp(2.4rem,6vw,4.5rem);}
-.kicker{font-weight:600;font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;color:oklch(82% 0.07 185);margin:0 0 1.2rem;}
-.hero h1{font-size:var(--text-display);max-width:14ch;}
-.hero-sub{max-width:38ch;font-size:clamp(1.02rem,1rem + 0.3vw,1.2rem);line-height:1.5;color:oklch(93% 0.02 92);margin:1.4rem 0 2rem;}
-.hero-proof{display:flex;align-items:center;gap:0.7rem;font-size:0.92rem;font-weight:500;color:oklch(88% 0.03 92);margin:0 0 1.8rem;max-width:46ch;}
-.hero-proof::before{content:"";width:26px;height:2px;background:oklch(70% 0.08 185);flex:none;}
-.hero-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.1rem 2rem;}
+/* vignette + floor gradient so type always has something to sit on */
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(120% 80% at 50% 40%,transparent 35%,rgba(7,7,10,.55) 100%),
+             linear-gradient(180deg,rgba(7,7,10,.55) 0%,transparent 28%,transparent 45%,rgba(7,7,10,.92) 100%);}
+.topbar{display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem var(--gutter);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;}
+.topbar nav{display:flex;gap:1.6rem;}
+.topbar a{text-decoration:none;opacity:.75;transition:opacity .2s;}
+.topbar a:hover{opacity:1;}
+.hero-in{padding:0 var(--gutter) clamp(2rem,5vw,3.6rem);align-self:end;}
+/* the scale jump is the point: this is 2x the live site's display size */
+.hero h1{font-family:var(--font-d);font-weight:300;margin:0;
+  font-size:clamp(3.1rem,1.2rem + 8.6vw,11rem);line-height:.92;letter-spacing:-.025em;
+  max-width:16ch;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-row{display:flex;flex-wrap:wrap;gap:1.6rem 2.4rem;align-items:center;
+  margin-top:clamp(1.4rem,3vw,2.4rem);}
+.hero-sub{margin:0;max-width:34ch;color:#cfcbc4;font-size:1.02rem;line-height:1.55;}
+/* Pill, brass, with a soft glow. This exact shape/colour appears in three of the
+   four references; the live site's square button is the outlier. */
+.cta{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;
+  background:linear-gradient(180deg,var(--accent-soft),var(--accent));color:#231b0e;
+  padding:1rem 2rem;font-weight:600;font-size:.95rem;border-radius:999px;
+  box-shadow:0 10px 30px -8px rgba(216,176,106,.5);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);}
+.cta:hover{transform:translateY(-3px);box-shadow:0 18px 42px -10px rgba(216,176,106,.7);}
 
-/* primary CTA */
-.cta{display:inline-block;font-weight:600;font-size:1rem;text-decoration:none;
-  background:var(--color-accent);color:oklch(97% 0.01 185);padding:0.95rem 1.9rem;border-radius:0;
-  transition:transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);}
-.cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(20,18,14,0.7);}
-.cta:active{transform:translateY(0);}
-/* secondary path for people who want proof before a price */
-.hero-cue{display:inline-flex;align-items:center;gap:0.6rem;color:oklch(93% 0.02 92);text-decoration:none;
-  font-size:0.95rem;font-weight:500;text-shadow:0 1px 12px rgba(20,18,14,0.5);}
-.hero-cue i{width:1.5px;height:1.6rem;background:currentColor;display:block;transform-origin:top;
-  animation:cue 2.4s var(--ease-out) infinite;}
-@keyframes cue{0%,100%{transform:scaleY(0.45);opacity:0.5;}50%{transform:scaleY(1);opacity:1;}}
-@media (prefers-reduced-motion:reduce){.hero-cue i{animation:none;}}
+/* ---------- FULL-BLEED FEATURE: the film gets the whole viewport ---------- */
+.slab{position:relative;padding:clamp(4rem,10vw,8rem) 0;}
+.slab-head{padding:0 var(--gutter);max-width:1100px;margin:0 auto clamp(2rem,5vw,3.4rem);}
+.slab-head h2{font-family:var(--font-d);font-weight:300;letter-spacing:-.02em;
+  font-size:clamp(2rem,1.2rem + 3.4vw,4.2rem);line-height:1.02;margin:0 0 .8rem;}
+.slab-head p{margin:0;color:var(--dim);max-width:48ch;line-height:1.6;}
+/* Near-full-bleed, but inset slightly and rounded so it reads as a framed object
+   with depth, the way every reference treats its hero media. */
+.bleed{position:relative;margin:0 clamp(0px,2.5vw,44px);border-radius:var(--r-media);
+  overflow:hidden;background:#000;box-shadow:var(--shadow);}
+.bleed video{width:100%;height:clamp(320px,70svh,860px);object-fit:cover;}
+.bleed figcaption{display:flex;justify-content:space-between;gap:1rem;
+  padding:1rem clamp(1rem,3vw,2rem);font-size:.82rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);
+  background:linear-gradient(180deg,rgba(13,11,9,0),rgba(13,11,9,.92));
+  position:absolute;left:0;right:0;bottom:0;padding-top:3.5rem;}
 
-/* samples — the screening room: dark band, one feature, a shelf of reels */
-.samples{background:var(--color-ink);color:var(--color-paper);padding:clamp(4rem,9vw,7rem) 0;}
-.samples-in{max-width:var(--maxw);margin-inline:auto;padding:0 var(--gutter);}
-.samples-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:1rem clamp(2rem,5vw,4rem);align-items:end;margin-bottom:clamp(2rem,4.5vw,3.2rem);}
-.samples h2{font-size:var(--text-h2);color:var(--color-paper);}
-.samples-note{color:oklch(70% 0.02 92);font-size:0.98rem;max-width:44ch;justify-self:end;text-align:right;}
-.feature{margin:0;position:relative;}
-.feature-frame{position:relative;overflow:hidden;border-radius:0;background:#000;box-shadow:0 30px 70px -40px rgba(0,0,0,0.9);}
-.feature video{width:100%;aspect-ratio:21/9;object-fit:cover;}
-.feature figcaption{position:absolute;left:clamp(1rem,3vw,2rem);bottom:clamp(0.9rem,2.5vw,1.6rem);display:flex;flex-direction:column;gap:0.15rem;text-shadow:0 1px 12px rgba(0,0,0,0.6);}
-.feature .card-title{font-family:var(--font-display);font-weight:500;font-size:clamp(1.3rem,1.1rem + 1vw,1.9rem);color:var(--color-paper);}
-.feature .card-loc{font-size:0.76rem;letter-spacing:0.14em;text-transform:uppercase;color:oklch(82% 0.07 185);}
-.shelf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2.4vw,1.8rem);margin-top:clamp(1.2rem,2.6vw,1.8rem);}
-/* an odd final card spans the row instead of leaving a hole */
-.shelf > .reel:last-child:nth-child(odd){grid-column:1 / -1;}
-/* depth from background + layered shadow instead of borders (Refactoring UI) */
-.reel{margin:0;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1rem;align-items:center;
-  border:0;border-left:2px solid transparent;border-radius:0;padding:0.9rem;background:oklch(25% 0.012 95);
-  box-shadow:0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -18px rgba(0,0,0,0.8);
-  transition:border-color var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);}
-.reel:hover{border-left-color:var(--color-accent);transform:translateY(-2px);}
-.reel video{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:0;}
-.reel figcaption{display:flex;flex-direction:column;gap:0.4rem;padding-right:0.4rem;}
-.reel .card-title{font-family:var(--font-display);font-weight:500;font-size:1.15rem;color:var(--color-paper);line-height:1.15;}
-.reel .card-loc{font-size:0.74rem;letter-spacing:0.13em;text-transform:uppercase;color:oklch(82% 0.07 185);}
-.reel-note{font-size:0.88rem;line-height:1.45;color:oklch(70% 0.02 92);}
+/* ---------- HOVER-TO-PLAY GRID: the page feels alive under the cursor ---------- */
+.grid{display:grid;gap:clamp(14px,2vw,26px);grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  padding:0 clamp(0px,2.5vw,44px) clamp(3rem,7vw,6rem);}
+.card{position:relative;margin:0;background:#000;overflow:hidden;cursor:pointer;
+  border-radius:var(--r-card);box-shadow:var(--shadow);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);}
+.card:hover{transform:translateY(-6px);box-shadow:0 34px 70px -20px rgba(0,0,0,.85);}
+/* The poster sits underneath as a still image and is ALWAYS crisp. The video above
+   it stays invisible until it can genuinely play through, then crossfades in. That
+   is what removes the judder: previously the scale/brightness change fired on
+   mouseenter while the file was still buffering, so you watched it stutter. */
+.card .still{position:absolute;inset:0;background-size:cover;background-position:center;
+  filter:saturate(.9) brightness(.74);transition:filter .6s var(--ease);}
+.card:hover .still,.card:focus-within .still{filter:saturate(1.02) brightness(.92);}
+.card video{position:relative;width:100%;height:clamp(260px,42svh,460px);object-fit:cover;
+  opacity:0;transition:opacity .5s var(--ease);}
+.card.playing video{opacity:1;}
+/* a quiet "loading" tick so a slow connection reads as deliberate, not broken */
+.card .wait{position:absolute;top:1rem;right:1rem;width:22px;height:22px;border-radius:50%;
+  border:2px solid rgba(244,241,234,.25);border-top-color:var(--accent);opacity:0;
+  transition:opacity .3s;pointer-events:none;}
+.card.loading .wait{opacity:1;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.card figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.4rem;
+  background:linear-gradient(180deg,transparent,rgba(7,7,10,.9));}
+.card .t{display:block;font-family:var(--font-d);font-size:1.35rem;line-height:1.15;}
+.card .s{display:block;color:var(--dim);font-size:.8rem;letter-spacing:.14em;
+  text-transform:uppercase;margin-top:.35rem;}
+.card .n{display:block;color:#cfcbc4;font-size:.92rem;line-height:1.5;margin-top:.7rem;
+  max-width:44ch;opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease);}
+.card:hover .n,.card:focus-within .n{opacity:1;transform:none;}
 
-/* steps — hairline ledger */
-.steps{background:var(--color-paper-2);padding:clamp(3.5rem,8vw,6.5rem) 0;}
-.steps-in{max-width:var(--maxw);margin-inline:auto;padding:0 var(--gutter);}
-.steps h2{font-size:var(--text-h2);max-width:16ch;}
-.ledger{margin-top:clamp(2rem,4.5vw,3.2rem);border-top:var(--rule-hair);}
-.step{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.4fr);gap:1rem clamp(1.5rem,4vw,4rem);padding:clamp(1.4rem,3vw,2rem) 0;border-bottom:var(--rule-hair);}
-.step h3{font-size:var(--text-h3);font-weight:500;}
-.step p{margin:0;color:var(--color-ink-2);font-size:0.98rem;line-height:1.55;max-width:52ch;}
+/* ---------- STEPS: oversized numerals, the only ornament on the page ---------- */
+.steps{display:grid;gap:clamp(14px,2vw,22px);grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  max-width:1400px;margin:0 auto;padding:0 clamp(1rem,3vw,2.4rem);}
+.step{background:linear-gradient(160deg,var(--ink-3),var(--ink-2));
+  border:1px solid rgba(255,255,255,.055);border-radius:var(--r-card);
+  padding:clamp(2rem,4vw,3rem) clamp(1.4rem,3vw,2.4rem);
+  transition:transform .4s var(--ease),border-color .4s;}
+.step:hover{transform:translateY(-4px);border-color:rgba(216,176,106,.35);}
+.step .num{font-family:var(--font-d);font-size:3.6rem;line-height:1;color:var(--accent);opacity:.45;}
+.step h3{font-family:var(--font-d);font-weight:400;font-size:1.5rem;margin:.8rem 0 .6rem;}
+.step p{margin:0;color:var(--dim);line-height:1.65;font-size:.98rem;}
 
-/* pricing — tier row, dark venue slab */
-.pricing{padding:clamp(3.5rem,8vw,6.5rem) 0;}
-.pricing-in{max-width:var(--maxw);margin-inline:auto;padding:0 var(--gutter);}
-.pricing h2{font-size:var(--text-h2);}
-.pricing-sub{color:var(--color-ink-2);max-width:52ch;margin:0.8rem 0 0;}
-.tiers{margin-top:clamp(1.8rem,4vw,2.6rem);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(0.9rem,2vw,1.3rem);}
-.tier{border:0;border-top:2px solid var(--color-rule);border-radius:var(--radius-card);padding:1.4rem 1.3rem 1.5rem;display:flex;flex-direction:column;gap:0.55rem;background:var(--color-paper);
-  box-shadow:0 1px 1px rgba(20,18,14,0.04), 0 10px 24px -20px rgba(20,18,14,0.5);
-  transition:transform var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);}
-.tier:hover{transform:translateY(-3px);border-top-color:var(--color-accent);}
+/* ---------- PRICING ---------- */
+.tiers{display:grid;gap:clamp(14px,2vw,22px);grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  max-width:1400px;margin:0 auto;padding:0 clamp(1rem,3vw,2.4rem);}
+.tier{background:linear-gradient(160deg,var(--ink-3),var(--ink-2));
+  border:1px solid rgba(255,255,255,.055);border-radius:var(--r-card);
+  padding:clamp(1.8rem,3.5vw,2.6rem);text-align:center;
+  transition:transform .4s var(--ease),border-color .4s,box-shadow .4s;}
+.tier:hover{transform:translateY(-5px);border-color:rgba(216,176,106,.45);
+  box-shadow:0 22px 50px -18px rgba(0,0,0,.8);}
+.tier .p{color:var(--accent-soft);}
+.tier .p{display:block;font-family:var(--font-d);font-size:clamp(2.4rem,1.6rem + 2vw,3.4rem);line-height:1;}
+.tier .s{display:block;color:var(--dim);font-size:.86rem;letter-spacing:.12em;
+  text-transform:uppercase;margin-top:.7rem;}
+.note{max-width:70ch;margin:clamp(2rem,4vw,3rem) auto 0;padding:0 var(--gutter);
+  color:var(--dim);line-height:1.7;font-size:.96rem;text-align:center;}
 
-/* assurances — trust signals sit AT the conversion point, not only in the samples band */
-.assurances{list-style:none;margin:1.4rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:0.5rem 1.9rem;}
-.assurances li{display:flex;align-items:center;gap:0.55rem;font-size:0.93rem;font-weight:500;color:var(--color-ink-2);}
-.assurances li::before{content:"";width:7px;height:7px;flex:none;background:var(--color-accent);border-radius:50%;}
-.tier-price{font-family:var(--font-display);font-weight:400;font-size:clamp(2.1rem,3.4vw,2.9rem);line-height:0.9;}
-.tier-size{font-weight:600;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-muted);}
-.tier--venue{background:var(--color-ink);color:var(--color-paper);border-color:var(--color-ink);}
-.tier--venue .tier-size{color:oklch(78% 0.07 185);}
-.pricing-note{margin:1.6rem 0 0;color:var(--color-muted);font-size:0.92rem;max-width:70ch;}
-/* the tier most people pick, called out so the row has a centre of gravity */
-.tier--common{position:relative;border-top-color:var(--color-accent);box-shadow:0 2px 3px rgba(20,18,14,0.05), 0 18px 40px -24px rgba(20,18,14,0.65);}
-.tier-flag{position:absolute;top:-0.72rem;left:1.3rem;background:var(--color-accent);color:oklch(97% 0.01 185);
-  font-size:0.66rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:0.22rem 0.6rem;}
-/* 44px minimum touch target */
-.tier-cta{margin-top:auto;padding:0.9rem 0 0.35rem;min-height:2.75rem;font-weight:600;font-size:0.88rem;text-decoration:none;
-  color:var(--color-accent-deep);display:inline-flex;align-items:center;gap:0.4rem;transition:gap var(--dur-short) var(--ease-out);}
-.tier-cta::after{content:"\2192";transition:transform var(--dur-short) var(--ease-out);}
-.tier:hover .tier-cta::after{transform:translateX(3px);}
-.tier--venue .tier-cta{color:oklch(82% 0.07 185);}
+/* ---------- CONTACT ---------- */
+.contact{padding:clamp(4rem,9vw,7rem) var(--gutter);text-align:center;border-top:1px solid #1a1a20;}
+.contact h2{font-family:var(--font-d);font-weight:300;letter-spacing:-.02em;
+  font-size:clamp(2.2rem,1.4rem + 3.6vw,4.6rem);margin:0 0 1rem;line-height:1.02;}
+.contact p{color:var(--dim);margin:0 auto 2.2rem;max-width:46ch;line-height:1.6;}
+.mail{display:inline-block;font-family:var(--font-d);font-size:clamp(1.1rem,.9rem + 1.1vw,1.9rem);
+  text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:.25rem;
+  transition:color .25s;}
+.mail:hover{color:var(--accent);}
+.tel{display:block;margin-top:1.4rem;color:var(--dim);font-size:.92rem;text-decoration:none;}
+.foot{display:flex;justify-content:space-between;padding:1.6rem var(--gutter);
+  border-top:1px solid #1a1a20;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
 
-
-/* contact — statement band */
-.contact{background:var(--color-ink);color:var(--color-paper);padding:clamp(4rem,9vw,7rem) 0;}
-.contact-in{max-width:var(--maxw);margin-inline:auto;padding:0 var(--gutter);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:center;}
-.contact h2{font-size:var(--text-h2);max-width:14ch;}
-.contact p{color:oklch(78% 0.02 92);margin:0.9rem 0 0;max-width:40ch;}
-.contact-card{display:flex;flex-direction:column;gap:1rem;justify-self:end;width:100%;max-width:360px;}
-.contact-mail{font-family:var(--font-display);font-size:clamp(1.15rem,1rem + 0.9vw,1.5rem);color:var(--color-paper);text-decoration:none;border-bottom:2px solid var(--color-accent);padding-bottom:0.3rem;width:fit-content;max-width:100%;transition:color var(--dur-short) var(--ease-out);}
-.contact-mail:hover{color:var(--color-accent);}
-.contact-tel{color:oklch(78% 0.02 92);text-decoration:none;font-size:1.02rem;width:fit-content;}
-.contact-tel:hover{color:var(--color-paper);}
-
-/* footer */
-.footer{background:var(--color-ink);color:oklch(62% 0.02 92);border-top:1px solid oklch(32% 0.012 95);}
-.footer-in{max-width:var(--maxw);margin-inline:auto;padding:1.5rem var(--gutter);display:flex;flex-wrap:wrap;justify-content:space-between;gap:0.5rem 2rem;font-size:0.9rem;}
-
-/* responsive */
-@media (max-width:900px){
-  .shelf{grid-template-columns:1fr;}
-  .samples-head{grid-template-columns:1fr;}
-  .samples-note{justify-self:start;text-align:left;}
-  .tiers{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .contact-in{grid-template-columns:1fr;}
-  .contact-card{justify-self:start;}
-}
-@media (max-width:620px){
-  .hero{min-height:86svh;}
-  .feature video{aspect-ratio:16/10;}
-  .reel{grid-template-columns:1fr;}
-  .step{grid-template-columns:1fr;gap:0.5rem;}
-  .tiers{grid-template-columns:1fr;}
-  /* keep one way to reach pricing on a 5000px phone page */
-  .nav-links .nav-a:not(.nav-pill){display:none;}
-  .nav-pill{border:1px solid oklch(88% 0.02 92 / 0.7);border-radius:99px;padding:0.45rem 1rem;font-size:0.85rem;}
-  .nav-pill::after{display:none;}
-}
+@media (max-width:620px){ .hero h1{max-width:12ch;} .foot{flex-direction:column;gap:.5rem;} }
 @media (prefers-reduced-motion:reduce){
-  *{transition-duration:0.01ms !important;animation:none !important;}
-  html{scroll-behavior:auto;}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+  body::after{animation:none;}
 }
 </style>
 </head>
 <body>
 
-<nav class="nav" aria-label="Main">
-  <div class="nav-in">
-    <a class="wordmark" href="#">WalkThru Tours</a>
-    <div class="nav-links">
-      <a class="nav-a" href="#samples">Samples</a>
-      <a class="nav-a nav-pill" href="#pricing">Pricing</a>
-    </div>
-  </div>
-</nav>
-
 <header class="hero">
-  <video id="hv-a" class="on" src="./media/hero-loop.mp4" poster="./media/hero-loop-poster.jpg" autoplay muted playsinline preload="auto" aria-label="Rotating scenes from cinematic property walkthroughs"></video>
+  <video id="hv-a" class="on" src="./media/hero-loop.mp4" poster="./media/hero-loop-poster.jpg" autoplay muted playsinline preload="auto"></video>
   <video id="hv-b" muted playsinline preload="auto" aria-hidden="true"></video>
-  <script>
-  (function(){
-    // Best scenes across every delivered tour. All local and web-encoded.
-    // Read MEDIA.md before swapping anything in.
-    var scenes=["./media/hero-loop.mp4","./media/hero-01.mp4","./media/hero-02.mp4",
-                "./media/hero-03.mp4","./media/hero-04.mp4","./media/hero-05.mp4",
-                "./media/hero-06.mp4"];
-    var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var a=document.getElementById("hv-a"),b=document.getElementById("hv-b");
-    if(reduce){a.removeAttribute("autoplay");a.pause();return;}
-    var i=0,front=a,back=b,fading=false,FADE=1.2;
-    back.src=scenes[1]; back.load();
-    function arm(v){
-      v.ontimeupdate=function(){
-        if(fading||!v.duration)return;
-        if(v.currentTime>=v.duration-FADE){fading=true;swap();}
-      };
-      v.onended=function(){ if(!fading){fading=true;swap();} };
-    }
-    function swap(){
-      var p=back.play(); if(p&&p.catch)p.catch(function(){});
-      back.classList.add("on"); front.classList.remove("on");
-      var old=front; front=back; back=old;
-      arm(front);
-      setTimeout(function(){
-        i=(i+1)%scenes.length;
-        var nxt=scenes[(i+1)%scenes.length];
-        back.classList.remove("on"); back.pause();
-        back.src=nxt; back.load();
-        fading=false;
-      }, FADE*1000+100);
-    }
-    arm(front);
-    // watchdog: browsers pause offscreen/background video and the event chain
-    // stalls at a clip end. Whenever visible, revive: replay or hand off.
-    setInterval(function(){
-      if(document.hidden)return;
-      if(front.paused){
-        if(front.ended&&!fading){fading=true;swap();}
-        else{var p=front.play(); if(p&&p.catch)p.catch(function(){});}
-      }
-    },1500);
-    document.addEventListener("visibilitychange",function(){
-      if(!document.hidden){var p=front.play(); if(p&&p.catch)p.catch(function(){});}
-    });
-  })();
-  </script>
+
+  <div class="topbar">
+    <span>WalkThru&nbsp;Tours</span>
+    <nav><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></nav>
+  </div>
+
   <div class="hero-in">
-    <p class="kicker">Walkthrough tours for rentals, wedding venues and golf clubs</p>
-    <h1>Show people around before they book.</h1>
-    <p class="hero-sub">You send the photos you already have. I turn them into a walkthrough film and get it back to you, usually the next day.</p>
-    <p class="hero-proof">Every scene behind these words started as a still photo. No camera ever visited the property.</p>
+    <h1>Show people around <em>before</em> they book.</h1>
     <div class="hero-row">
-      <a class="cta" href="#contact">Get my walkthrough</a>
-      <a class="hero-cue" href="#samples">Watch one first<i></i></a>
+      <p class="hero-sub">You send the photos you already have. I turn them into a walkthrough film and get it back to you, usually the next day.</p>
+      <a class="cta" href="#contact">Get my walkthrough &rarr;</a>
     </div>
   </div>
 </header>
 
-<section class="samples" id="samples">
-  <div class="samples-in">
-    <div class="samples-head">
-      <h2>Watch a real one</h2>
-      <p class="samples-note">Every film here was built from listing photos the owner already had. No visit, no camera, no shoot day.</p>
-    </div>
-    <figure class="feature">
-      <div class="feature-frame"><video src="./media/showreel.mp4" poster="./media/showreel-poster.jpg" controls muted playsinline preload="metadata"></video></div>
-      <figcaption><span class="card-title">A full walkthrough</span><span class="card-loc">Five bedroom pool home &middot; Gulf coast</span></figcaption>
-    </figure>
-    <div class="shelf">
-      <figure class="reel">
-        <video src="./media/photo-comes-alive.mp4" poster="./media/photo-comes-alive-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
-        <figcaption>
-          <span class="card-title">A photo becomes the tour</span>
-          <span class="card-loc">Before and after</span>
-          <span class="reel-note">An owner emailed me this photo and this is the shot I sent back.</span>
-        </figcaption>
-      </figure>
-      <figure class="reel">
-        <video src="./media/venue-tour.mp4" poster="./media/venue-tour-poster.jpg" controls muted playsinline preload="metadata"></video>
-        <figcaption>
-          <span class="card-title">Inside a wedding venue</span>
-          <span class="card-loc">Historic event hall</span>
-          <span class="reel-note">Couples can see the whole hall before they drive out to tour it.</span>
-        </figcaption>
-      </figure>
-      <figure class="reel">
-        <video src="./media/sizzle-30s.mp4" poster="./media/sizzle-30s-poster.jpg" controls muted playsinline preload="metadata"></video>
-        <figcaption>
-          <span class="card-title">The thirty second cut</span>
-          <span class="card-loc">Built for socials</span>
-          <span class="reel-note">Every tour also comes as a short vertical cut for reels and stories.</span>
-        </figcaption>
-      </figure>
-    </div>
+<section class="slab" id="work">
+  <div class="slab-head">
+    <h2>Every frame started as a photograph.</h2>
+    <p>No camera visited any of these properties. Each film was built from listing photos the owner already had.</p>
+  </div>
+  <figure class="bleed">
+    <video src="./media/showreel.mp4" poster="./media/showreel-poster.jpg" controls muted playsinline preload="metadata"></video>
+    <figcaption><span>A full walkthrough</span><span>Five bedroom pool home · Gulf coast</span></figcaption>
+  </figure>
+</section>
 
+<div class="grid">
+  <figure class="card">
+    <video src="./media/photo-comes-alive.mp4" poster="./media/photo-comes-alive-poster.jpg" muted loop playsinline preload="none" data-hover></video>
+    <figcaption>
+      <span class="t">A photo becomes the tour</span>
+      <span class="s">Before and after</span>
+      <span class="n">An owner emailed me this photo and this is the shot I sent back.</span>
+    </figcaption>
+  </figure>
+  <figure class="card">
+    <video src="./media/venue-tour.mp4" poster="./media/venue-tour-poster.jpg" muted loop playsinline preload="none" data-hover></video>
+    <figcaption>
+      <span class="t">Inside a wedding venue</span>
+      <span class="s">Historic event hall</span>
+      <span class="n">Couples can see the whole hall before they drive out to tour it.</span>
+    </figcaption>
+  </figure>
+  <figure class="card">
+    <video src="./media/sizzle-30s.mp4" poster="./media/sizzle-30s-poster.jpg" muted loop playsinline preload="none" data-hover></video>
+    <figcaption>
+      <span class="t">The thirty second cut</span>
+      <span class="s">Built for socials</span>
+      <span class="n">Every tour also comes as a short vertical cut for reels and stories.</span>
+    </figcaption>
+  </figure>
+</div>
+
+<section class="slab">
+  <div class="slab-head"><h2>You only do the first step.</h2></div>
+  <div class="steps">
+    <div class="step"><span class="num">01</span><h3>Send the link</h3><p>Send your listing link or a folder of photos. Nobody schedules anything and nobody visits the property.</p></div>
+    <div class="step"><span class="num">02</span><h3>I build it</h3><p>I put the rooms in the order a guest would walk them, then send it to you first. Changes are free until you like it.</p></div>
+    <div class="step"><span class="num">03</span><h3>Post it anywhere</h3><p>Put it on Airbnb, VRBO or your own site, or send it straight to someone asking questions in your inbox. One file that works everywhere.</p></div>
   </div>
 </section>
 
-<section class="steps">
-  <div class="steps-in">
-    <h2>You only do the first step.</h2>
-    <div class="ledger">
-      <div class="step">
-        <h3>Send the link</h3>
-        <p>Send your listing link or a folder of photos. Nobody schedules anything and nobody visits the property.</p>
-      </div>
-      <div class="step">
-        <h3>I build it</h3>
-        <p>I put the rooms in the order a guest would walk them, then send it to you first. Changes are free until you like it.</p>
-      </div>
-      <div class="step">
-        <h3>Post it anywhere</h3>
-        <p>Put it on Airbnb, VRBO or your own site, or send it straight to someone asking questions in your inbox. One file that works everywhere.</p>
-      </div>
-    </div>
+<section class="slab" id="pricing">
+  <div class="slab-head"><h2>Pay once. Own it forever.</h2>
+    <p>Priced by the size of the property. There is no monthly fee and no contract.</p></div>
+  <div class="tiers">
+    <div class="tier"><span class="p">$99</span><span class="s">1–2 bedrooms</span></div>
+    <div class="tier"><span class="p">$149</span><span class="s">3–4 bedrooms</span></div>
+    <div class="tier"><span class="p">$199</span><span class="s">5+ bedrooms</span></div>
+    <div class="tier"><span class="p">$299+</span><span class="s">Venues, golf clubs &amp; estates</span></div>
   </div>
-</section>
-
-<section class="pricing">
-  <div class="pricing-in">
-    <h2>Pay once. Own it forever.</h2>
-    <p class="pricing-sub">Priced by the size of the property. There is no monthly fee and no contract. You pay once and the file is yours to use wherever the property is listed.</p>
-    <ul class="assurances">
-      <li>You see it before you pay the balance</li>
-      <li>Delivered in about a day</li>
-      <li>The files are yours to host anywhere</li>
-    </ul>
-    <div class="tiers">
-      <div class="tier"><span class="tier-price">$99</span><span class="tier-size">1&ndash;2 bedrooms</span>
-        <a class="tier-cta" data-tier="1-2 bedrooms" href="#contact">Reserve &middot; $50 deposit</a></div>
-      <div class="tier tier--common"><span class="tier-flag">Most booked</span><span class="tier-price">$149</span><span class="tier-size">3&ndash;4 bedrooms</span>
-        <a class="tier-cta" data-tier="3-4 bedrooms" href="#contact">Reserve &middot; $50 deposit</a></div>
-      <div class="tier"><span class="tier-price">$199</span><span class="tier-size">5+ bedrooms</span>
-        <a class="tier-cta" data-tier="5+ bedrooms" href="#contact">Reserve &middot; $50 deposit</a></div>
-      <div class="tier tier--venue"><span class="tier-price">$299+</span><span class="tier-size">Venues, golf clubs &amp; estates</span>
-        <a class="tier-cta" data-tier="venue, golf club or estate" href="#contact">Start a conversation</a></div>
-    </div>
-    <p class="pricing-note">The fifty dollar deposit comes off the price. You pay the rest once you have watched it and you are happy with it. Every tier gets the full walkthrough sized for your listing page and for socials. If you run several properties, ask me about a rate for the group.</p>
-    <script>
-    /* Venmo deposit flow. Set VENMO_HANDLE once (no @) and every button opens a
-       pre-filled $50 payment; the Venmo app catches it on phones, the web page on
-       desktop. Leave it empty and the buttons fall back to a pre-filled email, so
-       a lead is never dropped either way. */
-    (function(){
-      var VENMO_HANDLE = "WalkThruTours";
-      var DEPOSIT = "50";
-      document.querySelectorAll(".tier-cta").forEach(function(a){
-        var tier = a.dataset.tier;
-        if (VENMO_HANDLE && tier !== "venue or estate") {
-          a.href = "https://venmo.com/?txn=pay&audience=private" +
-            "&recipients=" + encodeURIComponent(VENMO_HANDLE) +
-            "&amount=" + DEPOSIT +
-            "&note=" + encodeURIComponent("WalkThru Tours deposit for a " + tier + " property");
-          a.target = "_blank";
-          a.rel = "noopener";
-          return;
-        }
-        a.href = "mailto:willhainley@walkthrutours.com?subject=" +
-          encodeURIComponent("tour for my " + tier + " property") +
-          "&body=" + encodeURIComponent("Here is a link to my listing: ");
-      });
-    })();
-    </script>
-  </div>
+  <p class="note">The fifty dollar deposit comes off the price. You pay the rest once you have watched it and you are happy with it. Venues and golf clubs are quoted after I see the space. If you run several properties, ask me about a rate for the group.</p>
 </section>
 
 <section class="contact" id="contact">
-  <div class="contact-in">
-    <div>
-      <h2>Tell me about your place</h2>
-      <p>Send me the listing link and I will take it from there. You will have a quote the same day.</p>
-    </div>
-    <div class="contact-card">
-      <a class="contact-mail" href="mailto:willhainley@walkthrutours.com?subject=My%20rental">willhainley@walkthrutours.com</a>
-      <a class="contact-tel" href="#" id="tel-reveal" data-a="956" data-b="589" data-c="0497">Prefer to call? Tap to show the number</a>
-      <script>
-      (function(){var el=document.getElementById('tel-reveal');var done=false;
-      el.addEventListener('click',function(e){if(done)return;e.preventDefault();
-      var n='('+el.dataset.a+') '+el.dataset.b+'-'+el.dataset.c;
-      el.textContent=n;el.href='tel:+1'+el.dataset.a+el.dataset.b+el.dataset.c;done=true;});})();
-      </script>
-    </div>
-  </div>
+  <h2>Tell me about your place.</h2>
+  <p>Send me the listing link and I will take it from there. You will have a quote the same day.</p>
+  <a class="mail" href="mailto:willhainley@walkthrutours.com?subject=My%20property">willhainley@walkthrutours.com</a>
+  <a class="tel" href="#" id="tel-reveal" data-a="956" data-b="589" data-c="0497">Prefer to call? Tap to show the number</a>
 </section>
 
-<footer class="footer">
-  <div class="footer-in">
-    <span>WalkThru Tours</span>
-    <span>Bradenton, Florida</span>
-  </div>
-</footer>
+<footer class="foot"><span>WalkThru Tours</span><span>Bradenton, Florida</span></footer>
 
-<!-- Motion layer.
-     Native APIs on purpose. GSAP + ScrollTrigger + Lenis were wired up first and did
-     load fine; they were dropped because they were not earning their ~130KB. Reveals
-     and a scroll-scrubbed video are a few lines of IntersectionObserver and rAF, so
-     the dependency bought nothing here and cost a CDN round trip on every visit.
-
-     Everything below is progressive enhancement. If it throws, if the browser is old,
-     or if the visitor prefers reduced motion, the page renders exactly as before with
-     all content visible. Nothing here is required to read or use the site.
-
-     The reveal deliberately has THREE independent triggers (observer, scroll, timer).
-     Hiding a single-page sales site and depending on one event to bring it back is the
-     only change here that could actually cost money, so it does not rely on any one
-     API working. Worst case, everything is visible within 12 seconds regardless. -->
 <script>
-(function () {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!('IntersectionObserver' in window)) return;
+(function(){
+  // hero rotation, same approach as the live site
+  var a=document.getElementById('hv-a'),b=document.getElementById('hv-b'),i=0,fading=false;
+  var scenes=["./media/hero-loop.mp4","./media/hero-01.mp4","./media/hero-02.mp4",
+              "./media/hero-03.mp4","./media/hero-04.mp4","./media/hero-05.mp4","./media/hero-06.mp4"];
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches && a && b){
+    b.src=scenes[1]; b.load();
+    setInterval(function(){
+      if(fading) return; fading=true;
+      var front=a.classList.contains('on')?a:b, back=front===a?b:a;
+      back.play().catch(function(){});
+      back.classList.add('on'); front.classList.remove('on');
+      setTimeout(function(){
+        i=(i+1)%scenes.length;
+        front.src=scenes[(i+1)%scenes.length]; front.load();
+        fading=false;
+      },1700);
+    },6200);
+  }
 
-  var groups = [
-    ['.samples-head > *', 60],
-    ['.feature', 0],
-    ['.shelf .reel', 80],
-    ['.steps .step', 80],
-    ['.pricing-in > h2, .pricing-in > .pricing-sub, .assure li, .tier', 50],
-    ['.contact-in > *', 60]
-  ];
+  // Hover to play, without the judder.
+  //
+  // The old version called play() on mouseenter and changed the visuals at the same
+  // moment. With preload="none" the file had not been fetched yet, so the first
+  // second was decode stutter and it read as shaking. Now the poster is a separate
+  // still layer that is always sharp, and the video only crossfades in once the
+  // browser reports it can play through. Nothing moves until it can move smoothly.
+  [].forEach.call(document.querySelectorAll('[data-hover]'),function(v){
+    var card=v.closest('.card'), ready=false, want=false;
 
-  var all = [];
-  groups.forEach(function (g) {
-    var els = [].slice.call(document.querySelectorAll(g[0]));
-    els.forEach(function (el, i) {
-      el.style.willChange = 'opacity, transform';
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(18px)';
-      el.style.transition = 'opacity .55s cubic-bezier(.22,.61,.36,1) ' + (i * g[1]) +
-                            'ms, transform .55s cubic-bezier(.22,.61,.36,1) ' + (i * g[1]) + 'ms';
-      all.push(el);
-    });
+    // build the still + spinner layers from the poster already on the video
+    var still=document.createElement('div');
+    still.className='still';
+    still.style.backgroundImage='url("'+v.getAttribute('poster')+'")';
+    card.insertBefore(still,v);
+    var wait=document.createElement('div'); wait.className='wait'; card.appendChild(wait);
+
+    function begin(){
+      if(!want) return;
+      card.classList.remove('loading');
+      ready=true;
+      var p=v.play();
+      if(p&&p.catch) p.catch(function(){});
+      // let the first frame actually paint before revealing it
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        if(want) card.classList.add('playing');
+      });});
+    }
+
+    function enter(){
+      want=true;
+      if(ready){ begin(); return; }
+      card.classList.add('loading');
+      if(v.preload!=='auto'){ v.preload='auto'; v.load(); }
+      if(v.readyState>=3) begin();
+      else v.addEventListener('canplaythrough',begin,{once:true});
+    }
+    function leave(){
+      want=false;
+      card.classList.remove('playing','loading');
+      // pause after the fade so it does not freeze mid-dissolve
+      setTimeout(function(){ if(!want) v.pause(); },500);
+    }
+
+    card.addEventListener('mouseenter',enter);
+    card.addEventListener('mouseleave',leave);
+    card.addEventListener('focusin',enter);
+    card.addEventListener('focusout',leave);
+    card.addEventListener('click',function(){ want?leave():enter(); });
   });
-  if (!all.length) return;
 
-  function show(el) {
-    el.style.opacity = '1';
-    el.style.transform = 'none';
-    setTimeout(function () { el.style.willChange = ''; }, 900);
-  }
-
-  // THREE independent ways for an element to become visible. This is deliberate
-  // redundancy, not belt-and-braces paranoia: hiding a one-page sales site and
-  // relying on a single event to bring it back is the one failure that would cost
-  // real money, and it must not depend on any single API behaving.
-  var pending = all.slice();
-
-  function sweep() {
-    if (!pending.length) return;
-    for (var i = pending.length - 1; i >= 0; i--) {
-      var r = pending[i].getBoundingClientRect();
-      if (r.top < innerHeight * 0.92 && r.bottom > 0) { show(pending[i]); pending.splice(i, 1); }
-    }
-  }
-
-  // 1. IntersectionObserver, the efficient path.
-  try {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          show(e.target);
-          io.unobserve(e.target);
-          var k = pending.indexOf(e.target);
-          if (k > -1) pending.splice(k, 1);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.01 });
-    all.forEach(function (el) { io.observe(el); });
-  } catch (e) {}
-
-  // 2. Plain scroll/resize, in case the observer never fires.
-  addEventListener('scroll', sweep, { passive: true });
-  addEventListener('resize', sweep, { passive: true });
-  sweep();
-
-  // 3. A polling backstop for the first 12 seconds, then reveal everything left,
-  //    whatever happened. After this point nothing can still be hidden.
-  var ticks = 0;
-  var poll = setInterval(function () {
-    sweep();
-    if (++ticks >= 24 || !pending.length) {
-      clearInterval(poll);
-      pending.forEach(show);
-      pending.length = 0;
-    }
-  }, 500);
-
-  // NOTE: a scroll-scrubbed version of the "photo becomes the tour" clip was tried here
-  // and removed. Setting video.currentTime seeks to the nearest keyframe, and this clip
-  // is encoded with a normal GOP, so scrubbing snapped between keyframes and read as
-  // glitching rather than as smooth motion. Doing it properly needs an all-intra
-  // re-encode (ffmpeg -g 1), which multiplies the file size. Not worth it for one
-  // effect on a page whose job is to load fast. The clip keeps its autoplay loop.
+  // phone reveal, unchanged
+  var el=document.getElementById('tel-reveal'),done=false;
+  el.addEventListener('click',function(e){ if(done)return; e.preventDefault();
+    el.textContent='('+el.dataset.a+') '+el.dataset.b+'-'+el.dataset.c;
+    el.href='tel:+1'+el.dataset.a+el.dataset.b+el.dataset.c; done=true; });
 })();
 </script>
-
 </body>
 </html>
