@@ -9,7 +9,59 @@
 <meta property="og:description" content="You send the photos you already have. We turn them into a walkthrough film, usually back the next day. Pay once, no subscription.">
 <meta property="og:image" content="./media/hero-loop-poster.jpg">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://walkthrutours.com/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://walkthrutours.com/">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+
+<!-- Structured data. Deliberately NOT LocalBusiness: this is a remote service with no
+     storefront and no service radius. LocalBusiness would tell Google to rank the site
+     for one metro, which is the opposite of the goal. Organization + Service with
+     areaServed = United States is the correct shape for work delivered remotely. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://walkthrutours.com/#org",
+      "name": "WalkThru Tours",
+      "url": "https://walkthrutours.com/",
+      "logo": "https://walkthrutours.com/favicon.svg",
+      "image": "https://walkthrutours.com/media/hero-loop-poster.jpg",
+      "description": "Walkthrough tour films for vacation rentals, wedding venues and golf clubs, built from photos the owner already has.",
+      "founder": { "@type": "Person", "name": "Will Hainley" },
+      "email": "willhainley@walkthrutours.com",
+      "areaServed": { "@type": "Country", "name": "United States" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://walkthrutours.com/#website",
+      "url": "https://walkthrutours.com/",
+      "name": "WalkThru Tours",
+      "publisher": { "@id": "https://walkthrutours.com/#org" }
+    },
+    {
+      "@type": "Service",
+      "name": "Property walkthrough tour films",
+      "serviceType": "Property video and virtual tour production",
+      "provider": { "@id": "https://walkthrutours.com/#org" },
+      "areaServed": { "@type": "Country", "name": "United States" },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Vacation rental owners, wedding venues, golf clubs and estates"
+      },
+      "description": "Send the photos you already have. We build a walkthrough film of the property, usually back the next day. No site visit and no camera crew.",
+      "offers": [
+        { "@type": "Offer", "name": "1 to 2 bedrooms", "price": "99", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "3 to 4 bedrooms", "price": "149", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "5+ bedrooms", "price": "199", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Venues, golf clubs and estates", "price": "299", "priceCurrency": "USD", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "299", "priceCurrency": "USD" } }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400&display=swap" rel="stylesheet">
@@ -191,6 +243,22 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
 .foot{display:flex;justify-content:space-between;padding:1.6rem var(--gutter);
   border-top:1px solid #1a1a20;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
 
+/* Sticky mobile CTA. The cinema layout is deliberately tall, which means on a phone
+   the hero button scrolls away and the next one is at the very bottom of the page.
+   This keeps a way to act on screen the whole time. Desktop keeps the in-page CTAs,
+   where a floating bar would just be clutter. */
+.stickybar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  padding:.7rem clamp(.8rem,4vw,1.2rem) calc(.7rem + env(safe-area-inset-bottom,0px));
+  background:rgba(13,11,9,.86);backdrop-filter:blur(14px);
+  border-top:1px solid rgba(255,255,255,.09);
+  transform:translateY(110%);transition:transform .35s var(--ease);}
+.stickybar.on{transform:none;}
+.stickybar a{display:block;text-align:center;text-decoration:none;border-radius:999px;
+  background:linear-gradient(180deg,var(--accent-soft),var(--accent));color:#231b0e;
+  font-weight:600;padding:.9rem 1.2rem;}
+@media (max-width:820px){ .stickybar{display:block;} body{padding-bottom:4.6rem;} }
+@media (prefers-reduced-motion:reduce){ .stickybar{transition:none;} }
+
 @media (max-width:620px){ .hero h1{max-width:12ch;} .foot{flex-direction:column;gap:.5rem;} }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
@@ -286,6 +354,8 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
 
 <footer class="foot"><span>WalkThru Tours</span><span>College Station, Texas &middot; working with owners anywhere</span></footer>
 
+<div class="stickybar" id="stickybar"><a href="#contact">Get your walkthrough</a></div>
+
 <script>
 (function(){
   // hero rotation, same approach as the live site
@@ -356,6 +426,35 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
     card.addEventListener('focusin',enter);
     card.addEventListener('focusout',leave);
     card.addEventListener('click',function(){ want?leave():enter(); });
+  });
+
+  // Sticky mobile CTA: appear once the hero is behind you, hide again over the
+  // contact section so it never covers the thing it is pointing at.
+  var bar=document.getElementById('stickybar'), hero=document.querySelector('.hero'),
+      contact=document.getElementById('contact');
+  if(bar&&hero){
+    var sync=function(){
+      var past=hero.getBoundingClientRect().bottom<0;
+      var atContact=contact&&contact.getBoundingClientRect().top<innerHeight*0.9;
+      bar.classList.toggle('on',past&&!atContact);
+    };
+    addEventListener('scroll',sync,{passive:true});
+    addEventListener('resize',sync,{passive:true});
+    sync();
+  }
+
+  // Accessible names for the videos. There are no <img> tags on this page, so the
+  // "alt text" checklist item lands on aria-label here.
+  var labels={'hero-loop':'Rotating scenes from property walkthrough films',
+              'showreel':'Full walkthrough film of a five bedroom pool home on the Gulf coast',
+              'photo-comes-alive':'A still listing photo turning into a moving walkthrough shot',
+              'venue-tour':'Walkthrough film inside a historic wedding and event hall',
+              'sizzle-30s':'Thirty second vertical cut built for reels and stories'};
+  [].forEach.call(document.querySelectorAll('video'),function(v){
+    if(v.getAttribute('aria-label')||v.getAttribute('aria-hidden')) return;
+    var src=v.getAttribute('src')||'';
+    for(var k in labels){ if(src.indexOf(k)>-1){ v.setAttribute('aria-label',labels[k]); return; } }
+    v.setAttribute('aria-hidden','true');
   });
 
   // phone reveal, unchanged
