@@ -56,7 +56,8 @@
         { "@type": "Offer", "name": "1 to 2 bedrooms", "price": "99", "priceCurrency": "USD" },
         { "@type": "Offer", "name": "3 to 4 bedrooms", "price": "149", "priceCurrency": "USD" },
         { "@type": "Offer", "name": "5+ bedrooms", "price": "199", "priceCurrency": "USD" },
-        { "@type": "Offer", "name": "Venues, golf clubs and estates", "price": "299", "priceCurrency": "USD", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "299", "priceCurrency": "USD" } }
+        { "@type": "Offer", "name": "Venues, golf clubs and estates", "price": "299", "priceCurrency": "USD", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "299", "priceCurrency": "USD" } },
+        { "@type": "Offer", "name": "Land parcel flyover films", "price": "300", "priceCurrency": "USD" }
       ]
     }
   ]
@@ -202,6 +203,16 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
   max-width:44ch;opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease);}
 .card:hover .n,.card:focus-within .n{opacity:1;transform:none;}
 
+/* The vertical reel gets a taller frame and letterboxes on black instead of being
+   centre-cropped — cropping a captioned 9:16 reel into a 16:9 card beheads the
+   captions, which are the point of showing it. */
+.card.card-tall video{height:clamp(420px,58svh,640px);object-fit:contain;background:#000;}
+.card.card-tall .still{background-size:contain;background-repeat:no-repeat;background-color:#000;}
+
+.foot-social{display:flex;gap:1.2rem;}
+.foot-social a{text-decoration:none;opacity:.8;transition:opacity .2s,color .2s;}
+.foot-social a:hover{opacity:1;color:var(--accent);}
+
 /* ---------- STEPS: oversized numerals, the only ornament on the page ---------- */
 .steps{display:grid;gap:clamp(14px,2vw,22px);grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   max-width:1400px;margin:0 auto;padding:0 clamp(1rem,3vw,2.4rem);}
@@ -274,7 +285,7 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
 
   <div class="topbar">
     <span>WalkThru&nbsp;Tours</span>
-    <nav><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></nav>
+    <nav><a href="#work">Work</a><a href="#land">Land</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></nav>
   </div>
 
   <div class="hero-in">
@@ -315,14 +326,47 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
     </figcaption>
   </figure>
   <figure class="card">
+    <video src="./media/aquarius-tour.mp4" poster="./media/aquarius-tour-poster.jpg" muted loop playsinline preload="none" data-hover></video>
+    <figcaption>
+      <span class="t">A gulf-front condo, floor to pool</span>
+      <span class="s">Beachfront resort tower</span>
+      <span class="n">Balcony, rooms, pool and the sunset it actually gets. One film from the listing gallery.</span>
+    </figcaption>
+  </figure>
+  <figure class="card card-tall">
+    <video src="./media/reel-portfolio.mp4" poster="./media/reel-portfolio-poster.jpg" muted loop playsinline preload="none" data-hover></video>
+    <figcaption>
+      <span class="t">The vertical cut</span>
+      <span class="s">Built for socials</span>
+      <span class="n">Every tour also comes as a short vertical reel, captioned and scored, sized for phones.</span>
+    </figcaption>
+  </figure>
+  <figure class="card">
     <video src="./media/sizzle-30s.mp4" poster="./media/sizzle-30s-poster.jpg" muted loop playsinline preload="none" data-hover></video>
     <figcaption>
       <span class="t">The thirty second cut</span>
-      <span class="s">Built for socials</span>
-      <span class="n">Every tour also comes as a short vertical cut for reels and stories.</span>
+      <span class="s">Fast tour, full home</span>
+      <span class="n">A short cut of the whole property for owners who want one file that does everything.</span>
     </figcaption>
   </figure>
 </div>
+
+<section class="slab" id="land">
+  <div class="slab-head">
+    <h2>We film land, too.</h2>
+    <p>Rural tracts, ranches and acreage. A cinematic flyover of the real terrain, built
+    from public elevation and aerial data with the boundary drawn on the ground — no
+    drone, no site visit. Flat $300 per listing, with an interactive parcel page and an
+    MLS-safe copy included.</p>
+  </div>
+  <figure class="bleed">
+    <video src="./media/land-flyover.mp4" poster="./media/land-flyover-poster.jpg" controls playsinline preload="metadata"></video>
+    <figcaption><span>Parcel flyover</span><span>40-acre tract · Grimes County, Texas</span></figcaption>
+  </figure>
+  <p class="note">A terrain visualization from public records — USGS elevation, USDA/TxGIO
+  imagery, county parcel lines — and it says so on screen. Not drone photography, and not
+  a survey.</p>
+</section>
 
 <section class="slab">
   <div class="slab-head"><h2>You only do the first step.</h2></div>
@@ -345,6 +389,16 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
   <p class="note">You pay once you have watched the tour and you are happy with it. Venues, golf clubs and estates are quoted after I have seen the space, and if you run several properties, ask me about a group rate.</p>
 </section>
 
+<section class="slab" id="faq">
+  <div class="slab-head"><h2>Straight answers.</h2></div>
+  <div class="steps">
+    <div class="step"><h3>Is this AI?</h3><p>The camera moves are generated from your real photos, and every film is labeled as AI-assisted wherever it is posted. Nothing is invented — if it is not in your photos, it is not in your tour.</p></div>
+    <div class="step"><h3>What if I don't like it?</h3><p>You pay after you have watched the finished tour and you are happy with it. Changes are free until you like it.</p></div>
+    <div class="step"><h3>Who owns the film?</h3><p>You do. One flat price, the files are yours, host them anywhere. No subscription, no watermark ransom.</p></div>
+    <div class="step"><h3>How fast is it?</h3><p>Rental and venue tours are usually back the next day. Land flyovers take two to three days — real terrain takes longer to render than it does to film.</p></div>
+  </div>
+</section>
+
 <section class="contact" id="contact">
   <h2>See it on your own place first.</h2>
   <p>Send me your listing link and I will build a short sample from the photos already on it, free, so you can see it on your own place before deciding anything.</p>
@@ -352,7 +406,14 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
   <a class="tel" href="#" id="tel-reveal" data-a="956" data-b="589" data-c="0497">Prefer to call? Tap to show the number</a>
 </section>
 
-<footer class="foot"><span>WalkThru Tours</span><span>Working with owners nationwide</span></footer>
+<footer class="foot">
+  <span>WalkThru Tours</span>
+  <span class="foot-social">
+    <a href="https://www.instagram.com/walkthrutours/" rel="noopener" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/profile.php?id=61593848542018" rel="noopener" target="_blank">Facebook</a>
+  </span>
+  <span>Working with owners nationwide</span>
+</footer>
 
 <div class="stickybar" id="stickybar"><a href="#contact">Get your walkthrough</a></div>
 
@@ -449,7 +510,10 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
               'showreel':'Full walkthrough film of a five bedroom pool home on the Gulf coast',
               'photo-comes-alive':'A still listing photo turning into a moving walkthrough shot',
               'venue-tour':'Walkthrough film inside a historic wedding and event hall',
-              'sizzle-30s':'Thirty second vertical cut built for reels and stories'};
+              'aquarius-tour':'Walkthrough film of a gulf-front condo in a beachfront resort tower',
+              'reel-portfolio':'Vertical social reel showing scenes from several property films',
+              'land-flyover':'Cinematic terrain flyover of a forty acre rural tract with the parcel boundary drawn on the ground',
+              'sizzle-30s':'Thirty second cut of a full property tour'};
   [].forEach.call(document.querySelectorAll('video'),function(v){
     if(v.getAttribute('aria-label')||v.getAttribute('aria-hidden')) return;
     var src=v.getAttribute('src')||'';
