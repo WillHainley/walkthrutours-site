@@ -59,6 +59,20 @@
         { "@type": "Offer", "name": "Venues, golf clubs and estates", "price": "299", "priceCurrency": "USD", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "299", "priceCurrency": "USD" } },
         { "@type": "Offer", "name": "Land parcel flyover films", "price": "300", "priceCurrency": "USD" }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://walkthrutours.com/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is this AI?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The camera moves are generated from your real photos, and every film is labeled as AI-assisted wherever it is posted. Nothing is invented: if it is not in your photos, it is not in your tour." } },
+        { "@type": "Question", "name": "What if I don't like it?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You pay after you have watched the finished tour and you are happy with it. Changes are free until you like it." } },
+        { "@type": "Question", "name": "Who owns the film?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You do. One flat price, the files are yours, host them anywhere. No subscription and no watermark." } },
+        { "@type": "Question", "name": "How fast is it?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Rental and venue tours are usually back the next day. Land flyovers take two to three days." } }
+      ]
     }
   ]
 }
@@ -289,8 +303,17 @@ h2{font-family:var(--font-d);font-weight:400;letter-spacing:-.01em;color:var(--n
   background:linear-gradient(180deg,var(--gold-lt),#d3a94e);color:#231b0e;
   font-weight:600;padding:.9rem 1.2rem;}
 @media (max-width:820px){ .stickybar{display:block;} body{padding-bottom:4.6rem;} }
+
+/* ---------- scroll reveal: sections rise gently as they enter ---------- */
+.rv{opacity:0;transform:translateY(26px);
+  transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.rv.on{opacity:1;transform:none;}
+.rv:nth-child(2){transition-delay:.07s;} .rv:nth-child(3){transition-delay:.14s;}
+.rv:nth-child(4){transition-delay:.21s;} .rv:nth-child(5){transition-delay:.28s;}
+
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+  .rv{opacity:1;transform:none;}
 }
 </style>
 </head>
@@ -608,6 +631,26 @@ h2{font-family:var(--font-d);font-weight:400;letter-spacing:-.01em;color:var(--n
     for(var k in labels){ if(src.indexOf(k)>-1){ v.setAttribute('aria-label',labels[k]); return; } }
     v.setAttribute('aria-hidden','true');
   });
+
+  // Scroll reveal — FAIL-OPEN by design. Classes are added by JS (no-script
+  // users see everything), anything already in view reveals immediately, and a
+  // 3s failsafe reveals the rest even if the observer never fires. A broken
+  // observer may cost the animation; it can never cost the content.
+  if('IntersectionObserver' in window &&
+     !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var rvs=[].slice.call(document.querySelectorAll(
+      '.sec-head,.feature,.card,.step,.tier,.qa,.land-film,.land-grid>div'));
+    var vh=innerHeight||document.documentElement.clientHeight||800;
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+    },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    rvs.forEach(function(el){
+      el.classList.add('rv');
+      if(el.getBoundingClientRect().top<vh*0.95){ el.classList.add('on'); }
+      else io.observe(el);
+    });
+    setTimeout(function(){ rvs.forEach(function(el){ el.classList.add('on'); }); },3000);
+  }
 
   // phone reveal
   var el=document.getElementById('tel-reveal'),done=false;
