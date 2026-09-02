@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>WalkThru Tours · Show people around before they book</title>
-<meta name="description" content="Walkthrough tours for vacation rentals, wedding venues and golf clubs, built from the photos you already have. Pay once, no subscription.">
+<meta name="description" content="Walkthrough tours for vacation rentals, wedding venues, golf clubs and land, built from the photos you already have. Pay once, no subscription.">
 <meta property="og:title" content="WalkThru Tours">
 <meta property="og:description" content="You send the photos you already have. We turn them into a walkthrough film, usually back the next day. Pay once, no subscription.">
 <meta property="og:image" content="./media/hero-loop-poster.jpg">
@@ -15,9 +15,8 @@
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 
 <!-- Structured data. Deliberately NOT LocalBusiness: this is a remote service with no
-     storefront and no service radius. LocalBusiness would tell Google to rank the site
-     for one metro, which is the opposite of the goal. Organization + Service with
-     areaServed = United States is the correct shape for work delivered remotely. -->
+     storefront and no service radius. Organization + Service with areaServed =
+     United States is the correct shape for work delivered remotely. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -29,9 +28,10 @@
       "url": "https://walkthrutours.com/",
       "logo": "https://walkthrutours.com/favicon.svg",
       "image": "https://walkthrutours.com/media/hero-loop-poster.jpg",
-      "description": "Walkthrough tour films for vacation rentals, wedding venues and golf clubs, built from photos the owner already has.",
+      "description": "Walkthrough tour films for vacation rentals, wedding venues, golf clubs and land, built from photos the owner already has.",
       "founder": { "@type": "Person", "name": "Will Hainley" },
       "email": "willhainley@walkthrutours.com",
+      "sameAs": ["https://www.instagram.com/walkthrutours/","https://www.facebook.com/profile.php?id=61593848542018"],
       "areaServed": { "@type": "Country", "name": "United States" }
     },
     {
@@ -49,7 +49,7 @@
       "areaServed": { "@type": "Country", "name": "United States" },
       "audience": {
         "@type": "Audience",
-        "audienceType": "Vacation rental owners, wedding venues, golf clubs and estates"
+        "audienceType": "Vacation rental owners, wedding venues, golf clubs, estates and land brokers"
       },
       "description": "Send the photos you already have. We build a walkthrough film of the property, usually back the next day. No site visit and no camera crew.",
       "offers": [
@@ -65,361 +65,462 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================================
-   WalkThru Tours — cinema cut. Shipped 2026-08-03, replacing the cream editorial
-   layout that preceded it (see git history if it needs to come back).
-
-   The previous design was a warm editorial magazine: cream paper, serif display,
-   everything inside a 1180px column. Tasteful, but it argued with the product.
-   Film is shown dark, full bleed and big, because darkness makes the footage the
-   only light on the screen. Three decisions carry the whole page:
-     1. warm near-black ground, so video is the brightest object on screen
-     2. nothing caged in a column, footage runs edge to edge
-     3. type at theatrical scale, overlapping the frame
-
-   Rounded corners, pill buttons in brass, and real depth (shadow, gradient, glow)
-   come from the reference designs Will picked: all four used them, and the old
-   flat square-cornered layout was the outlier.
+   WalkThru Tours — brand cut. Shipped 2026-09, replacing the dark cinema layout
+   (git history has it). This is the SAME design system as the delivered product:
+   the tour pages, the film title cards and the reels all use navy #0c1826, warm
+   cream, brass-gold and a serif display face. The site now matches the thing it
+   sells. Structure: warm cream ground, navy full-width bands for the moments that
+   matter (hero, land, contact), media always framed — rounded, shadowed, never
+   full-bleed — so every film reads as a crafted object instead of wallpaper.
    ========================================================================== */
 :root{
-  /* Warm near-black, not the cool blue-black I reached for first. Every reference
-     Will picked is moody but WARM (deep green, deep brown, cream+brown). A cold
-     ground would fight the brass and the property footage. */
-  --ink:#0d0b09;
-  --ink-2:#151210;
-  --ink-3:#1d1815;
-  --paper:#f4f1ea;
-  --dim:#9a938a;
-  --accent:#d8b06a;         /* brass: the pill-button colour in 3 of the 4 refs */
-  --accent-soft:#e6c78d;
+  --navy:#0c1826;
+  --navy-2:#13233a;
+  --cream:#f6f3ec;
+  --paper:#fffdf8;
+  --ink:#1c2733;
+  --dim:#68727f;
+  --dim-on-navy:#9fb2c5;
+  --gold:#b78a34;          /* readable on cream */
+  --gold-lt:#e4bc60;       /* the film-title gold, for navy ground */
+  --line:#e6e0d2;
   --font-d:"Newsreader",Georgia,serif;
   --font-b:"Instrument Sans",system-ui,sans-serif;
-  --gutter:clamp(1.1rem,4vw,3.2rem);
+  --gutter:clamp(1.1rem,4vw,3rem);
   --ease:cubic-bezier(.16,1,.3,1);
-  /* Rounded + shadowed. All four references do this; the live site is square and
-     flat, which is the single most consistent difference between them and it. */
-  --r-card:18px;
-  --r-media:22px;
-  --shadow:0 24px 60px -18px rgba(0,0,0,.75);
+  --r:16px;
+  --r-media:20px;
+  --shadow:0 18px 44px -16px rgba(12,24,38,.28);
+  --shadow-deep:0 26px 60px -20px rgba(0,0,0,.55);
 }
 *{box-sizing:border-box;}
-html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);
+html{scroll-behavior:smooth;}
+html,body{margin:0;padding:0;background:var(--cream);color:var(--ink);
   font-family:var(--font-b);-webkit-font-smoothing:antialiased;overflow-x:clip;}
 img,video{display:block;max-width:100%;}
 a{color:inherit;}
-::selection{background:var(--accent);color:var(--ink);}
+::selection{background:var(--gold-lt);color:var(--navy);}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter);}
 
-/* film grain over the whole page: the single cheapest trick that makes a site
-   read as "shot" rather than "designed". Very low opacity on purpose. */
-body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:none;
-  opacity:.035;background-image:url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'>\
-<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter>\
-<rect width='140' height='140' filter='url(%23n)'/></svg>");
-  animation:grain 700ms steps(2) infinite;}
-@keyframes grain{0%{transform:translate(0,0)}50%{transform:translate(-3%,2%)}100%{transform:translate(2%,-2%)}}
+/* ---------- nav: cream, sticky, with the mark ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(246,243,236,.88);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.nav-in{display:flex;justify-content:space-between;align-items:center;
+  max-width:1180px;margin:0 auto;padding:.8rem var(--gutter);}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;
+  font-family:var(--font-d);font-size:1.25rem;color:var(--navy);}
+.brand svg{width:34px;height:34px;}
+.nav nav{display:flex;gap:1.5rem;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;}
+.nav nav a{text-decoration:none;color:var(--dim);transition:color .2s;}
+.nav nav a:hover{color:var(--navy);}
+@media (max-width:560px){
+  .brand{font-size:1.05rem;gap:.5rem;}
+  .brand svg{width:28px;height:28px;}
+  .nav nav{gap:.9rem;font-size:.74rem;}
+  .nav nav a.hide-s{display:none;}
+}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.2rem;margin:0;}
 
-/* ---------- HERO: full bleed, full height, type over footage ---------- */
-.hero{position:relative;height:100svh;min-height:560px;display:grid;
-  grid-template-rows:1fr auto;isolation:isolate;overflow:hidden;}
-.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
-  opacity:0;transition:opacity 1.6s var(--ease);}
-.hero video.on{opacity:1;}
-/* vignette + floor gradient so type always has something to sit on */
-.hero::before{content:"";position:absolute;inset:0;z-index:-1;
-  background:radial-gradient(120% 80% at 50% 40%,transparent 35%,rgba(7,7,10,.55) 100%),
-             linear-gradient(180deg,rgba(7,7,10,.55) 0%,transparent 28%,transparent 45%,rgba(7,7,10,.92) 100%);}
-.topbar{display:flex;justify-content:space-between;align-items:center;
-  padding:1.4rem var(--gutter);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;}
-.topbar nav{display:flex;gap:1.6rem;}
-.topbar a{text-decoration:none;opacity:.75;transition:opacity .2s;}
-.topbar a:hover{opacity:1;}
-.hero-in{padding:0 var(--gutter) clamp(2rem,5vw,3.6rem);align-self:end;}
-/* the scale jump is the point: this is 2x the live site's display size */
-.hero h1{font-family:var(--font-d);font-weight:300;margin:0;
-  font-size:clamp(3.1rem,1.2rem + 8.6vw,11rem);line-height:.92;letter-spacing:-.025em;
-  max-width:16ch;}
-.hero h1 em{font-style:italic;color:var(--accent);}
-.hero-row{display:flex;flex-wrap:wrap;gap:1.6rem 2.4rem;align-items:center;
-  margin-top:clamp(1.4rem,3vw,2.4rem);}
-.hero-sub{margin:0;max-width:34ch;color:#cfcbc4;font-size:1.02rem;line-height:1.55;}
-/* Pill, brass, with a soft glow. This exact shape/colour appears in three of the
-   four references; the live site's square button is the outlier. */
-.cta{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;
-  background:linear-gradient(180deg,var(--accent-soft),var(--accent));color:#231b0e;
-  padding:1rem 2rem;font-weight:600;font-size:.95rem;border-radius:999px;
-  box-shadow:0 10px 30px -8px rgba(216,176,106,.5);
+/* ---------- hero: navy band, framed rotating film ---------- */
+.hero{background:linear-gradient(165deg,var(--navy) 0%,var(--navy-2) 100%);color:var(--cream);
+  padding:clamp(3rem,7vw,5.5rem) 0 clamp(3.4rem,7vw,6rem);}
+.hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);
+  gap:clamp(2rem,4vw,3.6rem);align-items:center;max-width:1180px;margin:0 auto;
+  padding:0 var(--gutter);}
+.eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-lt);
+  margin:0 0 1.1rem;font-weight:600;}
+.hero h1{font-family:var(--font-d);font-weight:400;margin:0 0 1.2rem;
+  font-size:clamp(2.5rem,1.4rem + 4.4vw,4.6rem);line-height:1.04;letter-spacing:-.015em;}
+.hero h1 em{font-style:italic;color:var(--gold-lt);}
+.hero-sub{margin:0 0 1.8rem;color:var(--dim-on-navy);font-size:1.05rem;line-height:1.6;max-width:38ch;}
+.cta{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
+  background:linear-gradient(180deg,var(--gold-lt),#d3a94e);color:#231b0e;
+  padding:.95rem 1.9rem;font-weight:600;font-size:.95rem;border-radius:999px;
+  box-shadow:0 12px 28px -10px rgba(228,188,96,.55);
   transition:transform .3s var(--ease),box-shadow .3s var(--ease);}
-.cta:hover{transform:translateY(-3px);box-shadow:0 18px 42px -10px rgba(216,176,106,.7);}
+.cta:hover{transform:translateY(-2px);box-shadow:0 18px 38px -12px rgba(228,188,96,.75);}
+.cta-ghost{display:inline-flex;align-items:center;margin-left:1.1rem;color:var(--dim-on-navy);
+  font-size:.9rem;text-decoration:none;border-bottom:1px solid rgba(159,178,197,.4);
+  padding-bottom:2px;transition:color .2s;}
+.cta-ghost:hover{color:var(--cream);}
+.hero-film{position:relative;border-radius:var(--r-media);overflow:hidden;background:#000;
+  box-shadow:var(--shadow-deep);aspect-ratio:16/10;}
+.hero-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity 1.4s var(--ease);}
+.hero-film video.on{opacity:1;}
+.hero-film .tag{position:absolute;left:1rem;bottom:1rem;z-index:2;font-size:.7rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--cream);
+  background:rgba(12,24,38,.72);padding:.45rem .8rem;border-radius:999px;}
+.hero-proof{display:flex;gap:2.2rem;margin-top:2rem;flex-wrap:wrap;}
+.proof b{display:block;font-family:var(--font-d);font-size:1.5rem;color:var(--cream);font-weight:500;}
+.proof span{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim-on-navy);}
+@media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} .hero-film{aspect-ratio:16/9;} }
 
-/* ---------- FULL-BLEED FEATURE: the film gets the whole viewport ---------- */
-.slab{position:relative;padding:clamp(4rem,10vw,8rem) 0;}
-.slab-head{padding:0 var(--gutter);max-width:1100px;margin:0 auto clamp(2rem,5vw,3.4rem);}
-.slab-head h2{font-family:var(--font-d);font-weight:300;letter-spacing:-.02em;
-  font-size:clamp(2rem,1.2rem + 3.4vw,4.2rem);line-height:1.02;margin:0 0 .8rem;}
-.slab-head p{margin:0;color:var(--dim);max-width:48ch;line-height:1.6;}
-/* Near-full-bleed, but inset slightly and rounded so it reads as a framed object
-   with depth, the way every reference treats its hero media. */
-.bleed{position:relative;margin:0 clamp(0px,2.5vw,44px);border-radius:var(--r-media);
-  overflow:hidden;background:#000;box-shadow:var(--shadow);}
-.bleed video{width:100%;height:clamp(320px,70svh,860px);object-fit:cover;}
-.bleed figcaption{display:flex;justify-content:space-between;gap:1rem;
-  padding:1rem clamp(1rem,3vw,2rem);font-size:.82rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--dim);
-  background:linear-gradient(180deg,rgba(13,11,9,0),rgba(13,11,9,.92));
-  position:absolute;left:0;right:0;bottom:0;padding-top:3.5rem;}
+/* ---------- section scaffolding ---------- */
+section{padding:clamp(3.4rem,7vw,6rem) 0;}
+.sec-head{max-width:760px;margin-bottom:clamp(1.8rem,4vw,3rem);}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+h2{font-family:var(--font-d);font-weight:400;letter-spacing:-.01em;color:var(--navy);
+  font-size:clamp(1.9rem,1.2rem + 2.6vw,3.2rem);line-height:1.08;margin:0 0 .8rem;}
+.sec-head p{margin:0;color:var(--dim);line-height:1.65;font-size:1.02rem;}
+.rule{width:56px;height:3px;background:var(--gold-lt);border-radius:2px;margin:0 0 1.1rem;}
+.center .rule{margin-left:auto;margin-right:auto;}
 
-/* ---------- HOVER-TO-PLAY GRID: the page feels alive under the cursor ---------- */
-.grid{display:grid;gap:clamp(14px,2vw,26px);grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  padding:0 clamp(0px,2.5vw,44px) clamp(3rem,7vw,6rem);}
-.card{position:relative;margin:0;background:#000;overflow:hidden;cursor:pointer;
-  border-radius:var(--r-card);box-shadow:var(--shadow);
-  transition:transform .5s var(--ease),box-shadow .5s var(--ease);}
-.card:hover{transform:translateY(-6px);box-shadow:0 34px 70px -20px rgba(0,0,0,.85);}
-/* The poster sits underneath as a still image and is ALWAYS crisp. The video above
-   it stays invisible until it can genuinely play through, then crossfades in. That
-   is what removes the judder: previously the scale/brightness change fired on
-   mouseenter while the file was still buffering, so you watched it stutter. */
+/* ---------- feature film ---------- */
+.feature{border-radius:var(--r-media);overflow:hidden;background:#000;box-shadow:var(--shadow);margin:0;}
+.feature video{width:100%;aspect-ratio:16/9;object-fit:cover;}
+.feature figcaption{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  padding:.9rem 1.2rem;font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--dim);background:var(--paper);}
+
+/* ---------- work grid: white cards, captions under the media ---------- */
+.grid{display:grid;gap:clamp(16px,2.4vw,28px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin-top:clamp(16px,2.4vw,28px);}
+.card{position:relative;margin:0;background:var(--paper);border-radius:var(--r-media);
+  overflow:hidden;box-shadow:var(--shadow);cursor:pointer;
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease);}
+.card:hover{transform:translateY(-5px);box-shadow:0 26px 56px -18px rgba(12,24,38,.38);}
+.card .frame{position:relative;background:#000;height:clamp(240px,34vw,340px);}
+.card.card-tall .frame{height:clamp(380px,46vw,520px);}
 .card .still{position:absolute;inset:0;background-size:cover;background-position:center;
-  filter:saturate(.9) brightness(.74);transition:filter .6s var(--ease);}
-.card:hover .still,.card:focus-within .still{filter:saturate(1.02) brightness(.92);}
-.card video{position:relative;width:100%;height:clamp(260px,42svh,460px);object-fit:cover;
-  opacity:0;transition:opacity .5s var(--ease);}
+  transition:filter .5s var(--ease);filter:saturate(.96);}
+.card.card-tall .still{background-size:contain;background-repeat:no-repeat;background-position:center;}
+.card:hover .still{filter:saturate(1.05);}
+.card video{position:relative;width:100%;height:100%;object-fit:cover;opacity:0;
+  transition:opacity .5s var(--ease);}
+.card.card-tall video{object-fit:contain;}
 .card.playing video{opacity:1;}
-/* a quiet "loading" tick so a slow connection reads as deliberate, not broken */
-.card .wait{position:absolute;top:1rem;right:1rem;width:22px;height:22px;border-radius:50%;
-  border:2px solid rgba(244,241,234,.25);border-top-color:var(--accent);opacity:0;
-  transition:opacity .3s;pointer-events:none;}
+.card .wait{position:absolute;top:.9rem;right:.9rem;width:20px;height:20px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.3);border-top-color:var(--gold-lt);opacity:0;
+  transition:opacity .3s;pointer-events:none;z-index:2;}
 .card.loading .wait{opacity:1;animation:spin .8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
-.card figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.4rem;
-  background:linear-gradient(180deg,transparent,rgba(7,7,10,.9));}
-.card .t{display:block;font-family:var(--font-d);font-size:1.35rem;line-height:1.15;}
-.card .s{display:block;color:var(--dim);font-size:.8rem;letter-spacing:.14em;
-  text-transform:uppercase;margin-top:.35rem;}
-.card .n{display:block;color:#cfcbc4;font-size:.92rem;line-height:1.5;margin-top:.7rem;
-  max-width:44ch;opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease);}
-.card:hover .n,.card:focus-within .n{opacity:1;transform:none;}
+.card figcaption{padding:1.1rem 1.3rem 1.3rem;border-top:3px solid var(--gold-lt);}
+.card .t{display:block;font-family:var(--font-d);font-size:1.3rem;color:var(--navy);line-height:1.15;}
+.card .s{display:block;color:var(--gold);font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;margin-top:.4rem;font-weight:600;}
+.card .n{display:block;color:var(--dim);font-size:.92rem;line-height:1.55;margin-top:.55rem;}
+.hint{margin:.9rem 0 0;text-align:center;color:var(--dim);font-size:.8rem;letter-spacing:.1em;
+  text-transform:uppercase;}
 
-/* The vertical reel gets a taller frame and letterboxes on black instead of being
-   centre-cropped — cropping a captioned 9:16 reel into a 16:9 card beheads the
-   captions, which are the point of showing it. */
-.card.card-tall video{height:clamp(420px,58svh,640px);object-fit:contain;background:#000;}
-.card.card-tall .still{background-size:contain;background-repeat:no-repeat;background-color:#000;}
+/* ---------- land: navy band, film + what's included ---------- */
+.land{background:linear-gradient(165deg,var(--navy) 0%,var(--navy-2) 100%);color:var(--cream);}
+.land h2{color:var(--cream);}
+.land .sec-head p{color:var(--dim-on-navy);}
+.land-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  gap:clamp(1.8rem,3.6vw,3rem);align-items:start;}
+.land-film{border-radius:var(--r-media);overflow:hidden;background:#000;box-shadow:var(--shadow-deep);margin:0;}
+.land-film video{width:100%;aspect-ratio:16/9;object-fit:cover;}
+.land-film figcaption{padding:.8rem 1.1rem;font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim-on-navy);background:rgba(255,255,255,.04);}
+.land-list{list-style:none;margin:0 0 1.6rem;padding:0;display:grid;gap:.95rem;}
+.land-list li{position:relative;padding-left:1.35rem;line-height:1.55;
+  color:var(--cream);font-size:.98rem;}
+.land-list li::before{content:"";position:absolute;left:0;top:.5rem;width:8px;height:8px;
+  border-radius:50%;background:var(--gold-lt);}
+.land-list li span{color:var(--dim-on-navy);}
+.land-price{font-family:var(--font-d);font-size:2.2rem;color:var(--gold-lt);margin:0 0 .2rem;}
+.land-price small{font-family:var(--font-b);font-size:.78rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim-on-navy);margin-left:.6rem;}
+.land-fine{color:var(--dim-on-navy);font-size:.82rem;line-height:1.6;margin:1.4rem 0 0;max-width:52ch;}
+@media (max-width:860px){ .land-grid{grid-template-columns:1fr;} }
 
+/* ---------- steps ---------- */
+.steps{display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+.step{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);
+  padding:clamp(1.6rem,3vw,2.4rem);border-top:3px solid var(--gold-lt);
+  transition:transform .4s var(--ease);}
+.step:hover{transform:translateY(-4px);}
+.step .num{font-family:var(--font-d);font-size:2.6rem;line-height:1;color:var(--gold-lt);}
+.step h3{font-family:var(--font-d);font-weight:500;font-size:1.35rem;margin:.7rem 0 .5rem;color:var(--navy);}
+.step p{margin:0;color:var(--dim);line-height:1.65;font-size:.96rem;}
+
+/* ---------- pricing ---------- */
+.tiers{display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fit,minmax(210px,1fr));}
+.tier{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);
+  border-top:3px solid var(--gold-lt);padding:clamp(1.6rem,3vw,2.2rem);text-align:center;
+  transition:transform .4s var(--ease);}
+.tier:hover{transform:translateY(-4px);}
+.tier .p{display:block;font-family:var(--font-d);color:var(--navy);
+  font-size:clamp(2.1rem,1.5rem + 1.6vw,2.9rem);line-height:1;}
+.tier .s{display:block;color:var(--dim);font-size:.78rem;letter-spacing:.12em;
+  text-transform:uppercase;margin-top:.65rem;}
+.note{max-width:68ch;margin:clamp(1.6rem,3vw,2.4rem) auto 0;color:var(--dim);
+  line-height:1.7;font-size:.95rem;text-align:center;}
+
+/* ---------- faq ---------- */
+.faq-grid{display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
+.qa{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);
+  padding:clamp(1.5rem,2.6vw,2.1rem);}
+.qa h3{font-family:var(--font-d);font-weight:500;font-size:1.3rem;margin:0 0 .55rem;color:var(--navy);}
+.qa p{margin:0;color:var(--dim);line-height:1.65;font-size:.95rem;}
+
+/* ---------- contact: navy closer ---------- */
+.contact{background:linear-gradient(165deg,var(--navy) 0%,var(--navy-2) 100%);color:var(--cream);
+  text-align:center;}
+.contact h2{color:var(--cream);}
+.contact>.wrap>p{color:var(--dim-on-navy);margin:0 auto 2rem;max-width:46ch;line-height:1.65;}
+.mail{display:inline-block;font-family:var(--font-d);font-size:clamp(1.15rem,.9rem + 1.2vw,1.8rem);
+  color:var(--cream);text-decoration:none;border-bottom:1px solid var(--gold-lt);
+  padding-bottom:.25rem;transition:color .25s;}
+.mail:hover{color:var(--gold-lt);}
+.tel{display:block;margin-top:1.3rem;color:var(--dim-on-navy);font-size:.92rem;text-decoration:none;}
+.contact .mark-lg{width:56px;height:56px;margin:0 auto 1.4rem;opacity:.9;}
+
+/* ---------- footer ---------- */
+.foot{background:var(--navy);color:var(--dim-on-navy);border-top:1px solid rgba(255,255,255,.08);}
+.foot-in{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  max-width:1180px;margin:0 auto;padding:1.5rem var(--gutter);
+  font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;}
+.foot a{text-decoration:none;transition:color .2s;}
+.foot a:hover{color:var(--gold-lt);}
 .foot-social{display:flex;gap:1.2rem;}
-.foot-social a{text-decoration:none;opacity:.8;transition:opacity .2s,color .2s;}
-.foot-social a:hover{opacity:1;color:var(--accent);}
 
-/* ---------- STEPS: oversized numerals, the only ornament on the page ---------- */
-.steps{display:grid;gap:clamp(14px,2vw,22px);grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  max-width:1400px;margin:0 auto;padding:0 clamp(1rem,3vw,2.4rem);}
-.step{background:linear-gradient(160deg,var(--ink-3),var(--ink-2));
-  border:1px solid rgba(255,255,255,.055);border-radius:var(--r-card);
-  padding:clamp(2rem,4vw,3rem) clamp(1.4rem,3vw,2.4rem);
-  transition:transform .4s var(--ease),border-color .4s;}
-.step:hover{transform:translateY(-4px);border-color:rgba(216,176,106,.35);}
-.step .num{font-family:var(--font-d);font-size:3.6rem;line-height:1;color:var(--accent);opacity:.45;}
-.step h3{font-family:var(--font-d);font-weight:400;font-size:1.5rem;margin:.8rem 0 .6rem;}
-.step p{margin:0;color:var(--dim);line-height:1.65;font-size:.98rem;}
-
-/* ---------- PRICING ---------- */
-.tiers{display:grid;gap:clamp(14px,2vw,22px);grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  max-width:1400px;margin:0 auto;padding:0 clamp(1rem,3vw,2.4rem);}
-.tier{background:linear-gradient(160deg,var(--ink-3),var(--ink-2));
-  border:1px solid rgba(255,255,255,.055);border-radius:var(--r-card);
-  padding:clamp(1.8rem,3.5vw,2.6rem);text-align:center;
-  transition:transform .4s var(--ease),border-color .4s,box-shadow .4s;}
-.tier:hover{transform:translateY(-5px);border-color:rgba(216,176,106,.45);
-  box-shadow:0 22px 50px -18px rgba(0,0,0,.8);}
-.tier .p{color:var(--accent-soft);}
-.tier .p{display:block;font-family:var(--font-d);font-size:clamp(2.4rem,1.6rem + 2vw,3.4rem);line-height:1;}
-.tier .s{display:block;color:var(--dim);font-size:.86rem;letter-spacing:.12em;
-  text-transform:uppercase;margin-top:.7rem;}
-.note{max-width:70ch;margin:clamp(2rem,4vw,3rem) auto 0;padding:0 var(--gutter);
-  color:var(--dim);line-height:1.7;font-size:.96rem;text-align:center;}
-
-/* ---------- CONTACT ---------- */
-.contact{padding:clamp(4rem,9vw,7rem) var(--gutter);text-align:center;border-top:1px solid #1a1a20;}
-.contact h2{font-family:var(--font-d);font-weight:300;letter-spacing:-.02em;
-  font-size:clamp(2.2rem,1.4rem + 3.6vw,4.6rem);margin:0 0 1rem;line-height:1.02;}
-.contact p{color:var(--dim);margin:0 auto 2.2rem;max-width:46ch;line-height:1.6;}
-.mail{display:inline-block;font-family:var(--font-d);font-size:clamp(1.1rem,.9rem + 1.1vw,1.9rem);
-  text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:.25rem;
-  transition:color .25s;}
-.mail:hover{color:var(--accent);}
-.tel{display:block;margin-top:1.4rem;color:var(--dim);font-size:.92rem;text-decoration:none;}
-.foot{display:flex;justify-content:space-between;padding:1.6rem var(--gutter);
-  border-top:1px solid #1a1a20;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
-
-/* Sticky mobile CTA. The cinema layout is deliberately tall, which means on a phone
-   the hero button scrolls away and the next one is at the very bottom of the page.
-   This keeps a way to act on screen the whole time. Desktop keeps the in-page CTAs,
-   where a floating bar would just be clutter. */
+/* ---------- sticky mobile CTA ---------- */
 .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
   padding:.7rem clamp(.8rem,4vw,1.2rem) calc(.7rem + env(safe-area-inset-bottom,0px));
-  background:rgba(13,11,9,.86);backdrop-filter:blur(14px);
-  border-top:1px solid rgba(255,255,255,.09);
+  background:rgba(246,243,236,.92);backdrop-filter:blur(14px);border-top:1px solid var(--line);
   transform:translateY(110%);transition:transform .35s var(--ease);}
 .stickybar.on{transform:none;}
 .stickybar a{display:block;text-align:center;text-decoration:none;border-radius:999px;
-  background:linear-gradient(180deg,var(--accent-soft),var(--accent));color:#231b0e;
+  background:linear-gradient(180deg,var(--gold-lt),#d3a94e);color:#231b0e;
   font-weight:600;padding:.9rem 1.2rem;}
 @media (max-width:820px){ .stickybar{display:block;} body{padding-bottom:4.6rem;} }
-@media (prefers-reduced-motion:reduce){ .stickybar{transition:none;} }
-
-@media (max-width:620px){ .hero h1{max-width:12ch;} .foot{flex-direction:column;gap:.5rem;} }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
-  body::after{animation:none;}
 }
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <video id="hv-a" class="on" src="./media/hero-loop.mp4" poster="./media/hero-loop-poster.jpg" autoplay muted playsinline preload="auto"></video>
-  <video id="hv-b" muted playsinline preload="auto" aria-hidden="true"></video>
-
-  <div class="topbar">
-    <span>WalkThru&nbsp;Tours</span>
-    <nav><a href="#work">Work</a><a href="#land">Land</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></nav>
-  </div>
-
-  <div class="hero-in">
-    <h1>Show people around <em>before</em> they book.</h1>
-    <div class="hero-row">
-      <p class="hero-sub">Send the photos you already have and I will turn them into a walkthrough tour, usually back to you the next day.</p>
-      <a class="cta" href="#contact">See it on your own place &rarr;</a>
-    </div>
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="44" fill="none" stroke="#0c1826" stroke-width="6"/>
+        <path d="M27 61 L50 35 L73 61" fill="none" stroke="#0c1826" stroke-width="6"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M34 67 Q42 73 50 67" fill="none" stroke="#78bedc" stroke-width="4" stroke-linecap="round"/>
+        <path d="M50 67 Q58 73 66 67" fill="none" stroke="#78bedc" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      WalkThru&nbsp;Tours
+    </a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#land">Land</a>
+      <a class="hide-s" href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
 </header>
 
-<section class="slab" id="work">
-  <div class="slab-head">
-    <h2>Every frame started as a photograph.</h2>
-    <p>Each film was built from listing photos the owner already had.</p>
+<div class="hero">
+  <div class="hero-grid">
+    <div>
+      <p class="eyebrow">Films from listing photos</p>
+      <h1>Show people around <em>before</em> they book.</h1>
+      <p class="hero-sub">Send the photos you already have and I will turn them into a
+      walkthrough tour, usually back to you the next day.</p>
+      <p class="cta-row">
+        <a class="cta" href="#contact">See it on your own place &rarr;</a>
+        <a class="cta-ghost" style="margin-left:0" href="#work">Watch the work</a>
+      </p>
+      <div class="hero-proof">
+        <div class="proof"><b>1 day</b><span>usual turnaround</span></div>
+        <div class="proof"><b>$99+</b><span>pay once, own it</span></div>
+        <div class="proof"><b>0 visits</b><span>no crew, no scheduling</span></div>
+      </div>
+    </div>
+    <div class="hero-film">
+      <video id="hv-a" class="on" src="./media/hero-loop.mp4" poster="./media/hero-loop-poster.jpg" autoplay muted playsinline preload="auto"></video>
+      <video id="hv-b" muted playsinline preload="auto" aria-hidden="true"></video>
+      <span class="tag">Built from stills · moving like film</span>
+    </div>
   </div>
-  <figure class="bleed">
-    <video src="./media/showreel.mp4" poster="./media/showreel-poster.jpg" controls muted playsinline preload="metadata"></video>
-    <figcaption><span>A full walkthrough</span><span>Five bedroom pool home · Gulf coast</span></figcaption>
-  </figure>
-</section>
-
-<div class="grid">
-  <figure class="card">
-    <video src="./media/photo-comes-alive.mp4" poster="./media/photo-comes-alive-poster.jpg" muted loop playsinline preload="none" data-hover></video>
-    <figcaption>
-      <span class="t">A photo becomes the tour</span>
-      <span class="s">Before and after</span>
-      <span class="n">An owner sent in this photo. This is the shot that went back to them.</span>
-    </figcaption>
-  </figure>
-  <figure class="card">
-    <video src="./media/venue-tour.mp4" poster="./media/venue-tour-poster.jpg" muted loop playsinline preload="none" data-hover></video>
-    <figcaption>
-      <span class="t">Inside a wedding venue</span>
-      <span class="s">Historic event hall</span>
-      <span class="n">Couples can see the whole hall before they drive out to tour it.</span>
-    </figcaption>
-  </figure>
-  <figure class="card">
-    <video src="./media/aquarius-tour.mp4" poster="./media/aquarius-tour-poster.jpg" muted loop playsinline preload="none" data-hover></video>
-    <figcaption>
-      <span class="t">A gulf-front condo, floor to pool</span>
-      <span class="s">Beachfront resort tower</span>
-      <span class="n">Balcony, rooms, pool and the sunset it actually gets. One film from the listing gallery.</span>
-    </figcaption>
-  </figure>
-  <figure class="card card-tall">
-    <video src="./media/reel-portfolio.mp4" poster="./media/reel-portfolio-poster.jpg" muted loop playsinline preload="none" data-hover></video>
-    <figcaption>
-      <span class="t">The vertical cut</span>
-      <span class="s">Built for socials</span>
-      <span class="n">Every tour also comes as a short vertical reel, captioned and scored, sized for phones.</span>
-    </figcaption>
-  </figure>
-  <figure class="card">
-    <video src="./media/sizzle-30s.mp4" poster="./media/sizzle-30s-poster.jpg" muted loop playsinline preload="none" data-hover></video>
-    <figcaption>
-      <span class="t">The thirty second cut</span>
-      <span class="s">Fast tour, full home</span>
-      <span class="n">A short cut of the whole property for owners who want one file that does everything.</span>
-    </figcaption>
-  </figure>
 </div>
 
-<section class="slab" id="land">
-  <div class="slab-head">
-    <h2>We film land, too.</h2>
-    <p>Rural tracts, ranches and acreage. A cinematic flyover of the real terrain, built
-    from public elevation and aerial data with the boundary drawn on the ground — no
-    drone, no site visit. Flat $300 per listing, with an interactive parcel page and an
-    MLS-safe copy included.</p>
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rule"></div>
+      <h2>Every frame started as a photograph.</h2>
+      <p>Each film below was built from listing photos the owner already had. No camera
+      crew ever visited.</p>
+    </div>
+    <figure class="feature">
+      <video src="./media/showreel.mp4" poster="./media/showreel-poster.jpg" controls muted playsinline preload="metadata"></video>
+      <figcaption><span>A full walkthrough</span><span>Five bedroom pool home · Gulf coast</span></figcaption>
+    </figure>
+    <div class="grid">
+      <figure class="card">
+        <div class="frame">
+          <video src="./media/photo-comes-alive.mp4" poster="./media/photo-comes-alive-poster.jpg" muted loop playsinline preload="none" data-hover></video>
+        </div>
+        <figcaption>
+          <span class="t">A photo becomes the tour</span>
+          <span class="s">Before and after</span>
+          <span class="n">An owner sent in this photo. This is the shot that went back to them.</span>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame">
+          <video src="./media/venue-tour.mp4" poster="./media/venue-tour-poster.jpg" muted loop playsinline preload="none" data-hover></video>
+        </div>
+        <figcaption>
+          <span class="t">Inside a wedding venue</span>
+          <span class="s">Historic event hall</span>
+          <span class="n">Couples can see the whole hall before they drive out to tour it.</span>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame">
+          <video src="./media/aquarius-tour.mp4" poster="./media/aquarius-tour-poster.jpg" muted loop playsinline preload="none" data-hover></video>
+        </div>
+        <figcaption>
+          <span class="t">A gulf-front condo, floor to pool</span>
+          <span class="s">Beachfront resort tower</span>
+          <span class="n">Balcony, rooms, pool and the sunset it actually gets. One film from the listing gallery.</span>
+        </figcaption>
+      </figure>
+      <figure class="card card-tall">
+        <div class="frame">
+          <video src="./media/reel-portfolio.mp4" poster="./media/reel-portfolio-poster.jpg" muted loop playsinline preload="none" data-hover></video>
+        </div>
+        <figcaption>
+          <span class="t">The vertical cut</span>
+          <span class="s">Built for socials</span>
+          <span class="n">Every tour also comes as a short vertical reel, captioned and scored, sized for phones.</span>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame">
+          <video src="./media/sizzle-30s.mp4" poster="./media/sizzle-30s-poster.jpg" muted loop playsinline preload="none" data-hover></video>
+        </div>
+        <figcaption>
+          <span class="t">The thirty second cut</span>
+          <span class="s">Fast tour, full home</span>
+          <span class="n">A short cut of the whole property for owners who want one file that does everything.</span>
+        </figcaption>
+      </figure>
+    </div>
+    <p class="hint">Hover any card to play it</p>
   </div>
-  <figure class="bleed">
-    <video src="./media/land-flyover.mp4" poster="./media/land-flyover-poster.jpg" controls playsinline preload="metadata"></video>
-    <figcaption><span>Parcel flyover</span><span>40-acre tract · Grimes County, Texas</span></figcaption>
-  </figure>
-  <p class="note">A terrain visualization from public records — USGS elevation, USDA/TxGIO
-  imagery, county parcel lines — and it says so on screen. Not drone photography, and not
-  a survey.</p>
 </section>
 
-<section class="slab">
-  <div class="slab-head"><h2>You only do the first step.</h2></div>
-  <div class="steps">
-    <div class="step"><span class="num">01</span><h3>Send the link</h3><p>Send your listing link or a folder of photos. Nobody schedules anything and nobody visits the property.</p></div>
-    <div class="step"><span class="num">02</span><h3>I build it</h3><p>I put the rooms in the order a guest would walk them, then send it to you first. Changes are free until you like it.</p></div>
-    <div class="step"><span class="num">03</span><h3>Post it anywhere</h3><p>Put it on Airbnb, VRBO or your own site, or send it straight to someone asking questions in your inbox. One file that works everywhere.</p></div>
+<section class="land" id="land">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rule"></div>
+      <h2>We film land, too.</h2>
+      <p>Rural tracts, ranches and acreage. A cinematic flyover of the real terrain with the
+      boundary drawn on the ground — no drone, no site visit.</p>
+    </div>
+    <div class="land-grid">
+      <figure class="land-film">
+        <video src="./media/land-flyover.mp4" poster="./media/land-flyover-poster.jpg" controls playsinline preload="metadata"></video>
+        <figcaption>Parcel flyover · 40-acre tract · Grimes County, Texas</figcaption>
+      </figure>
+      <div>
+        <p class="land-price">$300 <small>flat, per listing</small></p>
+        <ul class="land-list">
+          <li>The cinematic flyover film, <span>sized for Land.com, YouTube and email</span></li>
+          <li>An interactive parcel page <span>— flood, terrain, water and soils, all cited</span></li>
+          <li>An MLS-safe unbranded copy</li>
+          <li>The annotated aerial <span>as a listing photo</span></li>
+        </ul>
+        <a class="cta" href="#contact">Film a tract &rarr;</a>
+        <p class="land-fine">Built from public records — USGS elevation, USDA/TxGIO imagery,
+        county parcel lines — and it says so on screen. Not drone photography, and not a survey.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="slab" id="pricing">
-  <div class="slab-head"><h2>Pay once. Own it forever.</h2>
-    <p>Priced by the size of the place. There is no monthly fee and no contract.</p></div>
-  <div class="tiers">
-    <div class="tier"><span class="p">$99</span><span class="s">Rentals, 1–2 bedrooms</span></div>
-    <div class="tier"><span class="p">$149</span><span class="s">Rentals, 3–4 bedrooms</span></div>
-    <div class="tier"><span class="p">$199</span><span class="s">Rentals, 5+ bedrooms</span></div>
-    <div class="tier"><span class="p">$299+</span><span class="s">Wedding &amp; event venues</span></div>
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head center">
+      <div class="rule"></div>
+      <h2>You only do the first step.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="num">01</span><h3>Send the link</h3><p>Send your listing link or a folder of photos. Nobody schedules anything and nobody visits the property.</p></div>
+      <div class="step"><span class="num">02</span><h3>I build it</h3><p>I put the rooms in the order a guest would walk them, then send it to you first. Changes are free until you like it.</p></div>
+      <div class="step"><span class="num">03</span><h3>Post it anywhere</h3><p>Put it on Airbnb, VRBO or your own site, or send it straight to someone asking questions in your inbox. One file that works everywhere.</p></div>
+    </div>
   </div>
-  <p class="note">You pay once you have watched the tour and you are happy with it. Venues, golf clubs and estates are quoted after I have seen the space, and if you run several properties, ask me about a group rate.</p>
 </section>
 
-<section class="slab" id="faq">
-  <div class="slab-head"><h2>Straight answers.</h2></div>
-  <div class="steps">
-    <div class="step"><h3>Is this AI?</h3><p>The camera moves are generated from your real photos, and every film is labeled as AI-assisted wherever it is posted. Nothing is invented — if it is not in your photos, it is not in your tour.</p></div>
-    <div class="step"><h3>What if I don't like it?</h3><p>You pay after you have watched the finished tour and you are happy with it. Changes are free until you like it.</p></div>
-    <div class="step"><h3>Who owns the film?</h3><p>You do. One flat price, the files are yours, host them anywhere. No subscription, no watermark ransom.</p></div>
-    <div class="step"><h3>How fast is it?</h3><p>Rental and venue tours are usually back the next day. Land flyovers take two to three days — real terrain takes longer to render than it does to film.</p></div>
+<section id="pricing" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head center">
+      <div class="rule"></div>
+      <h2>Pay once. Own it forever.</h2>
+      <p>Priced by the size of the place. There is no monthly fee and no contract.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier"><span class="p">$99</span><span class="s">Rentals, 1–2 bedrooms</span></div>
+      <div class="tier"><span class="p">$149</span><span class="s">Rentals, 3–4 bedrooms</span></div>
+      <div class="tier"><span class="p">$199</span><span class="s">Rentals, 5+ bedrooms</span></div>
+      <div class="tier"><span class="p">$299+</span><span class="s">Wedding &amp; event venues</span></div>
+      <div class="tier"><span class="p">$300</span><span class="s">Land, per listing</span></div>
+    </div>
+    <p class="note">You pay once you have watched the tour and you are happy with it. Venues,
+    golf clubs and estates are quoted after I have seen the space, and if you run several
+    properties, ask me about a group rate.</p>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head center">
+      <div class="rule"></div>
+      <h2>Straight answers.</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="qa"><h3>Is this AI?</h3><p>The camera moves are generated from your real photos, and every film is labeled as AI-assisted wherever it is posted. Nothing is invented — if it is not in your photos, it is not in your tour.</p></div>
+      <div class="qa"><h3>What if I don't like it?</h3><p>You pay after you have watched the finished tour and you are happy with it. Changes are free until you like it.</p></div>
+      <div class="qa"><h3>Who owns the film?</h3><p>You do. One flat price, the files are yours, host them anywhere. No subscription and no watermark.</p></div>
+      <div class="qa"><h3>How fast is it?</h3><p>Rental and venue tours are usually back the next day. Land flyovers take two to three days — real terrain takes longer to render than it does to film.</p></div>
+    </div>
   </div>
 </section>
 
 <section class="contact" id="contact">
-  <h2>See it on your own place first.</h2>
-  <p>Send me your listing link and I will build a short sample from the photos already on it, free, so you can see it on your own place before deciding anything.</p>
-  <a class="mail" href="mailto:willhainley@walkthrutours.com?subject=My%20property">willhainley@walkthrutours.com</a>
-  <a class="tel" href="#" id="tel-reveal" data-a="956" data-b="589" data-c="0497">Prefer to call? Tap to show the number</a>
+  <div class="wrap">
+    <svg class="mark-lg" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="44" fill="none" stroke="#f6f3ec" stroke-width="5"/>
+      <path d="M27 61 L50 35 L73 61" fill="none" stroke="#f6f3ec" stroke-width="5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M34 67 Q42 73 50 67" fill="none" stroke="#78bedc" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M50 67 Q58 73 66 67" fill="none" stroke="#78bedc" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+    <h2>See it on your own place first.</h2>
+    <p>Send me your listing link and I will build a short sample from the photos already on
+    it, free, so you can see it on your own place before deciding anything.</p>
+    <a class="mail" href="mailto:willhainley@walkthrutours.com?subject=My%20property">willhainley@walkthrutours.com</a>
+    <a class="tel" href="#" id="tel-reveal" data-a="956" data-b="589" data-c="0497">Prefer to call? Tap to show the number</a>
+  </div>
 </section>
 
 <footer class="foot">
-  <span>WalkThru Tours</span>
-  <span class="foot-social">
-    <a href="https://www.instagram.com/walkthrutours/" rel="noopener" target="_blank">Instagram</a>
-    <a href="https://www.facebook.com/profile.php?id=61593848542018" rel="noopener" target="_blank">Facebook</a>
-  </span>
-  <span>Working with owners nationwide</span>
+  <div class="foot-in">
+    <span>WalkThru Tours</span>
+    <span class="foot-social">
+      <a href="https://www.instagram.com/walkthrutours/" rel="noopener" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=61593848542018" rel="noopener" target="_blank">Facebook</a>
+    </span>
+    <span>Working with owners nationwide</span>
+  </div>
 </footer>
 
 <div class="stickybar" id="stickybar"><a href="#contact">Get your walkthrough</a></div>
 
 <script>
 (function(){
-  // hero rotation, same approach as the live site
+  // hero rotation between two stacked videos inside the frame
   var a=document.getElementById('hv-a'),b=document.getElementById('hv-b'),i=0,fading=false;
   var scenes=["./media/hero-loop.mp4","./media/hero-01.mp4","./media/hero-02.mp4",
               "./media/hero-03.mp4","./media/hero-04.mp4","./media/hero-05.mp4","./media/hero-06.mp4"];
@@ -434,26 +535,19 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
         i=(i+1)%scenes.length;
         front.src=scenes[(i+1)%scenes.length]; front.load();
         fading=false;
-      },1700);
+      },1500);
     },6200);
   }
 
-  // Hover to play, without the judder.
-  //
-  // The old version called play() on mouseenter and changed the visuals at the same
-  // moment. With preload="none" the file had not been fetched yet, so the first
-  // second was decode stutter and it read as shaking. Now the poster is a separate
-  // still layer that is always sharp, and the video only crossfades in once the
-  // browser reports it can play through. Nothing moves until it can move smoothly.
+  // Hover to play without judder: the poster is a separate always-sharp layer and
+  // the video only crossfades in once it can genuinely play through.
   [].forEach.call(document.querySelectorAll('[data-hover]'),function(v){
-    var card=v.closest('.card'), ready=false, want=false;
-
-    // build the still + spinner layers from the poster already on the video
+    var card=v.closest('.card'), frame=v.parentElement, ready=false, want=false;
     var still=document.createElement('div');
     still.className='still';
     still.style.backgroundImage='url("'+v.getAttribute('poster')+'")';
-    card.insertBefore(still,v);
-    var wait=document.createElement('div'); wait.className='wait'; card.appendChild(wait);
+    frame.insertBefore(still,v);
+    var wait=document.createElement('div'); wait.className='wait'; frame.appendChild(wait);
 
     function begin(){
       if(!want) return;
@@ -461,12 +555,10 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
       ready=true;
       var p=v.play();
       if(p&&p.catch) p.catch(function(){});
-      // let the first frame actually paint before revealing it
       requestAnimationFrame(function(){ requestAnimationFrame(function(){
         if(want) card.classList.add('playing');
       });});
     }
-
     function enter(){
       want=true;
       if(ready){ begin(); return; }
@@ -478,10 +570,8 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
     function leave(){
       want=false;
       card.classList.remove('playing','loading');
-      // pause after the fade so it does not freeze mid-dissolve
       setTimeout(function(){ if(!want) v.pause(); },500);
     }
-
     card.addEventListener('mouseenter',enter);
     card.addEventListener('mouseleave',leave);
     card.addEventListener('focusin',enter);
@@ -489,8 +579,7 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
     card.addEventListener('click',function(){ want?leave():enter(); });
   });
 
-  // Sticky mobile CTA: appear once the hero is behind you, hide again over the
-  // contact section so it never covers the thing it is pointing at.
+  // Sticky mobile CTA: appears after the hero, hides over the contact section.
   var bar=document.getElementById('stickybar'), hero=document.querySelector('.hero'),
       contact=document.getElementById('contact');
   if(bar&&hero){
@@ -504,8 +593,7 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
     sync();
   }
 
-  // Accessible names for the videos. There are no <img> tags on this page, so the
-  // "alt text" checklist item lands on aria-label here.
+  // Accessible names for the videos.
   var labels={'hero-loop':'Rotating scenes from property walkthrough films',
               'showreel':'Full walkthrough film of a five bedroom pool home on the Gulf coast',
               'photo-comes-alive':'A still listing photo turning into a moving walkthrough shot',
@@ -521,7 +609,7 @@ body::after{content:"";position:fixed;inset:-150%;z-index:9999;pointer-events:no
     v.setAttribute('aria-hidden','true');
   });
 
-  // phone reveal, unchanged
+  // phone reveal
   var el=document.getElementById('tel-reveal'),done=false;
   el.addEventListener('click',function(e){ if(done)return; e.preventDefault();
     el.textContent='('+el.dataset.a+') '+el.dataset.b+'-'+el.dataset.c;
