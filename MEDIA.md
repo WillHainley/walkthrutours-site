@@ -3,6 +3,24 @@
 All site video is local and committed — this repo IS the website, so its media travels
 with it. Do not copy the `walkthru-tours` gitignore rules here.
 
+## 2026-09 quality rebuild (supersedes the table + re-encode rule below)
+
+Will's verdict: the crushed encodes read as low quality, hero especially. The old
+weight rules assumed everything loaded on arrival; the current page only loads the
+HERO on arrival — grid cards are hover-loaded (`preload="none"`), feature films are
+click-to-play. So:
+
+- **Hero = ONE continuous reel** (`hero-reel.mp4`, 1080p CRF 23, ~21s, baked
+  crossfades, fade-to-black loop point) + `hero-reel-720.mp4` (CRF 25) that JS picks
+  on small screens / save-data. The seven-file rotation is gone.
+- **Everything else encodes at CRF 24–25, 1920px, from the TRUE masters**
+  (Downloads\*-WalkThru-Tour.mp4, FLOW-v8, Sundowner). Cut points come from
+  OneDrive\WalkThru-Tours\Scene-Catalog. Rebuild everything with
+  scratchpad build_site_media.py (also in git history of this note).
+- Posters: `-q:v 3` from the new files.
+- The old `hero-01..06.mp4` files are unused; kept only so old cached HTML keeps
+  working, delete after a few weeks.
+
 Masters live in the `videos-v1` release on `walkthru-tours` (they are 12–205MB, over
 GitHub's 100MB file cap, so they are never committed):
 
