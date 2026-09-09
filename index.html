@@ -218,11 +218,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 
 /* ---------- process + pricing: rule-lined rows ---------- */
 .rows{border-top:1px solid var(--line);margin-top:clamp(1.4rem,2.6vw,2.2rem);}
-.row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:1rem 2.4rem;padding:1.3rem 0;border-bottom:1px solid var(--line);}
+.row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:1rem 2rem;padding:1.3rem 0;border-bottom:1px solid var(--line);}
 .row h3{font-size:clamp(1.3rem,1rem + 1vw,1.8rem);line-height:1.15;}
 .row h3 small{display:block;font-family:var(--font-b);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ice);margin-bottom:.45rem;}
 .row p{margin:0;color:var(--cream-70);line-height:1.65;font-size:.96rem;max-width:58ch;}
 @media (max-width:640px){ .row{grid-template-columns:1fr;gap:.6rem;} }
+.hp{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,4vw,4rem);align-items:start;}
+@media (max-width:900px){ .hp{grid-template-columns:1fr;} }
+.hp-lab{margin:0;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cream-50);}
+.hp .rows,.hp .tiers{margin-top:.8rem;}
+.quote{font-family:var(--font-b);font-size:.8rem;font-weight:600;letter-spacing:.04em;text-decoration:none;
+  color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:.15rem;white-space:nowrap;}
+.quote:hover{color:#f0cc74;border-color:#f0cc74;}
 .tiers{border-top:1px solid var(--line);margin-top:clamp(1.4rem,2.6vw,2.2rem);}
 .tier{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;align-items:baseline;padding:1.1rem 0;border-bottom:1px solid var(--line);}
 .tier .n{font-size:1.02rem;}
@@ -307,8 +314,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       <li data-for="how-it-looks"><a href="#how-it-looks"><span>Before / after</span><i></i></a></li>
       <li data-for="work"><a href="#work"><span>The films</span><i></i></a></li>
       <li data-for="land"><a href="#land"><span>Land</span><i></i></a></li>
-      <li data-for="how"><a href="#how"><span>How it works</span><i></i></a></li>
-      <li data-for="pricing"><a href="#pricing"><span>Pricing</span><i></i></a></li>
+      <li data-for="how"><a href="#how"><span>Process and pricing</span><i></i></a></li>
       <li data-for="contact"><a href="#contact"><span>Contact</span><i></i></a></li>
     </ul>
 
@@ -416,34 +422,33 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <section class="sec" id="how">
       <div class="sec-head">
         <div>
-          <p class="eyebrow">How it works</p>
-          <h2>You only do the first step.</h2>
-        </div>
-      </div>
-      <div class="rows">
-        <div class="row"><h3><small>Step one</small>Send us your listing</h3><p>Send your listing link or a folder of photos. There is nothing to schedule and no one visits the property.</p></div>
-        <div class="row"><h3><small>Step two</small>We build the film</h3><p>We walk the rooms in the order a guest would. Then we color grade it, add music and send it to you first. Changes are free until you are happy.</p></div>
-        <div class="row"><h3><small>Step three</small>Post it anywhere</h3><p>Use it on Airbnb, VRBO, your website and social media. One file works everywhere.</p></div>
-      </div>
-    </section>
-
-    <section class="sec" id="pricing">
-      <div class="sec-head">
-        <div>
-          <p class="eyebrow">Pricing</p>
-          <h2>Pay once. Own it forever.</h2>
+          <p class="eyebrow">How it works and what it costs</p>
+          <h2>You only do the first step. Pay once and own the film.</h2>
         </div>
         <p class="lede">Pay after you watch the film and love it. No subscription. No hosting
         fee. No watermark.</p>
       </div>
-      <div class="tiers">
-        <div class="tier"><span class="n">Rental <span>1 to 2 bedrooms</span></span><span class="p">$99</span></div>
-        <div class="tier"><span class="n">Rental <span>3 to 4 bedrooms</span></span><span class="p">$149</span></div>
-        <div class="tier"><span class="n">Rental <span>5 or more bedrooms</span></span><span class="p">$199</span></div>
-        <div class="tier"><span class="n">Wedding and event venues <span>quoted after we see the space</span></span><span class="p">from $299</span></div>
-        <div class="tier"><span class="n">Land <span>annotated aerial film, per listing</span></span><span class="p">$300</span></div>
+      <div class="hp">
+        <div>
+          <p class="hp-lab">The process</p>
+          <div class="rows">
+            <div class="row"><h3><small>Step one</small>Send us your listing</h3><p>Send your listing link or a folder of photos. There is nothing to schedule and no one visits the property.</p></div>
+            <div class="row"><h3><small>Step two</small>We build the film</h3><p>We walk the rooms in the order a guest would. Then we color grade it, add music and send it to you first. Changes are free until you are happy.</p></div>
+            <div class="row"><h3><small>Step three</small>Post it anywhere</h3><p>Use it on Airbnb, VRBO, your website and social media. One file works everywhere.</p></div>
+          </div>
+        </div>
+        <div>
+          <p class="hp-lab">Pricing</p>
+          <div class="tiers">
+            <div class="tier"><span class="n">Rental <span>1 to 2 bedrooms</span></span><span class="p">$99</span></div>
+            <div class="tier"><span class="n">Rental <span>3 to 4 bedrooms</span></span><span class="p">$149</span></div>
+            <div class="tier"><span class="n">Rental <span>5 or more bedrooms</span></span><span class="p">$199</span></div>
+            <div class="tier"><span class="n">Land <span>annotated aerial film, per listing</span></span><span class="p">$300</span></div>
+            <div class="tier"><span class="n">Venues, golf clubs and estates <span>priced by the space</span></span><span class="p"><a class="quote" href="#contact">Get a quote</a></span></div>
+          </div>
+          <p class="note">Have several properties? Ask about a group rate.</p>
+        </div>
       </div>
-      <p class="note">Have several properties? Ask about a group rate. Golf clubs and estates are quoted the same way as venues.</p>
     </section>
 
     <section class="contact" id="contact">
