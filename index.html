@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>WalkThru Tours · Show people around before they book</title>
-<meta name="description" content="Walkthrough tours for vacation rentals, wedding venues, golf clubs and land, built from the photos you already have. Pay once, no subscription.">
+<meta name="description" content="Cinematic walkthrough films for vacation rentals, wedding venues, golf clubs and land, built from the photos you already have. Pay once, no subscription.">
 <meta property="og:title" content="WalkThru Tours">
 <meta property="og:description" content="You send the photos you already have. We turn them into a walkthrough film, usually back the next day. Pay once, no subscription.">
 <meta property="og:image" content="./media/hero-loop-poster.jpg">
@@ -13,10 +13,6 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://walkthrutours.com/">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-
-<!-- Structured data. Deliberately NOT LocalBusiness: this is a remote service with no
-     storefront and no service radius. Organization + Service with areaServed =
-     United States is the correct shape for work delivered remotely. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -28,7 +24,7 @@
       "url": "https://walkthrutours.com/",
       "logo": "https://walkthrutours.com/favicon.svg",
       "image": "https://walkthrutours.com/media/hero-loop-poster.jpg",
-      "description": "Walkthrough tour films for vacation rentals, wedding venues, golf clubs and land, built from photos the owner already has.",
+      "description": "Cinematic walkthrough films for vacation rentals, wedding venues, golf clubs and land, built from photos the owner already has.",
       "founder": { "@type": "Person", "name": "Will Hainley" },
       "email": "willhainley@walkthrutours.com",
       "sameAs": ["https://www.instagram.com/walkthrutours/","https://www.facebook.com/profile.php?id=61593848542018"],
@@ -47,10 +43,6 @@
       "serviceType": "Property video and virtual tour production",
       "provider": { "@id": "https://walkthrutours.com/#org" },
       "areaServed": { "@type": "Country", "name": "United States" },
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Vacation rental owners, wedding venues, golf clubs, estates and land brokers"
-      },
       "description": "Send the photos you already have. We build a walkthrough film of the property, usually back the next day. No site visit and no camera crew.",
       "offers": [
         { "@type": "Offer", "name": "1 to 2 bedrooms", "price": "99", "priceCurrency": "USD" },
@@ -68,207 +60,204 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================================
-   WalkThru Tours — brand cut. Shipped 2026-09, replacing the dark cinema layout
-   (git history has it). This is the SAME design system as the delivered product:
-   the tour pages, the film title cards and the reels all use navy #0c1826, warm
-   cream, brass-gold and a serif display face. The site now matches the thing it
-   sells. Structure: warm cream ground, navy full-width bands for the moments that
-   matter (hero, land, contact), media always framed — rounded, shadowed, never
-   full-bleed — so every film reads as a crafted object instead of wallpaper.
+   WalkThru Tours — cinema editorial (2026-09-08). Third cut. The rule this time:
+   the films carry the page. Every section is either footage at full width or
+   the fewest words that let the footage sell. Square edges, two grounds (deep
+   ink, warm cream), one accent (brass), one display face. No cards for the
+   sake of cards, no FAQ, no chrome.
    ========================================================================== */
 :root{
-  --navy:#0c1826;
-  --navy-2:#13233a;
-  --cream:#f6f3ec;
-  --paper:#fffdf8;
-  --ink:#1c2733;
-  --dim:#68727f;
-  --dim-on-navy:#9fb2c5;
-  --gold:#b78a34;          /* readable on cream */
-  --gold-lt:#e4bc60;       /* the film-title gold, for navy ground */
-  --line:#e6e0d2;
+  --ink:#070d16;
+  --ink-2:#0c1826;
+  --cream:#f4f0e8;
+  --paper:#fbf9f4;
+  --text:#1b2530;
+  --dim:#6a7480;
+  --dim-ink:#93a1b1;
+  --gold:#b98c33;
+  --gold-lt:#e4bc60;
+  --line:#e3ddd0;
+  --line-ink:rgba(255,255,255,.10);
   --font-d:"Newsreader",Georgia,serif;
   --font-b:"Instrument Sans",system-ui,sans-serif;
-  --gutter:clamp(1.1rem,4vw,3rem);
+  --gutter:clamp(1.2rem,5vw,4rem);
   --ease:cubic-bezier(.16,1,.3,1);
-  /* square edges everywhere — Will killed the rounded corners 2026-09 */
-  --r:0px;
-  --r-media:0px;
-  --shadow:0 18px 44px -16px rgba(12,24,38,.28);
-  --shadow-deep:0 26px 60px -20px rgba(0,0,0,.55);
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-html,body{margin:0;padding:0;background:var(--cream);color:var(--ink);
+html,body{margin:0;padding:0;background:var(--cream);color:var(--text);
   font-family:var(--font-b);-webkit-font-smoothing:antialiased;overflow-x:clip;}
 img,video{display:block;max-width:100%;}
 a{color:inherit;}
-::selection{background:var(--gold-lt);color:var(--navy);}
-.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter);}
+::selection{background:var(--gold-lt);color:var(--ink);}
+h1,h2,h3{font-family:var(--font-d);font-weight:400;letter-spacing:-.015em;margin:0;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--gutter);}
+.eyebrow{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;font-weight:600;
+  color:var(--gold);margin:0 0 1rem;}
+.on-ink .eyebrow{color:var(--gold-lt);}
+.lede{color:var(--dim);font-size:1.08rem;line-height:1.65;max-width:52ch;margin:0;}
+.on-ink .lede{color:var(--dim-ink);}
+h2{font-size:clamp(2.2rem,1.3rem + 3.4vw,4.4rem);line-height:1.02;}
 
-/* ---------- nav: transparent over the full-bleed hero, cream once scrolled ---------- */
+/* ---------- nav ---------- */
 .nav{position:fixed;top:0;left:0;right:0;z-index:50;color:var(--cream);
-  background:linear-gradient(180deg,rgba(6,12,20,.55),transparent);
+  background:linear-gradient(180deg,rgba(7,13,22,.6),transparent);
   transition:background .35s,color .35s,box-shadow .35s;}
-.nav.scrolled{color:var(--navy);background:rgba(246,243,236,.92);
+.nav.scrolled{color:var(--ink);background:rgba(244,240,232,.94);
   backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line);}
 .nav-in{display:flex;justify-content:space-between;align-items:center;
-  max-width:1180px;margin:0 auto;padding:.8rem var(--gutter);}
+  max-width:1280px;margin:0 auto;padding:.9rem var(--gutter);}
 .brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;
-  font-family:var(--font-d);font-size:1.25rem;color:inherit;}
-.brand svg{width:34px;height:34px;}
-.nav nav{display:flex;gap:1.5rem;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;}
+  font-family:var(--font-d);font-size:1.3rem;color:inherit;}
+.brand svg{width:32px;height:32px;}
+.nav nav{display:flex;gap:1.7rem;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;}
 .nav nav a{text-decoration:none;color:inherit;opacity:.78;transition:opacity .2s;}
 .nav nav a:hover{opacity:1;}
-@media (max-width:560px){
-  .brand{font-size:1.05rem;gap:.5rem;}
-  .brand svg{width:28px;height:28px;}
-  .nav nav{gap:.9rem;font-size:.74rem;}
-  .nav nav a.hide-s{display:none;}
-}
-.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.2rem;margin:0;}
+@media (max-width:560px){ .brand{font-size:1.05rem;} .brand svg{width:26px;height:26px;}
+  .nav nav{gap:.9rem;font-size:.7rem;} .nav nav a.hide-s{display:none;} }
 
-/* ---------- hero: the film IS the page — full viewport, type over footage ---------- */
-.hero{position:relative;height:100svh;min-height:600px;color:var(--cream);
-  display:flex;align-items:flex-end;isolation:isolate;overflow:hidden;
-  background:var(--navy);}
-.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;}
+/* ---------- hero ---------- */
+.hero{position:relative;height:100svh;min-height:620px;color:var(--cream);
+  display:flex;align-items:flex-end;isolation:isolate;overflow:hidden;background:var(--ink);}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+  will-change:transform;}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;
-  background:radial-gradient(120% 85% at 50% 35%,transparent 40%,rgba(6,12,20,.45) 100%),
-             linear-gradient(180deg,rgba(6,12,20,.30) 0%,transparent 30%,transparent 46%,rgba(6,12,20,.88) 100%);}
-.hero-in{width:100%;max-width:1180px;margin:0 auto;
-  padding:0 var(--gutter) clamp(2.2rem,5vw,3.6rem);}
-.eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-lt);
-  margin:0 0 1.1rem;font-weight:600;}
-.hero h1{font-family:var(--font-d);font-weight:400;margin:0 0 1.2rem;
-  font-size:clamp(2.8rem,1.4rem + 6vw,6.4rem);line-height:1.02;letter-spacing:-.018em;
-  max-width:15ch;text-shadow:0 2px 30px rgba(6,12,20,.55);}
+  background:linear-gradient(180deg,rgba(7,13,22,.28) 0%,transparent 32%,transparent 48%,rgba(7,13,22,.90) 100%);}
+.hero-in{width:100%;max-width:1280px;margin:0 auto;padding:0 var(--gutter) clamp(2.2rem,5vw,3.8rem);}
+.hero h1{font-size:clamp(3rem,1.2rem + 6.6vw,7.2rem);line-height:.98;max-width:14ch;
+  margin:0 0 1.3rem;text-shadow:0 2px 34px rgba(7,13,22,.5);}
 .hero h1 em{font-style:italic;color:var(--gold-lt);}
-.hero-sub{margin:0 0 1.8rem;color:#e6e2d8;font-size:1.05rem;line-height:1.6;max-width:38ch;
-  text-shadow:0 1px 18px rgba(6,12,20,.6);}
+.hero-row{display:flex;flex-wrap:wrap;gap:1.4rem 2.6rem;align-items:flex-end;justify-content:space-between;}
+.hero-sub{margin:0;color:#e7e2d8;font-size:1.05rem;line-height:1.6;max-width:40ch;
+  text-shadow:0 1px 18px rgba(7,13,22,.6);}
 .cta{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
-  background:linear-gradient(180deg,var(--gold-lt),#d3a94e);color:#231b0e;
-  padding:.95rem 1.9rem;font-weight:600;font-size:.95rem;border-radius:999px;
-  box-shadow:0 12px 28px -10px rgba(228,188,96,.55);
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease);}
-.cta:hover{transform:translateY(-2px);box-shadow:0 18px 38px -12px rgba(228,188,96,.75);}
-.cta-ghost{display:inline-flex;align-items:center;margin-left:1.1rem;color:var(--dim-on-navy);
-  font-size:.9rem;text-decoration:none;border-bottom:1px solid rgba(159,178,197,.4);
-  padding-bottom:2px;transition:color .2s;}
-.cta-ghost:hover{color:var(--cream);}
-.hero-proof{display:flex;gap:2.4rem;margin-top:2.2rem;flex-wrap:wrap;}
-.proof b{display:block;font-family:var(--font-d);font-size:1.5rem;color:var(--cream);font-weight:500;}
-.proof span{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#b9c4d2;}
+  background:var(--gold-lt);color:#22190c;padding:1rem 1.9rem;font-weight:600;font-size:.92rem;
+  letter-spacing:.02em;transition:transform .3s var(--ease),background .2s;}
+.cta:hover{transform:translateY(-2px);background:#f0cc74;}
+.cta.ghost{background:transparent;color:inherit;border:1px solid rgba(255,255,255,.4);}
+.cta.ghost:hover{background:rgba(255,255,255,.08);}
+.cta-row{display:flex;flex-wrap:wrap;gap:.8rem;}
+.scrollcue{position:absolute;left:50%;bottom:1.1rem;transform:translateX(-50%);
+  width:1px;height:38px;background:linear-gradient(180deg,transparent,rgba(244,240,232,.8));
+  animation:cue 2.2s var(--ease) infinite;}
+@keyframes cue{0%{transform:translate(-50%,-8px);opacity:0}30%{opacity:1}100%{transform:translate(-50%,10px);opacity:0}}
+@media (max-width:820px){ .scrollcue{display:none;} }
 
-/* ---------- section scaffolding ---------- */
-section{padding:clamp(3.4rem,7vw,6rem) 0;}
-.sec-head{max-width:760px;margin-bottom:clamp(1.8rem,4vw,3rem);}
-.sec-head.center{margin-left:auto;margin-right:auto;text-align:center;}
-h2{font-family:var(--font-d);font-weight:400;letter-spacing:-.01em;color:var(--navy);
-  font-size:clamp(1.9rem,1.2rem + 2.6vw,3.2rem);line-height:1.08;margin:0 0 .8rem;}
-.sec-head p{margin:0;color:var(--dim);line-height:1.65;font-size:1.02rem;}
-.rule{width:56px;height:3px;background:var(--gold-lt);border-radius:2px;margin:0 0 1.1rem;}
-.center .rule{margin-left:auto;margin-right:auto;}
+/* ---------- before / after slider ---------- */
+.ba-sec{background:var(--ink);color:var(--cream);padding:clamp(4rem,8vw,7rem) 0;}
+.ba-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2rem;
+  align-items:end;margin-bottom:clamp(1.8rem,3.5vw,3rem);}
+@media (max-width:820px){ .ba-head{grid-template-columns:1fr;} }
+.ba{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;
+  user-select:none;touch-action:none;cursor:ew-resize;}
+.ba video,.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.ba .before{clip-path:inset(0 calc(100% - var(--x,50%)) 0 0);z-index:2;}
+.ba .handle{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;
+  background:var(--gold-lt);z-index:3;transform:translateX(-1px);}
+.ba .knob{position:absolute;top:50%;left:var(--x,50%);transform:translate(-50%,-50%);z-index:4;
+  width:52px;height:52px;border:2px solid var(--gold-lt);background:rgba(7,13,22,.55);
+  display:flex;align-items:center;justify-content:center;gap:6px;backdrop-filter:blur(4px);}
+.ba .knob i{display:block;width:0;height:0;border:6px solid transparent;}
+.ba .knob i.l{border-right-color:var(--gold-lt);margin-left:-6px;}
+.ba .knob i.r{border-left-color:var(--gold-lt);margin-right:-6px;}
+.ba .lab{position:absolute;bottom:1rem;z-index:5;font-size:.7rem;letter-spacing:.22em;
+  text-transform:uppercase;padding:.5rem .85rem;background:rgba(7,13,22,.7);color:var(--cream);}
+.ba .lab.l{left:1rem;} .ba .lab.r{right:1rem;}
+.ba-note{margin:1rem 0 0;color:var(--dim-ink);font-size:.86rem;letter-spacing:.06em;}
 
-/* ---------- feature film ---------- */
-.feature{border-radius:var(--r-media);overflow:hidden;background:#000;box-shadow:var(--shadow);margin:0;}
-.feature video{width:100%;aspect-ratio:16/9;object-fit:cover;}
-.feature figcaption{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
-  padding:.9rem 1.2rem;font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--dim);background:var(--paper);}
-
-/* ---------- work grid: white cards, captions under the media ---------- */
-.grid{display:grid;gap:clamp(16px,2.4vw,28px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  margin-top:clamp(16px,2.4vw,28px);}
-.card{position:relative;margin:0;background:var(--paper);border-radius:var(--r-media);
-  overflow:hidden;box-shadow:var(--shadow);cursor:pointer;
-  transition:transform .45s var(--ease),box-shadow .45s var(--ease);}
-.card:hover{transform:translateY(-5px);box-shadow:0 26px 56px -18px rgba(12,24,38,.38);}
-.card .frame{position:relative;background:#000;height:clamp(240px,34vw,340px);}
-.card.card-tall .frame{height:clamp(380px,46vw,520px);}
-.card .still{position:absolute;inset:0;background-size:cover;background-position:center;
-  transition:filter .5s var(--ease);filter:saturate(.96);}
-.card.card-tall .still{background-size:contain;background-repeat:no-repeat;background-position:center;}
-.card:hover .still{filter:saturate(1.05);}
-.card video{position:relative;width:100%;height:100%;object-fit:cover;opacity:0;
-  transition:opacity .5s var(--ease);}
-.card.card-tall video{object-fit:contain;}
-.card.playing video{opacity:1;}
-.card .wait{position:absolute;top:.9rem;right:.9rem;width:20px;height:20px;border-radius:50%;
+/* ---------- film strip ---------- */
+.work{padding:clamp(4rem,8vw,7rem) 0;}
+.work-head{display:flex;justify-content:space-between;align-items:end;gap:2rem;
+  margin-bottom:clamp(1.6rem,3vw,2.6rem);flex-wrap:wrap;}
+.strip-wrap{position:relative;}
+.strip{display:flex;gap:clamp(12px,1.6vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:0 var(--gutter) 1.2rem;scroll-padding-left:var(--gutter);
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.strip::-webkit-scrollbar{display:none;}
+.film{flex:0 0 min(78vw,980px);scroll-snap-align:start;position:relative;margin:0;
+  background:transparent;cursor:pointer;}
+.film .frame{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;}
+.film.tall .frame{aspect-ratio:16/9;}
+.film .still{position:absolute;inset:0;background-size:cover;background-position:center;
+  transition:filter .6s var(--ease),transform 1.2s var(--ease);}
+.film.tall .still{background-size:contain;background-repeat:no-repeat;background-color:#000;}
+.film:hover .still{transform:scale(1.025);}
+.film video{position:relative;width:100%;height:100%;object-fit:cover;opacity:0;
+  transition:opacity .6s var(--ease);}
+.film.tall video{object-fit:contain;}
+.film.playing video{opacity:1;}
+.film .wait{position:absolute;top:1rem;right:1rem;width:20px;height:20px;border-radius:50%;
   border:2px solid rgba(255,255,255,.3);border-top-color:var(--gold-lt);opacity:0;
   transition:opacity .3s;pointer-events:none;z-index:2;}
-.card.loading .wait{opacity:1;animation:spin .8s linear infinite;}
+.film.loading .wait{opacity:1;animation:spin .8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
-.card figcaption{padding:1.1rem 1.3rem 1.3rem;border-top:3px solid var(--gold-lt);}
-.card .t{display:block;font-family:var(--font-d);font-size:1.3rem;color:var(--navy);line-height:1.15;}
-.card .s{display:block;color:var(--gold);font-size:.72rem;letter-spacing:.16em;
-  text-transform:uppercase;margin-top:.4rem;font-weight:600;}
-.card .n{display:block;color:var(--dim);font-size:.92rem;line-height:1.55;margin-top:.55rem;}
-.hint{margin:.9rem 0 0;text-align:center;color:var(--dim);font-size:.8rem;letter-spacing:.1em;
-  text-transform:uppercase;}
+.film figcaption{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+  padding:.9rem 0 0;color:var(--text);}
+.film .t{font-family:var(--font-d);font-size:1.35rem;}
+.film .s{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+.strip-nav{display:flex;gap:.5rem;}
+.strip-nav button{width:46px;height:46px;border:1px solid var(--line);background:var(--paper);
+  color:var(--text);cursor:pointer;font-size:1.1rem;transition:background .2s,border-color .2s;}
+.strip-nav button:hover{border-color:var(--gold);background:#fff;}
+.hint{margin:.6rem 0 0;padding:0 var(--gutter);color:var(--dim);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;}
+@media (max-width:640px){ .film{flex-basis:88vw;} }
 
-/* ---------- land: navy band, film + what's included ---------- */
-.land{background:linear-gradient(165deg,var(--navy) 0%,var(--navy-2) 100%);color:var(--cream);}
-.land h2{color:var(--cream);}
-.land .sec-head p{color:var(--dim-on-navy);}
+/* ---------- land ---------- */
+.land{background:var(--ink-2);color:var(--cream);padding:clamp(4rem,8vw,7rem) 0;}
 .land-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
-  gap:clamp(1.8rem,3.6vw,3rem);align-items:start;}
-.land-film{border-radius:var(--r-media);overflow:hidden;background:#000;box-shadow:var(--shadow-deep);margin:0;}
-.land-film video{width:100%;aspect-ratio:16/9;object-fit:cover;}
-.land-film figcaption{padding:.8rem 1.1rem;font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--dim-on-navy);background:rgba(255,255,255,.04);}
-.land-list{list-style:none;margin:0 0 1.6rem;padding:0;display:grid;gap:.95rem;}
-.land-list li{position:relative;padding-left:1.35rem;line-height:1.55;
-  color:var(--cream);font-size:.98rem;}
-.land-list li::before{content:"";position:absolute;left:0;top:.5rem;width:8px;height:8px;
-  border-radius:50%;background:var(--gold-lt);}
-.land-list li span{color:var(--dim-on-navy);}
-.land-price{font-family:var(--font-d);font-size:2.2rem;color:var(--gold-lt);margin:0 0 .2rem;}
-.land-price small{font-family:var(--font-b);font-size:.78rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--dim-on-navy);margin-left:.6rem;}
-.land-fine{color:var(--dim-on-navy);font-size:.82rem;line-height:1.6;margin:1.4rem 0 0;max-width:52ch;}
+  gap:clamp(2rem,4vw,3.6rem);align-items:center;}
 @media (max-width:860px){ .land-grid{grid-template-columns:1fr;} }
+.land-media{margin:0;background:#000;}
+.land-media img,.land-media video{width:100%;aspect-ratio:16/10;object-fit:cover;}
+.land-media figcaption{padding:.8rem 0 0;font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim-ink);}
+.land-price{font-family:var(--font-d);font-size:clamp(2.6rem,2rem + 2vw,3.6rem);color:var(--gold-lt);
+  line-height:1;margin:1.4rem 0 .3rem;}
+.land-price small{font-family:var(--font-b);font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim-ink);margin-left:.7rem;}
+.land-list{list-style:none;margin:1.4rem 0 1.8rem;padding:0;display:grid;gap:.75rem;}
+.land-list li{position:relative;padding-left:1.4rem;line-height:1.55;font-size:.98rem;}
+.land-list li::before{content:"";position:absolute;left:0;top:.55rem;width:9px;height:2px;background:var(--gold-lt);}
+.land-list li span{color:var(--dim-ink);}
+.fine{color:var(--dim-ink);font-size:.8rem;line-height:1.6;margin:1.4rem 0 0;max-width:52ch;}
 
-/* ---------- steps ---------- */
-.steps{display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
-.step{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);
-  padding:clamp(1.6rem,3vw,2.4rem);border-top:3px solid var(--gold-lt);
-  transition:transform .4s var(--ease);}
-.step:hover{transform:translateY(-4px);}
-.step .num{font-family:var(--font-d);font-size:2.6rem;line-height:1;color:var(--gold-lt);}
-.step h3{font-family:var(--font-d);font-weight:500;font-size:1.35rem;margin:.7rem 0 .5rem;color:var(--navy);}
-.step p{margin:0;color:var(--dim);line-height:1.65;font-size:.96rem;}
+/* ---------- process: numbered timeline ---------- */
+.how{padding:clamp(4rem,8vw,7rem) 0;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.4rem,3vw,3rem);
+  margin-top:clamp(1.8rem,3.5vw,3rem);border-top:1px solid var(--line);}
+@media (max-width:760px){ .steps{grid-template-columns:1fr;} }
+.step{padding-top:1.6rem;position:relative;}
+.step::before{content:"";position:absolute;top:-1px;left:0;width:48px;height:2px;background:var(--gold-lt);}
+.step .num{font-family:var(--font-d);font-size:1rem;color:var(--gold);letter-spacing:.1em;}
+.step h3{font-size:1.6rem;margin:.6rem 0 .6rem;}
+.step p{margin:0;color:var(--dim);line-height:1.65;font-size:.98rem;}
 
-/* ---------- pricing ---------- */
-.tiers{display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fit,minmax(210px,1fr));}
-.tier{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);
-  border-top:3px solid var(--gold-lt);padding:clamp(1.6rem,3vw,2.2rem);text-align:center;
-  transition:transform .4s var(--ease);}
-.tier:hover{transform:translateY(-4px);}
-.tier .p{display:block;font-family:var(--font-d);color:var(--navy);
-  font-size:clamp(2.1rem,1.5rem + 1.6vw,2.9rem);line-height:1;}
-.tier .s{display:block;color:var(--dim);font-size:.78rem;letter-spacing:.12em;
-  text-transform:uppercase;margin-top:.65rem;}
-.note{max-width:68ch;margin:clamp(1.6rem,3vw,2.4rem) auto 0;color:var(--dim);
-  line-height:1.7;font-size:.95rem;text-align:center;}
+/* ---------- pricing: one clean row ---------- */
+.pricing{padding:0 0 clamp(4rem,8vw,7rem);}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:clamp(1.8rem,3.5vw,3rem);}
+.tier{padding:1.8rem 1.4rem;border-right:1px solid var(--line);}
+.tier:last-child{border-right:0;}
+.tier .p{display:block;font-family:var(--font-d);font-size:clamp(2rem,1.4rem + 1.6vw,2.8rem);line-height:1;color:var(--ink);}
+.tier .s{display:block;color:var(--dim);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;margin-top:.7rem;}
+@media (max-width:640px){ .tier{border-right:0;border-bottom:1px solid var(--line);} .tier:last-child{border-bottom:0;} }
+.note{max-width:64ch;margin:1.6rem 0 0;color:var(--dim);line-height:1.7;font-size:.95rem;}
 
-/* ---------- contact: navy closer ---------- */
-.contact{background:linear-gradient(165deg,var(--navy) 0%,var(--navy-2) 100%);color:var(--cream);
-  text-align:center;}
-.contact h2{color:var(--cream);}
-.contact>.wrap>p{color:var(--dim-on-navy);margin:0 auto 2rem;max-width:46ch;line-height:1.65;}
-.mail{display:inline-block;font-family:var(--font-d);font-size:clamp(1.15rem,.9rem + 1.2vw,1.8rem);
-  color:var(--cream);text-decoration:none;border-bottom:1px solid var(--gold-lt);
-  padding-bottom:.25rem;transition:color .25s;}
+/* ---------- contact ---------- */
+.contact{background:var(--ink);color:var(--cream);padding:clamp(5rem,10vw,8rem) 0;text-align:center;}
+.contact h2{font-size:clamp(2.4rem,1.4rem + 4vw,5rem);}
+.contact p{color:var(--dim-ink);margin:1.2rem auto 2.2rem;max-width:46ch;line-height:1.65;}
+.mail{display:inline-block;font-family:var(--font-d);font-size:clamp(1.2rem,.9rem + 1.4vw,2rem);
+  color:var(--cream);text-decoration:none;border-bottom:1px solid var(--gold-lt);padding-bottom:.25rem;
+  transition:color .25s;}
 .mail:hover{color:var(--gold-lt);}
-.tel{display:block;margin-top:1.3rem;color:var(--dim-on-navy);font-size:.92rem;text-decoration:none;}
-.contact .mark-lg{width:56px;height:56px;margin:0 auto 1.4rem;opacity:.9;}
+.tel{display:block;margin-top:1.3rem;color:var(--dim-ink);font-size:.9rem;text-decoration:none;}
+.mark-lg{width:54px;height:54px;margin:0 auto 1.6rem;}
 
 /* ---------- footer ---------- */
-.foot{background:var(--navy);color:var(--dim-on-navy);border-top:1px solid rgba(255,255,255,.08);}
-.foot-in{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
-  max-width:1180px;margin:0 auto;padding:1.5rem var(--gutter);
-  font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;}
+.foot{background:var(--ink);color:var(--dim-ink);border-top:1px solid var(--line-ink);}
+.foot-in{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;max-width:1280px;
+  margin:0 auto;padding:1.5rem var(--gutter);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;}
 .foot a{text-decoration:none;transition:color .2s;}
 .foot a:hover{color:var(--gold-lt);}
 .foot-social{display:flex;gap:1.2rem;}
@@ -276,21 +265,16 @@ h2{font-family:var(--font-d);font-weight:400;letter-spacing:-.01em;color:var(--n
 /* ---------- sticky mobile CTA ---------- */
 .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
   padding:.7rem clamp(.8rem,4vw,1.2rem) calc(.7rem + env(safe-area-inset-bottom,0px));
-  background:rgba(246,243,236,.92);backdrop-filter:blur(14px);border-top:1px solid var(--line);
+  background:rgba(244,240,232,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line);
   transform:translateY(110%);transition:transform .35s var(--ease);}
 .stickybar.on{transform:none;}
-.stickybar a{display:block;text-align:center;text-decoration:none;border-radius:999px;
-  background:linear-gradient(180deg,var(--gold-lt),#d3a94e);color:#231b0e;
-  font-weight:600;padding:.9rem 1.2rem;}
+.stickybar a{display:block;text-align:center;text-decoration:none;background:var(--gold-lt);
+  color:#22190c;font-weight:600;padding:.95rem 1.2rem;}
 @media (max-width:820px){ .stickybar{display:block;} body{padding-bottom:4.6rem;} }
 
-/* ---------- scroll reveal: sections rise gently as they enter ---------- */
-.rv{opacity:0;transform:translateY(26px);
-  transition:opacity .7s var(--ease),transform .7s var(--ease);}
+/* ---------- reveal (fail-open) ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
 .rv.on{opacity:1;transform:none;}
-.rv:nth-child(2){transition-delay:.07s;} .rv:nth-child(3){transition-delay:.14s;}
-.rv:nth-child(4){transition-delay:.21s;} .rv:nth-child(5){transition-delay:.28s;}
-
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
   .rv{opacity:1;transform:none;}
@@ -304,8 +288,7 @@ h2{font-family:var(--font-d);font-weight:400;letter-spacing:-.01em;color:var(--n
     <a class="brand" href="/">
       <svg viewBox="0 0 100 100" aria-hidden="true">
         <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="6"/>
-        <path d="M27 61 L50 35 L73 61" fill="none" stroke="currentColor" stroke-width="6"
-              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M27 61 L50 35 L73 61" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M34 67 Q42 73 50 67" fill="none" stroke="#78bedc" stroke-width="4" stroke-linecap="round"/>
         <path d="M50 67 Q58 73 66 67" fill="none" stroke="#78bedc" stroke-width="4" stroke-linecap="round"/>
       </svg>
@@ -321,143 +304,127 @@ h2{font-family:var(--font-d);font-weight:400;letter-spacing:-.01em;color:var(--n
 </header>
 
 <div class="hero">
-  <video id="hero-reel" poster="./media/hero-loop-poster.jpg"
-         autoplay muted loop playsinline preload="auto"></video>
+  <video id="hero-reel" poster="./media/hero-loop-poster.jpg" autoplay muted loop playsinline preload="auto"></video>
   <div class="hero-in">
-    <p class="eyebrow">Films from listing photos</p>
+    <p class="eyebrow" style="color:var(--gold-lt)">Films from listing photos</p>
     <h1>Show people around <em>before</em> they book.</h1>
-    <p class="hero-sub">Send the photos you already have and I will turn them into a
-    walkthrough tour, usually back to you the next day.</p>
-    <p class="cta-row">
-      <a class="cta" href="#contact">See it on your own place &rarr;</a>
-      <a class="cta-ghost" style="margin-left:0" href="#work">Watch the work</a>
-    </p>
-    <div class="hero-proof">
-      <div class="proof"><b>1 day</b><span>usual turnaround</span></div>
-      <div class="proof"><b>$99+</b><span>pay once, own it</span></div>
-      <div class="proof"><b>0 visits</b><span>no crew, no scheduling</span></div>
+    <div class="hero-row">
+      <p class="hero-sub">Send the photos you already have. I turn them into a cinematic
+      walkthrough, usually back to you the next day.</p>
+      <div class="cta-row">
+        <a class="cta" href="#contact">See it on your own place &rarr;</a>
+        <a class="cta ghost" href="#work">Watch the work</a>
+      </div>
     </div>
   </div>
+  <span class="scrollcue" aria-hidden="true"></span>
 </div>
 
-<section id="work">
+<section class="ba-sec on-ink" id="how-it-looks">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="rule"></div>
-      <h2>Every frame started as a photograph.</h2>
-      <p>Each film below was built from listing photos the owner already had. No camera
-      crew ever visited.</p>
+    <div class="ba-head">
+      <div>
+        <p class="eyebrow">One photo. One film.</p>
+        <h2>This is the exact photo an owner sent. Drag to see what went back.</h2>
+      </div>
+      <p class="lede">Nothing is invented. The camera moves through the room that is already in
+      the picture — no visit, no crew, no scheduling.</p>
     </div>
-    <figure class="feature">
-      <video src="./media/showreel.mp4" poster="./media/showreel-poster.jpg" controls muted playsinline preload="metadata"></video>
-      <figcaption><span>The walkthrough, condensed</span><span>Five bedroom pool home · Gulf coast</span></figcaption>
-    </figure>
-    <div class="grid">
-      <figure class="card">
-        <div class="frame">
-          <video src="./media/photo-comes-alive.mp4" poster="./media/photo-comes-alive-poster.jpg" muted loop playsinline preload="none" data-hover></video>
-        </div>
-        <figcaption>
-          <span class="t">A photo becomes the tour</span>
-          <span class="s">Before and after</span>
-          <span class="n">An owner sent in this photo. This is the shot that went back to them.</span>
-        </figcaption>
-      </figure>
-      <figure class="card">
-        <div class="frame">
-          <video src="./media/venue-tour.mp4" poster="./media/venue-tour-poster.jpg" muted loop playsinline preload="none" data-hover></video>
-        </div>
-        <figcaption>
-          <span class="t">Inside a wedding venue</span>
-          <span class="s">Historic event hall</span>
-          <span class="n">Couples can see the whole hall before they drive out to tour it.</span>
-        </figcaption>
-      </figure>
-      <figure class="card">
-        <div class="frame">
-          <video src="./media/aquarius-tour.mp4" poster="./media/aquarius-tour-poster.jpg" muted loop playsinline preload="none" data-hover></video>
-        </div>
-        <figcaption>
-          <span class="t">A gulf-front condo, floor to pool</span>
-          <span class="s">Beachfront resort tower</span>
-          <span class="n">Balcony, rooms, pool and the sunset it actually gets. One film from the listing gallery.</span>
-        </figcaption>
-      </figure>
-      <figure class="card card-tall">
-        <div class="frame">
-          <video src="./media/reel-portfolio.mp4" poster="./media/reel-portfolio-poster.jpg" muted loop playsinline preload="none" data-hover></video>
-        </div>
-        <figcaption>
-          <span class="t">The vertical cut</span>
-          <span class="s">Built for socials</span>
-          <span class="n">Every tour also comes as a short vertical reel, captioned and scored, sized for phones.</span>
-        </figcaption>
-      </figure>
-      <figure class="card">
-        <div class="frame">
-          <video src="./media/sizzle-30s.mp4" poster="./media/sizzle-30s-poster.jpg" muted loop playsinline preload="none" data-hover></video>
-        </div>
-        <figcaption>
-          <span class="t">The thirty second cut</span>
-          <span class="s">Fast tour, full home</span>
-          <span class="n">A short cut of the whole property for owners who want one file that does everything.</span>
-        </figcaption>
-      </figure>
+    <div class="ba" id="ba" style="--x:52%">
+      <video class="after" src="./media/ba-film.mp4" muted loop playsinline autoplay preload="auto" aria-label="The same scene as a moving walkthrough shot"></video>
+      <img class="before" src="./media/ba-photo.jpg" alt="The original listing photo">
+      <div class="handle"></div>
+      <div class="knob" aria-hidden="true"><i class="l"></i><i class="r"></i></div>
+      <span class="lab l">The listing photo</span>
+      <span class="lab r">The film</span>
     </div>
-    <p class="hint">Hover any card to play it</p>
+    <p class="ba-note">Drag anywhere on the frame · works on touch</p>
   </div>
 </section>
 
-<section class="land" id="land">
+<section class="work" id="work">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="rule"></div>
-      <h2>We film land, too.</h2>
-      <p>Rural tracts, ranches and acreage. A cinematic flyover of the real terrain with the
-      boundary drawn on the ground — no drone, no site visit.</p>
+    <div class="work-head">
+      <div>
+        <p class="eyebrow">The work</p>
+        <h2>Every frame started as a photograph.</h2>
+      </div>
+      <div class="strip-nav" aria-label="Scroll the film strip">
+        <button type="button" data-dir="-1" aria-label="Previous">&larr;</button>
+        <button type="button" data-dir="1" aria-label="Next">&rarr;</button>
+      </div>
     </div>
+  </div>
+  <div class="strip-wrap">
+    <div class="strip" id="strip">
+      <figure class="film">
+        <div class="frame"><video src="./media/showreel.mp4" poster="./media/showreel-poster.jpg" muted loop playsinline preload="none" data-hover></video></div>
+        <figcaption><span class="t">Five bedroom pool home, walked room by room</span><span class="s">Gulf coast · rental</span></figcaption>
+      </figure>
+      <figure class="film">
+        <div class="frame"><video src="./media/venue-tour.mp4" poster="./media/venue-tour-poster.jpg" muted loop playsinline preload="none" data-hover></video></div>
+        <figcaption><span class="t">Inside a historic wedding hall</span><span class="s">Texas · venue</span></figcaption>
+      </figure>
+      <figure class="film">
+        <div class="frame"><video src="./media/aquarius-tour.mp4" poster="./media/aquarius-tour-poster.jpg" muted loop playsinline preload="none" data-hover></video></div>
+        <figcaption><span class="t">A gulf-front condo, balcony to pool to sunset</span><span class="s">South Padre · condo</span></figcaption>
+      </figure>
+      <figure class="film">
+        <div class="frame"><video src="./media/photo-comes-alive.mp4" poster="./media/photo-comes-alive-poster.jpg" muted loop playsinline preload="none" data-hover></video></div>
+        <figcaption><span class="t">A beach house opener, from one still</span><span class="s">Indian Rocks · rental</span></figcaption>
+      </figure>
+      <figure class="film tall">
+        <div class="frame"><video src="./media/reel-portfolio.mp4" poster="./media/reel-portfolio-poster.jpg" muted loop playsinline preload="none" data-hover></video></div>
+        <figcaption><span class="t">The vertical cut, built for socials</span><span class="s">Every film · reel</span></figcaption>
+      </figure>
+    </div>
+    <p class="hint">Hover or tap a film to play it · scroll sideways for more</p>
+  </div>
+</section>
+
+<section class="land on-ink" id="land">
+  <div class="wrap">
     <div class="land-grid">
-      <figure class="land-film">
-        <img src="./media/land-aerial.jpg" alt="Annotated aerial of a forty acre rural tract with the parcel boundary drawn in gold" loading="lazy" style="width:100%;display:block">
-        <figcaption>Annotated aerial · 40-acre tract · Grimes County, Texas</figcaption>
+      <figure class="land-media">
+        <img src="./media/land-aerial.jpg" alt="Annotated aerial of a forty acre rural tract with the parcel boundary drawn in gold" loading="lazy">
+        <figcaption>40-acre tract · Grimes County, Texas</figcaption>
       </figure>
       <div>
+        <p class="eyebrow">Land</p>
+        <h2>We film land, too.</h2>
+        <p class="lede">A cinematic flyover of the real terrain with the boundary drawn on the
+        ground, built from public elevation and aerial data. No drone, no site visit.</p>
         <p class="land-price">$300 <small>flat, per listing</small></p>
         <ul class="land-list">
-          <li>The cinematic flyover film, <span>sized for Land.com, YouTube and email</span></li>
+          <li>The flyover film, <span>sized for Land.com, YouTube and email</span></li>
           <li>An interactive parcel page <span>— flood, terrain, water and soils, all cited</span></li>
           <li>An MLS-safe unbranded copy</li>
           <li>The annotated aerial <span>as a listing photo</span></li>
         </ul>
         <a class="cta" href="#contact">Film a tract &rarr;</a>
-        <p class="land-fine">Built from public records — USGS elevation, USDA/TxGIO imagery,
-        county parcel lines — and it says so on screen. Not drone photography, and not a survey.</p>
+        <p class="fine">Public records only — USGS elevation, USDA/TxGIO imagery, county parcel
+        lines — and it says so on screen. Not drone photography, and not a survey.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="how">
+<section class="how" id="how">
   <div class="wrap">
-    <div class="sec-head center">
-      <div class="rule"></div>
-      <h2>You only do the first step.</h2>
-    </div>
+    <p class="eyebrow">How it works</p>
+    <h2>You only do the first step.</h2>
     <div class="steps">
-      <div class="step"><span class="num">01</span><h3>Send the link</h3><p>Send your listing link or a folder of photos. Nobody schedules anything and nobody visits the property.</p></div>
-      <div class="step"><span class="num">02</span><h3>I build it</h3><p>I put the rooms in the order a guest would walk them, then send it to you first. Changes are free until you like it.</p></div>
-      <div class="step"><span class="num">03</span><h3>Post it anywhere</h3><p>Put it on Airbnb, VRBO or your own site, or send it straight to someone asking questions in your inbox. One file that works everywhere.</p></div>
+      <div class="step"><span class="num">01</span><h3>Send the link</h3><p>Your listing link or a folder of photos. Nobody schedules anything and nobody visits the property.</p></div>
+      <div class="step"><span class="num">02</span><h3>I build it</h3><p>Rooms in the order a guest would walk them, graded and scored, sent to you first. Changes are free until you like it.</p></div>
+      <div class="step"><span class="num">03</span><h3>Post it anywhere</h3><p>Airbnb, VRBO, your own site, or straight to someone asking questions in your inbox. One file that works everywhere.</p></div>
     </div>
   </div>
 </section>
 
-<section id="pricing" style="padding-top:0">
+<section class="pricing" id="pricing">
   <div class="wrap">
-    <div class="sec-head center">
-      <div class="rule"></div>
-      <h2>Pay once. Own it forever.</h2>
-      <p>Priced by the size of the place. There is no monthly fee and no contract.</p>
-    </div>
+    <p class="eyebrow">Pricing</p>
+    <h2>Pay once. Own it forever.</h2>
     <div class="tiers">
       <div class="tier"><span class="p">$99</span><span class="s">Rentals, 1–2 bedrooms</span></div>
       <div class="tier"><span class="p">$149</span><span class="s">Rentals, 3–4 bedrooms</span></div>
@@ -465,24 +432,23 @@ h2{font-family:var(--font-d);font-weight:400;letter-spacing:-.01em;color:var(--n
       <div class="tier"><span class="p">$299+</span><span class="s">Wedding &amp; event venues</span></div>
       <div class="tier"><span class="p">$300</span><span class="s">Land, per listing</span></div>
     </div>
-    <p class="note">You pay once you have watched the tour and you are happy with it. Venues,
-    golf clubs and estates are quoted after I have seen the space, and if you run several
-    properties, ask me about a group rate.</p>
+    <p class="note">You pay once you have watched the tour and you are happy with it. Venues, golf
+    clubs and estates are quoted after I have seen the space. Several properties? Ask about a
+    group rate.</p>
   </div>
 </section>
 
 <section class="contact" id="contact">
   <div class="wrap">
     <svg class="mark-lg" viewBox="0 0 100 100" aria-hidden="true">
-      <circle cx="50" cy="50" r="44" fill="none" stroke="#f6f3ec" stroke-width="5"/>
-      <path d="M27 61 L50 35 L73 61" fill="none" stroke="#f6f3ec" stroke-width="5"
-            stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="50" cy="50" r="44" fill="none" stroke="#f4f0e8" stroke-width="5"/>
+      <path d="M27 61 L50 35 L73 61" fill="none" stroke="#f4f0e8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M34 67 Q42 73 50 67" fill="none" stroke="#78bedc" stroke-width="3.5" stroke-linecap="round"/>
       <path d="M50 67 Q58 73 66 67" fill="none" stroke="#78bedc" stroke-width="3.5" stroke-linecap="round"/>
     </svg>
     <h2>See it on your own place first.</h2>
-    <p>Send me your listing link and I will build a short sample from the photos already on
-    it, free, so you can see it on your own place before deciding anything.</p>
+    <p>Send me your listing link and I will build a short sample from the photos already on it,
+    free, so you can see it on your own place before deciding anything.</p>
     <a class="mail" href="mailto:willhainley@walkthrutours.com?subject=My%20property">willhainley@walkthrutours.com</a>
     <a class="tel" href="#" id="tel-reveal" data-a="956" data-b="589" data-c="0497">Prefer to call? Tap to show the number</a>
   </div>
@@ -503,125 +469,107 @@ h2{font-family:var(--font-d);font-weight:400;letter-spacing:-.01em;color:var(--n
 
 <script>
 (function(){
-  // Hero: ONE continuous high-quality showreel loop with baked crossfades.
-  // The old seven-file JS rotation forced every file to be crushed for weight
-  // and stuttered between src swaps — the muddy hero was most of what read as
-  // low quality. Phones and save-data connections get the lighter encode.
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero: one continuous graded reel; lighter encode for phones / save-data.
   var hero=document.getElementById('hero-reel');
   if(hero){
     var small=matchMedia('(max-width:820px)').matches ||
-              (navigator.connection&&(navigator.connection.saveData||
-               /2g/.test(navigator.connection.effectiveType||'')));
+              (navigator.connection&&(navigator.connection.saveData||/2g/.test(navigator.connection.effectiveType||'')));
     hero.src=small?'./media/hero-reel-720.mp4':'./media/hero-reel.mp4';
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches){
-      hero.removeAttribute('autoplay'); hero.pause();
-    }else{ hero.play().catch(function(){}); }
+    if(reduced){ hero.removeAttribute('autoplay'); hero.pause(); }
+    else{ hero.play().catch(function(){}); }
+    // slow parallax: footage drifts at a third of scroll speed
+    if(!reduced){
+      addEventListener('scroll',function(){
+        var y=scrollY; if(y<innerHeight) hero.style.transform='translateY('+(y*0.28)+'px)';
+      },{passive:true});
+    }
   }
 
-  // Hover to play without judder: the poster is a separate always-sharp layer and
-  // the video only crossfades in once it can genuinely play through.
+  // Before / after slider (pointer events: mouse + touch)
+  var ba=document.getElementById('ba');
+  if(ba){
+    var drag=false;
+    var setX=function(clientX){
+      var r=ba.getBoundingClientRect();
+      var x=Math.min(Math.max((clientX-r.left)/r.width,0.03),0.97);
+      ba.style.setProperty('--x',(x*100).toFixed(2)+'%');
+    };
+    ba.addEventListener('pointerdown',function(e){ drag=true; ba.setPointerCapture(e.pointerId); setX(e.clientX); });
+    ba.addEventListener('pointermove',function(e){ if(drag) setX(e.clientX); });
+    ba.addEventListener('pointerup',function(){ drag=false; });
+    ba.addEventListener('pointercancel',function(){ drag=false; });
+    var bav=ba.querySelector('video'); if(bav&&!reduced) bav.play().catch(function(){});
+    // gentle idle sway until first touch, so the divider reads as interactive
+    if(!reduced){
+      var t0=performance.now(), touched=false;
+      ba.addEventListener('pointerdown',function(){ touched=true; },{once:true});
+      (function sway(){ if(touched) return;
+        var t=(performance.now()-t0)/1000; var x=52+Math.sin(t*0.9)*6;
+        ba.style.setProperty('--x',x.toFixed(2)+'%'); requestAnimationFrame(sway); })();
+    }
+  }
+
+  // Film strip: hover-to-play without judder (poster layer stays sharp until the
+  // video can genuinely play through), plus arrow buttons.
   [].forEach.call(document.querySelectorAll('[data-hover]'),function(v){
-    var card=v.closest('.card'), frame=v.parentElement, ready=false, want=false;
-    var still=document.createElement('div');
-    still.className='still';
+    var card=v.closest('.film'), frame=v.parentElement, ready=false, want=false;
+    var still=document.createElement('div'); still.className='still';
     still.style.backgroundImage='url("'+v.getAttribute('poster')+'")';
     frame.insertBefore(still,v);
     var wait=document.createElement('div'); wait.className='wait'; frame.appendChild(wait);
-
-    function begin(){
-      if(!want) return;
-      card.classList.remove('loading');
-      ready=true;
-      var p=v.play();
-      if(p&&p.catch) p.catch(function(){});
-      requestAnimationFrame(function(){ requestAnimationFrame(function(){
-        if(want) card.classList.add('playing');
-      });});
-    }
-    function enter(){
-      want=true;
-      if(ready){ begin(); return; }
-      card.classList.add('loading');
+    function begin(){ if(!want) return; card.classList.remove('loading'); ready=true;
+      var p=v.play(); if(p&&p.catch) p.catch(function(){});
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ if(want) card.classList.add('playing'); }); }); }
+    function enter(){ want=true; if(ready){ begin(); return; } card.classList.add('loading');
       if(v.preload!=='auto'){ v.preload='auto'; v.load(); }
-      if(v.readyState>=3) begin();
-      else v.addEventListener('canplaythrough',begin,{once:true});
-    }
-    function leave(){
-      want=false;
-      card.classList.remove('playing','loading');
-      setTimeout(function(){ if(!want) v.pause(); },500);
-    }
-    card.addEventListener('mouseenter',enter);
-    card.addEventListener('mouseleave',leave);
-    card.addEventListener('focusin',enter);
-    card.addEventListener('focusout',leave);
+      if(v.readyState>=3) begin(); else v.addEventListener('canplaythrough',begin,{once:true}); }
+    function leave(){ want=false; card.classList.remove('playing','loading'); setTimeout(function(){ if(!want) v.pause(); },500); }
+    card.addEventListener('mouseenter',enter); card.addEventListener('mouseleave',leave);
+    card.addEventListener('focusin',enter); card.addEventListener('focusout',leave);
     card.addEventListener('click',function(){ want?leave():enter(); });
   });
-
-  // Nav: transparent over the full-bleed hero, cream once scrolled past it.
-  var navEl=document.querySelector('.nav');
-  if(navEl){
-    var syncNav=function(){ navEl.classList.toggle('scrolled', scrollY>innerHeight*0.7); };
-    addEventListener('scroll',syncNav,{passive:true});
-    syncNav();
-  }
-
-  // Sticky mobile CTA: appears after the hero, hides over the contact section.
-  var bar=document.getElementById('stickybar'), hero=document.querySelector('.hero'),
-      contact=document.getElementById('contact');
-  if(bar&&hero){
-    var sync=function(){
-      var past=hero.getBoundingClientRect().bottom<0;
-      var atContact=contact&&contact.getBoundingClientRect().top<innerHeight*0.9;
-      bar.classList.toggle('on',past&&!atContact);
-    };
-    addEventListener('scroll',sync,{passive:true});
-    addEventListener('resize',sync,{passive:true});
-    sync();
-  }
-
-  // Accessible names for the videos.
-  var labels={'hero-reel':'Scenes from property walkthrough films',
-              'hero-loop':'Scenes from property walkthrough films',
-              'showreel':'Full walkthrough film of a five bedroom pool home on the Gulf coast',
-              'photo-comes-alive':'A still listing photo turning into a moving walkthrough shot',
-              'venue-tour':'Walkthrough film inside a historic wedding and event hall',
-              'aquarius-tour':'Walkthrough film of a gulf-front condo in a beachfront resort tower',
-              'reel-portfolio':'Vertical social reel showing scenes from several property films',
-              'land-flyover':'Cinematic terrain flyover of a forty acre rural tract with the parcel boundary drawn on the ground',
-              'sizzle-30s':'Thirty second cut of a full property tour'};
-  [].forEach.call(document.querySelectorAll('video'),function(v){
-    if(v.getAttribute('aria-label')||v.getAttribute('aria-hidden')) return;
-    var src=v.getAttribute('src')||'';
-    for(var k in labels){ if(src.indexOf(k)>-1){ v.setAttribute('aria-label',labels[k]); return; } }
-    v.setAttribute('aria-hidden','true');
+  var strip=document.getElementById('strip');
+  [].forEach.call(document.querySelectorAll('.strip-nav button'),function(b){
+    b.addEventListener('click',function(){
+      var w=strip.querySelector('.film').getBoundingClientRect().width+18;
+      strip.scrollBy({left:w*parseInt(b.dataset.dir,10),behavior:'smooth'});
+    });
   });
 
-  // Scroll reveal — FAIL-OPEN by design. Classes are added by JS (no-script
-  // users see everything), anything already in view reveals immediately, and a
-  // 3s failsafe reveals the rest even if the observer never fires. A broken
-  // observer may cost the animation; it can never cost the content.
-  if('IntersectionObserver' in window &&
-     !matchMedia('(prefers-reduced-motion: reduce)').matches){
-    var rvs=[].slice.call(document.querySelectorAll(
-      '.sec-head,.feature,.card,.step,.tier,.qa,.land-film,.land-grid>div'));
+  // Nav: transparent over the hero, cream once past it.
+  var navEl=document.querySelector('.nav');
+  if(navEl){ var syncNav=function(){ navEl.classList.toggle('scrolled', scrollY>innerHeight*0.7); };
+    addEventListener('scroll',syncNav,{passive:true}); syncNav(); }
+
+  // Sticky mobile CTA
+  var bar=document.getElementById('stickybar'), heroEl=document.querySelector('.hero'), contact=document.getElementById('contact');
+  if(bar&&heroEl){ var sync=function(){ var past=heroEl.getBoundingClientRect().bottom<0;
+      var atContact=contact&&contact.getBoundingClientRect().top<innerHeight*0.9;
+      bar.classList.toggle('on',past&&!atContact); };
+    addEventListener('scroll',sync,{passive:true}); addEventListener('resize',sync,{passive:true}); sync(); }
+
+  // Reveal — fail-open: in-view reveals now, observer reveals the rest, 3s failsafe reveals all.
+  if('IntersectionObserver' in window && !reduced){
+    var rvs=[].slice.call(document.querySelectorAll('.ba-head>*,.ba,.work-head>*,.film,.land-media,.land-grid>div,.step,.tier,.how h2,.pricing h2,.contact h2'));
     var vh=innerHeight||document.documentElement.clientHeight||800;
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
-    },{rootMargin:'0px 0px -8% 0px',threshold:.08});
-    rvs.forEach(function(el){
-      el.classList.add('rv');
-      if(el.getBoundingClientRect().top<vh*0.95){ el.classList.add('on'); }
-      else io.observe(el);
-    });
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -8% 0px',threshold:.06});
+    rvs.forEach(function(el){ el.classList.add('rv'); if(el.getBoundingClientRect().top<vh*0.95) el.classList.add('on'); else io.observe(el); });
     setTimeout(function(){ rvs.forEach(function(el){ el.classList.add('on'); }); },3000);
   }
+
+  // Accessible names for videos without one
+  var labels={'hero-reel':'Scenes from property walkthrough films','showreel':'Condensed walkthrough of a five bedroom pool home on the Gulf coast',
+    'venue-tour':'Walkthrough film inside a historic wedding and event hall','aquarius-tour':'Walkthrough film of a gulf-front condo',
+    'photo-comes-alive':'A still listing photo turning into a moving walkthrough shot','reel-portfolio':'Vertical social reel showing scenes from several property films'};
+  [].forEach.call(document.querySelectorAll('video'),function(v){ if(v.getAttribute('aria-label')) return;
+    var src=v.getAttribute('src')||''; for(var k in labels){ if(src.indexOf(k)>-1){ v.setAttribute('aria-label',labels[k]); return; } } v.setAttribute('aria-hidden','true'); });
 
   // phone reveal
   var el=document.getElementById('tel-reveal'),done=false;
   el.addEventListener('click',function(e){ if(done)return; e.preventDefault();
-    el.textContent='('+el.dataset.a+') '+el.dataset.b+'-'+el.dataset.c;
-    el.href='tel:+1'+el.dataset.a+el.dataset.b+el.dataset.c; done=true; });
+    el.textContent='('+el.dataset.a+') '+el.dataset.b+'-'+el.dataset.c; el.href='tel:+1'+el.dataset.a+el.dataset.b+el.dataset.c; done=true; });
 })();
 </script>
 </body>
