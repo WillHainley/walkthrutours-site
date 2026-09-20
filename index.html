@@ -206,7 +206,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .land-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(1.6rem,3.4vw,3rem);align-items:center;}
 @media (max-width:860px){ .land-grid{grid-template-columns:1fr;} }
 .land-media{margin:0;background:#000;}
-.land-media img{width:100%;aspect-ratio:16/10;object-fit:cover;}
+.land-media img,.land-media video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;}
 .land-media figcaption{padding:.7rem 0 0;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-50);}
 .price-line{font-family:var(--font-d);font-size:clamp(2.2rem,1.6rem + 1.6vw,3.2rem);line-height:1;margin:1.2rem 0 .3rem;}
 .price-line small{font-family:var(--font-b);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-50);margin-left:.6rem;}
@@ -395,8 +395,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <section class="sec" id="land">
       <div class="land-grid">
         <figure class="land-media">
-          <img src="./media/land-aerial.jpg" alt="Annotated aerial of a forty acre rural tract with the parcel boundary drawn in gold" loading="lazy">
-          <figcaption>40-acre tract · Grimes County, Texas</figcaption>
+          <video id="land-film" src="./media/land-flyover.mp4" poster="./media/land-flyover-poster.jpg" muted loop playsinline preload="metadata" aria-label="Terrain flyover of a sixty two acre tract with the parcel boundary drawn in gold and the facts on screen"></video>
+          <figcaption>62-acre tract · Brazos County, Texas · built from public data</figcaption>
         </figure>
         <div>
           <p class="eyebrow">WalkThru Land</p>
@@ -545,6 +545,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     card.addEventListener('focusin',enter); card.addEventListener('focusout',leave);
     card.addEventListener('click',function(){ want?leave():enter(); });
   });
+  // land film: plays only while on screen (and never under reduced motion)
+  (function(){
+    var lf=document.getElementById('land-film'); if(!lf) return;
+    var rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(rm||!('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting){ var p=lf.play(); if(p&&p.catch) p.catch(function(){}); } else { lf.pause(); }
+    }); },{threshold:.35}).observe(lf);
+  })();
 
   // Rail section list: mark the section that is on screen.
   var toc=document.getElementById('toc');
