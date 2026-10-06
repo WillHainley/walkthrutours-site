@@ -22,6 +22,7 @@ Venmo's link format has changed before.
   doing the first time someone asks to pay by card.
 
 ## The business rule
-Deposit before credits. Do not start generating until the $50 lands. The deposit
-comes off the price; collect the balance on approval, same handle.
+No deposit (Will, 2026-10-06). Build first, the client watches it, and they pay the
+full price on approval: rentals $75 / $125 / $175 by bedrooms, land $50. Rendering is
+local and free now (no Higgsfield), so there is no up-front cost to protect.
 

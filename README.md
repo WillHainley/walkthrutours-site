@@ -5,12 +5,12 @@ framework, no dependencies. Edit, push, GitHub Pages redeploys. Both machines: c
 
 Design is the v2 redesign ported from the other laptop (Newsreader + Instrument Sans,
 cream/ink/teal, rotating film hero, dark screening-room samples band), integrated here with
-the delivered-tours ledger, deposit-first pricing, favicon, OG tags and domain config.
+the delivered-tours ledger, pay-on-approval pricing (no deposit), favicon, OG tags and domain config.
 
 - `index.html` — the whole site
 - `media/` — Villa Manatee production film segments + posters (see MEDIA.md)
 - `MEDIA.md` — how to swap in the fuller hero reel from the other machine
-- `PAYMENTS-SETUP.md` — how to wire the Stripe deposit links
+- `PAYMENTS-SETUP.md` — how payment links work (pay on approval, no deposit)
 - `CNAME` — custom domain for GitHub Pages
 
 Local preview: `python -m http.server 8777` in this folder.
