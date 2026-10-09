@@ -5,4 +5,7 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url><loc>https://walkthrutours.com/airbnb-video-rules/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://walkthrutours.com/land-listing-video-cost/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://walkthrutours.com/ai-listing-video-vs-videographer/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
