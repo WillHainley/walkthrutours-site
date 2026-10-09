@@ -203,6 +203,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 }
 
 /* ---------- land ---------- */
+.land-films{margin-top:clamp(1.6rem,3.4vw,3rem);}
+.land-films .film{grid-column:span 4;}
+@media (max-width:860px){ .land-films .film{grid-column:span 12;} }
+
 .land-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(1.6rem,3.4vw,3rem);align-items:center;}
 @media (max-width:860px){ .land-grid{grid-template-columns:1fr;} }
 .land-media{margin:0;background:#000;}
@@ -395,8 +399,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <section class="sec" id="land">
       <div class="land-grid">
         <figure class="land-media">
-          <video id="land-film" src="./media/land-flyover.mp4" poster="./media/land-flyover-poster.jpg" muted loop playsinline preload="metadata" aria-label="Terrain flyover of a sixty two acre tract with the parcel boundary drawn in gold and the facts on screen"></video>
-          <figcaption>62-acre tract · Brazos County, Texas · built from public data</figcaption>
+          <video id="land-film" src="./media/land-fm2154.mp4" poster="./media/land-fm2154-poster.jpg" muted loop playsinline preload="metadata" aria-label="Three dimensional flyover of a ranch on FM 2154 in Brazos County with the lake, barns and parcel boundary drawn in gold"></video>
+          <figcaption>FM 2154 · Brazos County, Texas · built from public data</figcaption>
         </figure>
         <div>
           <p class="eyebrow">WalkThru Land</p>
@@ -416,6 +420,21 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
           imagery and county parcel lines. Every source is listed on screen. This is not drone
           photography and it is not a survey.</p>
         </div>
+      </div>
+
+      <div class="grid land-films" aria-label="More land films">
+        <figure class="film">
+          <div class="frame"><video src="./media/land-flyover.mp4" poster="./media/land-flyover-poster.jpg" muted loop playsinline preload="none" data-hover></video></div>
+          <figcaption><span class="t">62 acres with a lake on North Dowling Road</span><span class="s">Brazos County · land</span></figcaption>
+        </figure>
+        <figure class="film">
+          <div class="frame"><video src="./media/land-ganske.mp4" poster="./media/land-ganske-poster.jpg" muted loop playsinline preload="none" data-hover></video></div>
+          <figcaption><span class="t">121 acres, a creek and the flood line on Ganske Road</span><span class="s">Washington County · land</span></figcaption>
+        </figure>
+        <figure class="film">
+          <div class="frame"><video src="./media/land-fm2293.mp4" poster="./media/land-fm2293-poster.jpg" muted loop playsinline preload="none" data-hover></video></div>
+          <figcaption><span class="t">156 acres with 3,400 feet of seasonal creek</span><span class="s">Robertson County · land</span></figcaption>
+        </figure>
       </div>
     </section>
 
