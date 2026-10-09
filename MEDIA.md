@@ -59,3 +59,12 @@ ffmpeg -i master.mp4 -vf scale=1600:-2 -c:v libx264 -crf 28 -preset slow \
 ## Naming
 Never name a client property on the site. Describe by type and region only
 ("five bedroom pool home, gulf coast"). Keep master filenames out of user-visible text.
+
+## Encode spec (2026-10-09, after phones showed black tiles)
+Every film the page loads is H.264 High profile, 4:2:0, level 4.1 (4.2 only for the 48 fps land
+films), tv range, no audio track (the page plays everything muted), faststart, CRF 24 with a
+4.2 Mbps ceiling so nothing passes the 25 MB Cloudflare cap. Each film also has a `-720.mp4`
+copy; the page swaps to it on screens 820 px and narrower or when save-data is on. Never ship
+4:4:4 or yuv444p again: iPhones and most Android phones cannot decode it and render black.
+On touch screens the tiles play while they are 60% on screen instead of waiting for a hover.
+Re-encode with scratchpad `reencode_site.py` (keeps originals in media-backup).
